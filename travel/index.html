@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ant Du lịch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="icon" href="//bizweb.dktcdn.net/100/299/077/themes/642224/assets/favicon.png?1628515462023" type="image/x-icon" />
+
+<body>
+    <div class="main">
+        <ul class="main__contact-list">
+            <li class="main__contact-item__zalo">
+                <a href="#" class="main__contact-zalo-link">
+                    <img src="./assets/img/icon/zalo.png" alt="" class="main__contact-zalo-img">
+                </a>
+                <span class="main__contact-zalo-text">
+                    Chat qua Zalo
+                </span>
+            </li>
+            <li class="main__contact-item__mes hide-on-mobile-tablet">
+                <a href="#" class="main__contact-mes-link">
+                    <img src="./assets/img/icon/messenger.png" alt="" class="main__contact-mes-img">
+                </a>
+                <span class="main__contact-mes-text">
+                    Chat qua Messenger
+                </span>
+            </li>
+            <li class="main__contact-item__phone">
+                <a href="#" class="main__contact-phone-link">
+                    <img src="./assets/img/icon/phone.png" alt="" class="main__contact-phone-img">
+                </a>
+                <span class="main__contact-phone-text">
+                    Hotline đặt Tour
+                </span>
+            </li>
+            <li id="backup" class="main__contact-item-up">
+                <span class="main__contact-item-up-link">
+                    <i class="main__contact-item-up-icon fas fa-arrow-circle-up"></i>
+                </span>
+            </li>
+        </ul>
+        <div id="header" class="header-wrap">
+            <div class="header">
+                <div class="header__full-top hide-on-mobile-tablet">
+                    <div class="grid wide">
+                        <div class="row">
+                            <div class="header__top">
+                                <div class="col l-6 m-0 c-0">
+                                    <ul class="header__top-list">
+                                        <li class="header__top-item">
+                                            <i class="header__top-list-icon fas fa-phone-volume"></i>
+                                            <a href="#" class="header__top-list-phone">
+                                                19006750
+                                            </a>
+                                        </li>
+                                        <li class="header__top-item">
+                                            <i class="header__top-list-icon far fa-envelope"></i>
+                                            <a href="#" class="header__top-item-mail">
+                                                suppost@sapo.vn
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col l-6 m-0 c-0">
+                                    <ul class="header__top-list-info">
+                                        <li class="header__top-item">
+                                            <a href="#" class="header__top-list-login">
+                                                <i class="header__top-list-icon fas fa-sign-in-alt"></i>
+                                                Đăng nhập
+                                            </a>
+                                        </li>
+                                        <li class="header__top-item">
+                                            <a href="#" class="header__top-list-register">
+                                                <i class="header__top-list-icon fas fa-user-plus"></i>
+                                                Đăng kí
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header__container">
+                    <div class="header__container-body">
+                        <div class="grid wide">
+                            <div class="row">
+                                <div class="col l-3 m-12 c-12">
+                                    <div class="logo">
+                                        <a href="#" class="logo-wrap">
+                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/logo.png?1628515462023" alt="" class="logo-img">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col l-5 m-12 c-12">
+                                    <div class="container__search-tour">
+                                        <div class="container__search">
+                                            <div class="container-input-wrap">
+                                                <input type="text" class="container-input" placeholder="Tìm kiếm tour...">
+                                            </div>
+                                            <span class="container-search-wrap">
+                                                <button class="container-search-btn">
+                                                    <i class="container-search-btn-icon fas fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col l-4 m-0 c-0">
+                                    <div class="container-contacts">
+                                        <div class="container-contacts-wrap">
+                                            <div class="container-contact-hotline">
+                                                <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/hotline.svg?1628515462023" alt="" class="container-contacts-img" alt="" class="container-contact-img">
+                                            </div>
+                                            <ul class="container-contacts-list">
+                                                <li class="container-contacts-item">
+                                                    <a href="#" class="container-contacts-link">1900 6750</a>
+                                                </li>
+                                                <li class="container-contacts-item">Tổng đài miễn phí</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav class="header__nav">
+                    <div class="grid wide">
+                        <ul class="header__nav-list">
+                            <li class="header__nav-item">
+                                <a href="#" class="header__nav-item-link">Trang chủ</a>
+                            </li>
+                            <li class="header__nav-item">
+                                <a href="#" class="header__nav-item-link">Giới thiệu</a>
+                            </li>
+                            <li class="header__nav-item-tour1">
+                                <a href="#" class="header__nav-item-link">
+                                    Tour trong nước
+                                    <i class="header__nav-item-icon fas fa-chevron-down"></i>
+                                </a>
+                                <div class="header__subnav">
+                                    <div class="grid wide">
+                                        <div class="row">
+                                            <div class="col l-3">
+                                                <ul class="header__subnav-list">
+                                                    <a href="#" class="header__subnav-heading">Miền Trung</a>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Quảng Bình</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Huế</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Đà Nẵng</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Hội An</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Nha Trang</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Phan Thiết</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Đà Lạt</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col l-3">
+                                                <ul class="header__subnav-list">
+                                                    <a href="#" class="header__subnav-heading">Miền Bắc</a>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Hà Nội</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Hạ Long</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Sapa</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Ninh Bình</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Hải Phòng</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col l-3">
+                                                <ul class="header__subnav-list">
+                                                    <a href="#" class="header__subnav-heading">Miền Nam</a>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Phú Quốc</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Côn Đảo</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Cần Thơ</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Vũng Tàu</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Bến Tre</a>
+                                                    </li>
+                                                    <li class="header__subnav-item">
+                                                        <a href="#" class="header__subnav-link">Du lịch Đảo Nam Du</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="header__nav-item-tour2">
+                                <a href="#" class="header__nav-item-link">
+                                    Tour nước ngoài
+                                    <i class="header__nav-item-icon fas fa-chevron-down"></i>
+                                </a>
+                                <ul class="header__subnav-foreign-list">
+                                    <li class="header__subnav-foreign-item">
+                                        <a href="#" class="header__subnav-foreign-link">Du lịch Châu Á</a>
+                                    </li>
+                                    <li class="header__subnav-foreign-item">
+                                        <a href="#" class="header__subnav-foreign-link">Du lịch Châu Âu</a>
+                                    </li>
+                                    <li class="header__subnav-foreign-item">
+                                        <a href="#" class="header__subnav-foreign-link">Du lịch Châu Úc</a>
+                                    </li>
+                                    <li class="header__subnav-foreign-item">
+                                        <a href="#" class="header__subnav-foreign-link">Du lịch Châu Mỹ</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="header__nav-item">
+                                <a href="#" class="header__nav-item-link">Dịch vụ tour</a>
+                            </li>
+                            <li class="header__nav-item">
+                                <a href="#" class="header__nav-item-link">Cẩm nang du lịch</a>
+                            </li>
+                            <li class="header__nav-item">
+                                <a href="#" class="header__nav-item-link">Liên hệ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <label for="input-check" class="box-bar">
+            <i class="box-bar-icon fas fa-bars"></i>
+        </label>
+
+        <input type="checkbox" name="" hidden id="input-check" class="input-check-bar">
+
+        <label for="input-check" class="nav__overlay"></label>
+
+        <nav class="sub__nav">
+            <div class="sub__nav-login">
+                <div class="sub__nav-user">
+                    <label for="input-check" class="sub__nav-close">
+                        <i class="sub__nav-close-icon fas fa-times"></i>
+                    </label>
+
+                    <a href="#" class="sub__nav-link">
+                        <img src="./assets/img/icon/av-none-user.png" alt="" class="sub__nav-img">
+                    </a>
+                    <div class="sub__nav-user-text">
+                        Xin chào
+                    </div>
+                    <div class="sub__nav-user-btn">
+                        <a href="#" class="sub__nav-user-login">Đăng nhập</a>
+                        <a href="#" class="sub__nav-user-register">Đăng ký</a>
+                    </div>
+                </div>
+            </div>
+            <div class="sub__nav-category">
+                <div class="sub__nav-category-heading">Tất cả danh mục</div>
+                <ul class="sub__nav-category-list">
+                    <li class="sub__nav-category-item">
+                        <a href="#" class="sub__nav-category-link">Trang chủ</a>
+                    </li>
+                    <li class="sub__nav-category-item">
+                        <a href="#" class="sub__nav-category-link">Giới thiệu</a>
+                    </li>
+                    <li class="sub__nav-category-item">
+                        <a href="#" class="sub__nav-category-link">Tour trong nước</a>
+                        <i class="sub__nav-category-icon fas fa-plus"></i>
+                    </li>
+                    <li class="sub__nav-category-item">
+                        <a href="#" class="sub__nav-category-link">Tour nước ngoài</a>
+                        <i class="sub__nav-category-icon fas fa-plus"></i>
+                    </li>
+                    <li class="sub__nav-category-item">
+                        <a href="#" class="sub__nav-category-link">Dịch vụ tour</a>
+                    </li>
+                    <li class="sub__nav-category-item">
+                        <a href="#" class="sub__nav-category-link">Cẩm nang du lịch</a>
+                    </li>
+                    <li class="sub__nav-category-item">
+                        <a href="#" class="sub__nav-category-link">Liên hệ</a>
+                    </li>
+                </ul>
+                <div class="sub__nav-slider">
+                    <img src="./assets/img/left-menu-banner-1.png" alt="" class="sub__nav-slider-img">
+                </div>
+            </div>
+        </nav>
+
+        <div class="tour__new">
+            <div class="tour__new-wrap">
+                <div class="grid wide">
+                    <div class="row">
+                        <div class="col l-12 m-12">
+                            <div class="title__wrap">
+                                <div class="title">
+                                    <h2 class="title__heading">
+                                        Tour
+                                        <span class="title__heading-text">
+                                            Mới Nhất
+                                        </span>
+                                    </h2>
+                                    <div class="title__line">
+                                        <div class="t-1"></div>
+                                        <div class="t-2"></div>
+                                        <div class="t-3"></div>
+                                    </div>
+                                    <p class="title__paragraph">
+                                        Hệ thống đặt Tour hàng đầu Việt Nam. Hơn 300 tours du lịch ở Việt Nam và Quốc tế
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour__new-content">
+                    <div class="grid wide">
+                        <div class="row">
+                            <div class="col l-4 m-6">
+                                <div class="tour-wrap">
+                                    <ul class="tour-sale">
+                                        <li class="tour-percent">- 9%</li>
+                                    </ul>
+                                    <div class="tour-location">
+                                        <a href="#" class="tour-location__img-link">
+                                            <img src="./assets/img/product/my.jpg" alt="" class="tour-location-img">
+                                        </a>
+                                    </div>
+                                    <div class="tour__body">
+                                        <h4 class="tour__body-name">
+                                            <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                        </h4>
+                                        <div class="tour__new-price">
+                                            <div class="tour__price-box">
+                                                <div class="box-price">
+                                                    <span class="box-price__new">
+                                                        49.000.000đ
+                                                    </span>
+                                                    <span class="box-price__old">
+                                                        54.000.000đ
+                                                    </span>
+                                                </div>
+                                                <div class="box-tag">
+                                                    <ul class="box-tag__list">
+                                                        <li class="box-tag__item-car">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box__tag-car">
+                                                                <li class="box-tag__car-item">
+                                                                    <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="box-tag__item-planes">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box-tag__planes">
+                                                                <li class="box-tag__planes-item">
+                                                                    <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="box-tour-date">
+                                                <ul class="box-tour-date-list">
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Khởi hành: Thứ 2 - 7 hằng tuần
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Thời gian: 6 ngày 5 đêm
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-4 m-6">
+                                <div class="tour-wrap">
+                                    <ul class="tour-sale">
+                                        <li class="tour-percent">- 0%</li>
+                                    </ul>
+                                    <div class="tour-location">
+                                        <a href="#" class="tour-location__img-link">
+                                            <img src="./assets/img/product/HN.jpg" alt="" class="tour-location-img">
+                                        </a>
+                                    </div>
+                                    <div class="tour__body">
+                                        <h4 class="tour__body-name">
+                                            <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                        </h4>
+                                        <div class="tour__new-price">
+                                            <div class="tour__price-box">
+                                                <div class="box-price">
+                                                    <span class="box-price__new">
+                                                        49.000.000đ
+                                                    </span>
+                                                    <span class="box-price__old">
+                                                        54.000.000đ
+                                                    </span>
+                                                </div>
+                                                <div class="box-tag">
+                                                    <ul class="box-tag__list">
+                                                        <li class="box-tag__item-car">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box__tag-car">
+                                                                <li class="box-tag__car-item">
+                                                                    <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="box-tag__item-planes">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box-tag__planes">
+                                                                <li class="box-tag__planes-item">
+                                                                    <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="box-tour-date">
+                                                <ul class="box-tour-date-list">
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Khởi hành: Thứ 2 - 7 hằng tuần
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Thời gian: 6 ngày 5 đêm
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-4 m-6">
+                                <div class="tour-wrap">
+                                    <ul class="tour-sale">
+                                        <li class="tour-percent">- 0%</li>
+                                    </ul>
+                                    <div class="tour-location">
+                                        <a href="#" class="tour-location__img-link">
+                                            <img src="./assets/img/product/Au_phap.jpg" alt="" class="tour-location-img">
+                                        </a>
+                                    </div>
+                                    <div class="tour__body">
+                                        <h4 class="tour__body-name">
+                                            <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                        </h4>
+                                        <div class="tour__new-price">
+                                            <div class="tour__price-box">
+                                                <div class="box-price">
+                                                    <span class="box-price__new">
+                                                        49.000.000đ
+                                                    </span>
+                                                    <span class="box-price__old">
+                                                        54.000.000đ
+                                                    </span>
+                                                </div>
+                                                <div class="box-tag">
+                                                    <ul class="box-tag__list">
+                                                        <li class="box-tag__item-car">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box__tag-car">
+                                                                <li class="box-tag__car-item">
+                                                                    <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="box-tag__item-planes">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box-tag__planes">
+                                                                <li class="box-tag__planes-item">
+                                                                    <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="box-tour-date">
+                                                <ul class="box-tour-date-list">
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Khởi hành: Thứ 2 - 7 hằng tuần
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Thời gian: 6 ngày 5 đêm
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-4 m-6">
+                                <div class="tour-wrap">
+                                    <ul class="tour-sale">
+                                        <li class="tour-percent">- 9%</li>
+                                    </ul>
+                                    <div class="tour-location">
+                                        <a href="#" class="tour-location__img-link">
+                                            <img src="./assets/img/product/Phap_Bi.jpg" alt="" class="tour-location-img">
+                                        </a>
+                                    </div>
+                                    <div class="tour__body">
+                                        <h4 class="tour__body-name">
+                                            <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                        </h4>
+                                        <div class="tour__new-price">
+                                            <div class="tour__price-box">
+                                                <div class="box-price">
+                                                    <span class="box-price__new">
+                                                        49.000.000đ
+                                                    </span>
+                                                    <span class="box-price__old">
+                                                        54.000.000đ
+                                                    </span>
+                                                </div>
+                                                <div class="box-tag">
+                                                    <ul class="box-tag__list">
+                                                        <li class="box-tag__item-car">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box__tag-car">
+                                                                <li class="box-tag__car-item">
+                                                                    <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="box-tag__item-planes">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box-tag__planes">
+                                                                <li class="box-tag__planes-item">
+                                                                    <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="box-tour-date">
+                                                <ul class="box-tour-date-list">
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Khởi hành: Thứ 2 - 7 hằng tuần
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Thời gian: 6 ngày 5 đêm
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-4 m-6">
+                                <div class="tour-wrap">
+                                    <ul class="tour-sale">
+                                        <li class="tour-percent">- 3%</li>
+                                    </ul>
+                                    <div class="tour-location">
+                                        <a href="#" class="tour-location__img-link">
+                                            <img src="./assets/img/product/DN.jpg" alt="" class="tour-location-img">
+                                        </a>
+                                    </div>
+                                    <div class="tour__body">
+                                        <h4 class="tour__body-name">
+                                            <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                        </h4>
+                                        <div class="tour__price">
+                                            <div class="tour__price-box">
+                                                <div class="box-price">
+                                                    <span class="box-price__new">
+                                                        49.000.000đ
+                                                    </span>
+                                                    <span class="box-price__old">
+                                                        54.000.000đ
+                                                    </span>
+                                                </div>
+                                                <div class="box-tag">
+                                                    <ul class="box-tag__list">
+                                                        <li class="box-tag__item-car">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box__tag-car">
+                                                                <li class="box-tag__car-item">
+                                                                    <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="box-tag__item-planes">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box-tag__planes">
+                                                                <li class="box-tag__planes-item">
+                                                                    <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="box-tour-date">
+                                                <ul class="box-tour-date-list">
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Khởi hành: Thứ 2 - 7 hằng tuần
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Thời gian: 6 ngày 5 đêm
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-4 m-6">
+                                <div class="tour-wrap">
+                                    <ul class="tour-sale">
+                                        <li class="tour-percent">- 0%</li>
+                                    </ul>
+                                    <div class="tour-location">
+                                        <a href="#" class="tour-location__img-link">
+                                            <img src="./assets/img/product/NT.jpg" alt="" class="tour-location-img">
+                                        </a>
+                                    </div>
+                                    <div class="tour__body">
+                                        <h4 class="tour__body-name">
+                                            <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                        </h4>
+                                        <div class="tour__new-price">
+                                            <div class="tour__price-box">
+                                                <div class="box-price">
+                                                    <span class="box-price__new">
+                                                        49.000.000đ
+                                                    </span>
+                                                    <span class="box-price__old">
+                                                        54.000.000đ
+                                                    </span>
+                                                </div>
+                                                <div class="box-tag">
+                                                    <ul class="box-tag__list">
+                                                        <li class="box-tag__item-car">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box__tag-car">
+                                                                <li class="box-tag__car-item">
+                                                                    <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="box-tag__item-planes">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                            <ul class="box-tag__planes">
+                                                                <li class="box-tag__planes-item">
+                                                                    <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="box-tour-date">
+                                                <ul class="box-tour-date-list">
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Khởi hành: Thứ 2 - 7 hằng tuần
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="box-tour-date-item">
+                                                        <div class="box-tour-date-wrap">
+                                                            <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                            <span class="box-tour-date-start">
+                                                                Thời gian: 6 ngày 5 đêm
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tour__domestic">
+            <div class="grid wide tour__domestic--wrap">
+                <div class="row">
+                    <div class="col l-12 m-12">
+                        <div class="title__wrap-domestic">
+                            <div class="title">
+                                <h2 class="title__heading">
+                                    Tour
+                                    <span class="title__heading-text">
+                                        Trong Nước
+                                    </span>
+                                </h2>
+                                <div class="title__line">
+                                    <div class="t-1"></div>
+                                    <div class="t-2"></div>
+                                    <div class="t-3"></div>
+                                </div>
+                                <p class="title__paragraph">
+                                    Tour du lịch Trong nước tại Ant Du lịch. Hành hương đầu xuân - Tận hưởng bản sắc Việt.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour__domestic-content">
+                    <div class="row">
+                        <div class="col l-12 m-12 c-12">
+                            <ul class="tour__selection-list">
+                                <li class="tour__selection-item tour__selection-item--active">
+                                    <span class="tour__selection-item-icon">
+                                        <i class="tour__selection-icon-left fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="tour__selection-text">Miền Trung</span>
+                                    <span class="tour__selection-item-icon">
+                                        <i class="tour__selection-icon-right fas fa-chevron-right"></i>
+                                    </span>
+                                </li>
+                                <li class="tour__selection-item">
+                                    <span class="tour__selection-text hide-on-mobile">Miền Bắc</span>
+                                </li>
+                                <li class="tour__selection-item">
+                                    <span class="tour__selection-text hide-on-mobile">Miền Nam</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row tour__wraper">
+                        <div class="col l-4 m-6 c-12">
+                            <div class="tour-wrap">
+                                <ul class="tour-sale">
+                                    <li class="tour-percent">- 0%</li>
+                                </ul>
+                                <div class="tour-location">
+                                    <a href="#" class="tour-location__img-link">
+                                        <img src="./assets/img/product/DN.jpg" alt="" class="tour-location-img">
+                                    </a>
+                                </div>
+                                <div class="tour__body">
+                                    <h4 class="tour__body-name">
+                                        <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                    </h4>
+                                    <div class="tour__new-price">
+                                        <div class="tour__price-box">
+                                            <div class="box-price">
+                                                <span class="box-price__new">
+                                                    49.000.000đ
+                                                </span>
+                                                <span class="box-price__old">
+                                                    54.000.000đ
+                                                </span>
+                                            </div>
+                                            <div class="box-tag">
+                                                <ul class="box-tag__list">
+                                                    <li class="box-tag__item-car">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box__tag-car">
+                                                            <li class="box-tag__car-item">
+                                                                <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="box-tag__item-planes">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box-tag__planes">
+                                                            <li class="box-tag__planes-item">
+                                                                <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="box-tour-date">
+                                            <ul class="box-tour-date-list">
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Khởi hành: Thứ 2 - 7 hằng tuần
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Thời gian: 6 ngày 5 đêm
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-4 m-6 c-12">
+                            <div class="tour-wrap">
+                                <ul class="tour-sale">
+                                    <li class="tour-percent">- 0%</li>
+                                </ul>
+                                <div class="tour-location">
+                                    <a href="#" class="tour-location__img-link">
+                                        <img src="./assets/img/product/bana-hills.jpg" alt="" class="tour-location-img">
+                                    </a>
+                                </div>
+                                <div class="tour__body">
+                                    <h4 class="tour__body-name">
+                                        <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                    </h4>
+                                    <div class="tour__new-price">
+                                        <div class="tour__price-box">
+                                            <div class="box-price">
+                                                <span class="box-price__new">
+                                                    49.000.000đ
+                                                </span>
+                                                <span class="box-price__old">
+                                                    54.000.000đ
+                                                </span>
+                                            </div>
+                                            <div class="box-tag">
+                                                <ul class="box-tag__list">
+                                                    <li class="box-tag__item-car">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box__tag-car">
+                                                            <li class="box-tag__car-item">
+                                                                <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="box-tag__item-planes">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box-tag__planes">
+                                                            <li class="box-tag__planes-item">
+                                                                <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="box-tour-date">
+                                            <ul class="box-tour-date-list">
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Khởi hành: Thứ 2 - 7 hằng tuần
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Thời gian: 6 ngày 5 đêm
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-4 m-6 c-12">
+                            <div class="tour-wrap">
+                                <ul class="tour-sale">
+                                    <li class="tour-percent">- 0%</li>
+                                </ul>
+                                <div class="tour-location">
+                                    <a href="#" class="tour-location__img-link">
+                                        <img src="./assets/img/product/ponagar-cham-temple-nha-trang-min1.jpg" alt="" class="tour-location-img">
+                                    </a>
+                                </div>
+                                <div class="tour__body">
+                                    <h4 class="tour__body-name">
+                                        <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                    </h4>
+                                    <div class="tour__new-price">
+                                        <div class="tour__price-box">
+                                            <div class="box-price">
+                                                <span class="box-price__new">
+                                                    49.000.000đ
+                                                </span>
+                                                <span class="box-price__old">
+                                                    54.000.000đ
+                                                </span>
+                                            </div>
+                                            <div class="box-tag">
+                                                <ul class="box-tag__list">
+                                                    <li class="box-tag__item-car">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box__tag-car">
+                                                            <li class="box-tag__car-item">
+                                                                <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="box-tag__item-planes">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box-tag__planes">
+                                                            <li class="box-tag__planes-item">
+                                                                <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="box-tour-date">
+                                            <ul class="box-tour-date-list">
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Khởi hành: Thứ 2 - 7 hằng tuần
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Thời gian: 6 ngày 5 đêm
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="owl-dots">
+                    <div class="owl-dot owl-dot--active">
+                        <span class="owl-dot-btn"></span>
+                    </div>
+                    <div class="owl-dot">
+                        <span class="owl-dot-btn"></span>
+                    </div>
+                    <div class="owl-dot">
+                        <span class="owl-dot-btn"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tour__foreign">
+            <div class="grid wide">
+                <div class="row">
+                    <div class="col l-12 m-12">
+                        <div class="title__wrap-domestic">
+                            <div class="title">
+                                <h2 class="title__heading">
+                                    Tour
+                                    <span class="title__heading-text">
+                                        Nước Ngoài
+                                    </span>
+                                </h2>
+                                <div class="title__line">
+                                    <div class="t-1"></div>
+                                    <div class="t-2"></div>
+                                    <div class="t-3"></div>
+                                </div>
+                                <p class="title__paragraph">
+                                    Tour du lịch Nước ngoài tại Ant Du lịch. Du lịch 5 châu - Trải nghiệm sắc xuân thế giới
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour__foreign-content">
+                    <div class="row">
+                        <div class="col l-12 m-12 c-12">
+                            <ul class="tour__selection-list">
+                                <li class="tour__selection-item tour__selection-item--active">
+                                    <span class="tour__selection-item-icon">
+                                        <i class="tour__selection-icon-left fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="tour__selection-text">Du lịch Châu Á</span>
+                                    <span class="tour__selection-item-icon">
+                                        <i class="tour__selection-icon-right fas fa-chevron-right"></i>
+                                    </span>
+                                </li>
+                                <li class="tour__selection-item">
+                                    <span class="tour__selection-text hide-on-mobile">Du lịch Châu Âu</span>
+                                </li>
+                                <li class="tour__selection-item">
+                                    <span class="tour__selection-text hide-on-mobile">Du lịch Châu Úc</span>
+                                </li>
+                                <li class="tour__selection-item">
+                                    <span class="tour__selection-text hide-on-mobile">Du lịch Châu Mỹ</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row tour__wraper">
+                        <div class="col l-4 m-6 c-12">
+                            <div class="tour-wrap">
+                                <ul class="tour-sale">
+                                    <li class="tour-percent">- 0%</li>
+                                </ul>
+                                <div class="tour-location">
+                                    <a href="#" class="tour-location__img-link">
+                                        <img src="./assets/img/product/kuala-lumpur.jpg" alt="" class="tour-location-img">
+                                    </a>
+                                </div>
+                                <div class="tour__body">
+                                    <h4 class="tour__body-name">
+                                        <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                    </h4>
+                                    <div class="tour__new-price">
+                                        <div class="tour__price-box">
+                                            <div class="box-price">
+                                                <span class="box-price__new">
+                                                    49.000.000đ
+                                                </span>
+                                                <span class="box-price__old">
+                                                    54.000.000đ
+                                                </span>
+                                            </div>
+                                            <div class="box-tag">
+                                                <ul class="box-tag__list">
+                                                    <li class="box-tag__item-car">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box__tag-car">
+                                                            <li class="box-tag__car-item">
+                                                                <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="box-tag__item-planes">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box-tag__planes">
+                                                            <li class="box-tag__planes-item">
+                                                                <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="box-tour-date">
+                                            <ul class="box-tour-date-list">
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Khởi hành: Thứ 2 - 7 hằng tuần
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Thời gian: 6 ngày 5 đêm
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-4 m-6 c-12">
+                            <div class="tour-wrap">
+                                <ul class="tour-sale">
+                                    <li class="tour-percent">- 0%</li>
+                                </ul>
+                                <div class="tour-location">
+                                    <a href="#" class="tour-location__img-link">
+                                        <img src="./assets/img/product/south-east-asia-cruise-package-6-min-2.jpg" alt="" class="tour-location-img">
+                                    </a>
+                                </div>
+                                <div class="tour__body">
+                                    <h4 class="tour__body-name">
+                                        <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                    </h4>
+                                    <div class="tour__new-price">
+                                        <div class="tour__price-box">
+                                            <div class="box-price">
+                                                <span class="box-price__new">
+                                                    49.000.000đ
+                                                </span>
+                                                <span class="box-price__old">
+                                                    54.000.000đ
+                                                </span>
+                                            </div>
+                                            <div class="box-tag">
+                                                <ul class="box-tag__list">
+                                                    <li class="box-tag__item-car">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box__tag-car">
+                                                            <li class="box-tag__car-item">
+                                                                <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="box-tag__item-planes">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box-tag__planes">
+                                                            <li class="box-tag__planes-item">
+                                                                <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="box-tour-date">
+                                            <ul class="box-tour-date-list">
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Khởi hành: Thứ 2 - 7 hằng tuần
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Thời gian: 6 ngày 5 đêm
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-4 m-6 c-12">
+                            <div class="tour-wrap">
+                                <ul class="tour-sale">
+                                    <li class="tour-percent">- 0%</li>
+                                </ul>
+                                <div class="tour-location">
+                                    <a href="#" class="tour-location__img-link">
+                                        <img src="./assets/img/product/han-quoc-4-mua-hoa.jpg" alt="" class="tour-location-img">
+                                    </a>
+                                </div>
+                                <div class="tour__body">
+                                    <h4 class="tour__body-name">
+                                        <a href="#" class="tour__body-name-link">Du lịch Mỹ [Los Angeles - Las Vegas - Universal Studios Hollywood] [2 đêm KS 5* Bellagio, Las Vegas]</a>
+                                    </h4>
+                                    <div class="tour__new-price">
+                                        <div class="tour__price-box">
+                                            <div class="box-price">
+                                                <span class="box-price__new">
+                                                    49.000.000đ
+                                                </span>
+                                                <span class="box-price__old">
+                                                    54.000.000đ
+                                                </span>
+                                            </div>
+                                            <div class="box-tag">
+                                                <ul class="box-tag__list">
+                                                    <li class="box-tag__item-car">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_1.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box__tag-car">
+                                                            <li class="box-tag__car-item">
+                                                                <span class="box-tag__car-text">Di chuyển bằng Ô tô</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="box-tag__item-planes">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_3.svg?1628515462023" alt="" class="box-tag__item-icon">
+                                                        <ul class="box-tag__planes">
+                                                            <li class="box-tag__planes-item">
+                                                                <span class="box-tag__planes-text">Di chuyển bằng máy bay</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="box-tour-date">
+                                            <ul class="box-tour-date-list">
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_4.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Khởi hành: Thứ 2 - 7 hằng tuần
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                                <li class="box-tour-date-item">
+                                                    <div class="box-tour-date-wrap">
+                                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/tag_icon_5.svg?1628515462023" alt="" class="box-tour-date-img">
+                                                        <span class="box-tour-date-start">
+                                                            Thời gian: 6 ngày 5 đêm
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="owl-dots">
+                    <div class="owl-dot owl-dot--active">
+                        <span class="owl-dot-btn"></span>
+                    </div>
+                    <div class="owl-dot">
+                        <span class="owl-dot-btn"></span>
+                    </div>
+                    <div class="owl-dot">
+                        <span class="owl-dot-btn"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tour__holiday">
+            <div class="grid wide">
+                <div class="row">
+                    <div class="col l-5 m-12">
+                        <div class="tour__holiday-intro-wrap">
+                            <div class="tour__holiday-introduce">
+                                <h5 class="tour__holiday-sub-text">Trải nghiệm sắc xuân thế giới</h5>
+                                <h2 class="tour__holiday-text">Lễ hội hoa 5 châu</h2>
+                                <p class="tour__holiday-paragraph">Thưởng ngoạn hoa anh đào trên đảo Jeju và thủ đô Seoul nơi xứ sở Kim Chi - Hàn Quốc. Khám phá thủ đô Seoul sầm uất, thưởng thức show diễn nghệ thuật Painters Hero vẽ tranh độc đáo trên nền nhạc sôi động kết hợp các điệu nhảy vui nhộn</p>
+                            </div>
+                            <a href="#" class="tour__holiday-intro-link">Xem thêm</a>
+                        </div>
+                    </div>
+                    <div class="col l-7 m-12">
+                        <div class="tour__holiday-image">
+                            <a href="#" class="tour__holiday-image-link">
+                                <img src="./assets/img/image/sec_video_tour_embed_img.jpg" alt="" class="tour__holiday-img">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tour__favorite">
+            <div class="grid wide">
+                <div class="row">
+                    <div class="col l-12 m-12">
+                        <div class="title__wrap">
+                            <div class="title">
+                                <h2 class="title__heading">
+                                    Điểm Đến
+                                    <span class="title__heading-text">
+                                        Ưa thích
+                                    </span>
+                                </h2>
+                                <div class="title__line">
+                                    <div class="t-1"></div>
+                                    <div class="t-2"></div>
+                                    <div class="t-3"></div>
+                                </div>
+                                <p class="title__paragraph">
+                                    Những địa điểm du lịch hot nhất dịp Tết ở Việt Nam. Tham khảo những điểm du lịch đặc sắc nhất từ Bắc tới Nam cùng với chúng tôi.
+                                </p>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid ">
+                <div class="tour__favorite-content-wrap">
+                    <span class="hide-on-pc">
+                        <i class="tour__favorite-icon-left fas fa-chevron-left"></i>
+                    </span>
+                    <div class="row no-gutters tour__wraper">
+                        <div class="tour__favorite-content">
+                            <div class="col l-2-4 m-3 c-6">
+                                <div class="tour__favorite-content-item">
+                                    <div class="tour__favorite-item">
+                                        <div class="tour__favorite-item-image">
+                                            <img src="./assets/img/image/location_image_1.png" alt="" class="tour__favorite-item-img">
+                                        </div>
+    
+                                        <div class="tour__favorite-item-overlay"></div>
+                                        <div class="tour__favorite-item-blur"></div>
+    
+                                        <div class="tour__favorite-item-location">
+                                            <div class="tour__favorite-item-name">
+                                                <div class="tour__favorite-item-wrap-heading">
+                                                    <h3 class="tour__favorite-item-heading">
+                                                        <i class="tour__favorite-item-icon fas fa-map-marker-alt"></i>
+                                                        Phú Quốc
+                                                    </h3>
+                                                </div>
+                                                <div class="tour__favorite-item-details">
+                                                    <a href="#" class="tour__favorite-item-link">Xem chi tiết</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-2-4 m-3 c-6">
+                                <div class="tour__favorite-content-item">
+                                    <div class="tour__favorite-item">
+                                        <div class="tour__favorite-item-image">
+                                            <img src="./assets/img/image/location_image_2.png" alt="" class="tour__favorite-item-img">
+                                        </div>
+    
+                                        <div class="tour__favorite-item-overlay"></div>
+                                        <div class="tour__favorite-item-blur"></div>
+    
+                                        <div class="tour__favorite-item-location">
+                                            <div class="tour__favorite-item-name">
+                                                <div class="tour__favorite-item-wrap-heading">
+                                                    <h3 class="tour__favorite-item-heading">
+                                                        <i class="tour__favorite-item-icon fas fa-map-marker-alt"></i>
+                                                        Châu Á
+                                                    </h3>
+                                                </div>
+                                                <div class="tour__favorite-item-details">
+                                                    <a href="#" class="tour__favorite-item-link">Xem chi tiết</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-2-4 m-3 c-6">
+                                <div class="tour__favorite-content-item">
+                                    <div class="tour__favorite-item">
+                                        <div class="tour__favorite-item-image">
+                                            <img src="./assets/img/image/location_image_3.png" alt="" class="tour__favorite-item-img">
+                                        </div>
+    
+                                        <div class="tour__favorite-item-overlay"></div>
+                                        <div class="tour__favorite-item-blur"></div>
+    
+                                        <div class="tour__favorite-item-location">
+                                            <div class="tour__favorite-item-name">
+                                                <div class="tour__favorite-item-wrap-heading">
+                                                    <h3 class="tour__favorite-item-heading">
+                                                        <i class="tour__favorite-item-icon fas fa-map-marker-alt"></i>
+                                                        Châu Âu
+                                                    </h3>
+                                                </div>
+                                                <div class="tour__favorite-item-details">
+                                                    <a href="#" class="tour__favorite-item-link">Xem chi tiết</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-2-4 m-3 c-6">
+                                <div class="tour__favorite-content-item">
+                                    <div class="tour__favorite-item">
+                                        <div class="tour__favorite-item-image">
+                                            <img src="./assets/img/image/location_image_4.png" alt="" class="tour__favorite-item-img">
+                                        </div>
+    
+                                        <div class="tour__favorite-item-overlay"></div>
+                                        <div class="tour__favorite-item-blur"></div>
+    
+                                        <div class="tour__favorite-item-location">
+                                            <div class="tour__favorite-item-name">
+                                                <div class="tour__favorite-item-wrap-heading">
+                                                    <h3 class="tour__favorite-item-heading">
+                                                        <i class="tour__favorite-item-icon fas fa-map-marker-alt"></i>
+                                                        Châu Mỹ
+                                                    </h3>
+                                                </div>
+                                                <div class="tour__favorite-item-details">
+                                                    <a href="#" class="tour__favorite-item-link">Xem chi tiết</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col l-2-4 m-3 c-6">
+                                <div class="tour__favorite-content-item">
+                                    <div class="tour__favorite-item">
+                                        <div class="tour__favorite-item-image">
+                                            <img src="./assets/img/image/location_image_5.png" alt="" class="tour__favorite-item-img">
+                                        </div>
+    
+                                        <div class="tour__favorite-item-overlay"></div>
+                                        <div class="tour__favorite-item-blur"></div>
+    
+                                        <div class="tour__favorite-item-location">
+                                            <div class="tour__favorite-item-name">
+                                                <div class="tour__favorite-item-wrap-heading">
+                                                    <h3 class="tour__favorite-item-heading">
+                                                        <i class="tour__favorite-item-icon fas fa-map-marker-alt"></i>
+                                                        Châu Phi
+                                                    </h3>
+                                                </div>
+                                                <div class="tour__favorite-item-details">
+                                                    <a href="#" class="tour__favorite-item-link">Xem chi tiết</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="hide-on-pc">
+                        <i class="tour__favorite-icon-right fas fa-chevron-right"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tour__handbook">
+            <div class="grid wide">
+                <div class="row">
+                    <div class="col l-12 m-12">
+                        <div class="title__wrap">
+                            <div class="title">
+                                <h2 class="title__heading">
+                                    Cẩm Nang
+                                    <span class="title__heading-text">
+                                        Du Lịch
+                                    </span>
+                                </h2>
+                                <div class="title__line">
+                                    <div class="t-1"></div>
+                                    <div class="t-2"></div>
+                                    <div class="t-3"></div>
+                                </div>
+                                <p class="title__paragraph">
+                                    Cẩm nang thông tin về du lịch, văn hóa, ẩm thực, các sự kiện và lễ hội tại các điểm đến Việt nam, Đông Nam Á và Thế Giới.
+                                </p>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col l-6 m-6">
+                        <div class="tour__handbook-box">
+                            <div class="tour__handbook-image">
+                                <a href="#" class="tour__handbook-img-link">
+                                    <img src="./assets/img/image/chua-huong.jpg" alt="" class="tour__handbook-img">
+                                </a>
+                            </div>
+                            <div class="tour__handbook-body">
+                                <ul class="tour__handbook-list">
+                                    <li class="tour__handbook-item">
+                                        <h3 class="tour__handbook-heading">
+                                            <a href="#" class="tour__handbook-link">Xiêu lòng với những cảnh đẹp nên thơ ở chùa Hương</a>
+                                        </h3>
+                                    </li>
+                                    <li class="tour__handbook-item">
+                                        <p class="tour__handbook-text">Vậy ở chùa Hương có gì thú vị mà lại thu hút nhiều du khách trong lẫn ngoài nước đến như vậy, chúng ta hãy cùng tìm hiểu xem nhé. Chùa Hương hay tên gọi đầy đủ là chùa Hương Sơn, là một quần thể di tích thắng cảnh với rất nhiều ngôi chùa, đền, đình, bao quanh là non nước hùng...</p>
+                                    </li>
+                                    <li class="tour__handbook-item-time">
+                                        <i class="tour__handbook-icon far fa-clock"></i>
+                                        <span class="tour__handbook-rank">Saturday,</span>
+                                        <span class="tour__handbook-day">08/10/2021</span>
+                                        <i class="tour__handbook-icon fas fa-comments"></i>
+                                        <span class="tour__handbook-comment">(2) Bình luận</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l-6 m-6">
+                        <div class="tour__handbook-s-box">
+                            <div class="tour__handbook-s-image">
+                                <a href="#" class="tour__handbook-s-img-link">
+                                    <img src="./assets/img/image/trang-an-2-5-1.jpg" alt="" class="tour__handbook-s-img">
+                                </a>
+                            </div>
+                            <div class="tour__handbook-s-body">
+                                <ul class="tour__handbook-s-list">
+                                    <li class="tour__handbook-s-item">
+                                        <h3 class="tour__handbook-s-heading">
+                                            <a href="#" class="tour__handbook-s-link">Xiêu lòng với những cảnh đẹp nên thơ ở chùa Hương</a>
+                                        </h3>
+                                    </li>
+                                    <li class="tour__handbook-s-item">
+                                        <p class="tour__handbook-s-text hide-on-mobile-tablet">Vậy ở chùa Hương có gì thú vị mà lại thu hút nhiều du khách trong lẫn ngoài nước đến như vậy, chúng ta hãy cùng tìm hiểu xem nhé. Chùa Hương hay tên gọi đầy đủ là chùa Hương Sơn, là một quần thể di tích thắng cảnh với rất nhiều ngôi chùa, đền, đình, bao quanh là non nước hùng...</p>
+                                    </li>
+                                    <li class="tour__handbook-s-item-time">
+                                        <i class="tour__handbook-s-icon far fa-clock"></i>
+                                        <span class="tour__handbook-s-rank">Saturday,</span>
+                                        <span class="tour__handbook-s-day">08/10/2021</span>
+                                        <span class="tour__handbook-s-comment">
+                                            <i class="tour__handbook-s-comment-icon fas fa-comments"></i>
+                                            (2) Bình luận
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tour__handbook-s-box tour__handbook-s--margin">
+                            <div class="tour__handbook-s-image">
+                                <a href="#" class="tour__handbook-s-img-link">
+                                    <img src="./assets/img/image/7mai-anh-dao-dalat-zing.jpg" alt="" class="tour__handbook-s-img">
+                                </a>
+                            </div>
+                            <div class="tour__handbook-s-body">
+                                <ul class="tour__handbook-s-list">
+                                    <li class="tour__handbook-s-item">
+                                        <h3 class="tour__handbook-s-heading">
+                                            <a href="#" class="tour__handbook-s-link">Xiêu lòng với những cảnh đẹp nên thơ ở chùa Hương</a>
+                                        </h3>
+                                    </li>
+                                    <li class="tour__handbook-s-item">
+                                        <p class="tour__handbook-s-text hide-on-mobile-tablet">Vậy ở chùa Hương có gì thú vị mà lại thu hút nhiều du khách trong lẫn ngoài nước đến như vậy, chúng ta hãy cùng tìm hiểu xem nhé. Chùa Hương hay tên gọi đầy đủ là chùa Hương Sơn, là một quần thể di tích thắng cảnh với rất nhiều ngôi chùa, đền, đình, bao quanh là non nước hùng...</p>
+                                    </li>
+                                    <li class="tour__handbook-s-item-time">
+                                        <i class="tour__handbook-s-icon far fa-clock"></i>
+                                        <span class="tour__handbook-s-rank">Saturday,</span>
+                                        <span class="tour__handbook-s-day">08/10/2021</span>
+                                        <span class="tour__handbook-s-comment">
+                                            <i class="tour__handbook-s-comment-icon fas fa-comments"></i>
+                                            (2) Bình luận
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tour__handbook-s-box tour__handbook-s--margin">
+                            <div class="tour__handbook-s-image">
+                                <a href="#" class="tour__handbook-s-img-link">
+                                    <img src="./assets/img/image/dalat-1.jpg" alt="" class="tour__handbook-s-img">
+                                </a>
+                            </div>
+                            <div class="tour__handbook-s-body">
+                                <ul class="tour__handbook-s-list">
+                                    <li class="tour__handbook-s-item">
+                                        <h3 class="tour__handbook-s-heading">
+                                            <a href="#" class="tour__handbook-s-link">Xiêu lòng với những cảnh đẹp nên thơ ở chùa Hương</a>
+                                        </h3>
+                                    </li>
+                                    <li class="tour__handbook-s-item">
+                                        <p class="tour__handbook-s-text hide-on-mobile-tablet">Vậy ở chùa Hương có gì thú vị mà lại thu hút nhiều du khách trong lẫn ngoài nước đến như vậy, chúng ta hãy cùng tìm hiểu xem nhé. Chùa Hương hay tên gọi đầy đủ là chùa Hương Sơn, là một quần thể di tích thắng cảnh với rất nhiều ngôi chùa, đền, đình, bao quanh là non nước hùng...</p>
+                                    </li>
+                                    <li class="tour__handbook-s-item-time">
+                                        <i class="tour__handbook-s-icon far fa-clock"></i>
+                                        <span class="tour__handbook-s-rank">Saturday,</span>
+                                        <span class="tour__handbook-s-day">08/10/2021</span>
+                                        <span class="tour__handbook-s-comment">
+                                            <i class="tour__handbook-s-comment-icon fas fa-comments"></i>
+                                            (2) Bình luận
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tour__handbook-s-box tour__handbook-s--margin">
+                            <div class="tour__handbook-s-image">
+                                <a href="#" class="tour__handbook-s-img-link">
+                                    <img src="./assets/img/image/du-lich-hoi-an-11.jpg" alt="" class="tour__handbook-s-img">
+                                </a>
+                            </div>
+                            <div class="tour__handbook-s-body">
+                                <ul class="tour__handbook-s-list">
+                                    <li class="tour__handbook-s-item">
+                                        <h3 class="tour__handbook-s-heading">
+                                            <a href="#" class="tour__handbook-s-link">Xiêu lòng với những cảnh đẹp nên thơ ở chùa Hương</a>
+                                        </h3>
+                                    </li>
+                                    <li class="tour__handbook-s-item">
+                                        <p class="tour__handbook-s-text hide-on-mobile-tablet">Vậy ở chùa Hương có gì thú vị mà lại thu hút nhiều du khách trong lẫn ngoài nước đến như vậy, chúng ta hãy cùng tìm hiểu xem nhé. Chùa Hương hay tên gọi đầy đủ là chùa Hương Sơn, là một quần thể di tích thắng cảnh với rất nhiều ngôi chùa, đền, đình, bao quanh là non nước hùng...</p>
+                                    </li>
+                                    <li class="tour__handbook-s-item-time">
+                                        <i class="tour__handbook-s-icon far fa-clock"></i>
+                                        <span class="tour__handbook-s-rank">Saturday,</span>
+                                        <span class="tour__handbook-s-day">08/10/2021</span>
+                                        <span class="tour__handbook-s-comment">
+                                            <i class="tour__handbook-s-comment-icon fas fa-comments"></i>
+                                            (2) Bình luận
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer__slider">
+                <div class="grid wide">
+                    <div class="row">
+                        <div class="col l-4 m-12 c-12">
+                            <div class="footer__contact">
+                                <h3 class="footer__contact-heading">Liên hệ</h3>
+                                <div class="footer__contact-body">
+                                    <a href="" class="footer__contact-link">
+                                        <img src="https://bizweb.dktcdn.net/100/299/077/themes/642224/assets/fot_hotline.svg?1628515462023" alt="" class="footer__contact-img">
+                                    </a>
+                                    <div class="footer__contact-info">
+                                        <p class="footer__contact-text-support">Hỗ trợ trực tuyến 24/7!</p>
+                                        <a href="" class="footer__contact-hotline">
+                                            <p class="footer__contact-hotline-text">Hotline: 1900 6750</p>
+                                        </a>
+                                        <p class="footer__contact-address">70 Lu Gia, Ward 15, District 11, Ho Chi Minh City</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-2 m-4 c-12">
+                            <div class="footer__service">
+                                <h3 class="footer__service-heading">Dịch vụ
+                                    <span class="hide-on-pc">
+                                        <i class="footer__service-icon fas fa-chevron-down"></i>
+                                    </span>
+                                </h3>
+                                <ul class="footer__service-list">
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Trang chủ</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">GiớI thiệu</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Tour trong nước</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Tour nước ngoài</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Dịch vụ tour</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Cẩm nang du lịch</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Liên hệ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col l-3 m-4 c-12">
+                            <div class="footer__service">
+                                <h3 class="footer__service-heading">Chăm sóc khách hàng
+                                    <span class="hide-on-pc">
+                                        <i class="footer__service-icon fas fa-chevron-down"></i>
+                                    </span>
+                                </h3>
+                                <ul class="footer__service-list">
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Trang chủ</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">GiớI thiệu</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Tour trong nước</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Tour nước ngoài</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Dịch vụ tour</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Cẩm nang du lịch</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Liên hệ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col l-3 m-4 c-12">
+                            <div class="footer__service">
+                                <h3 class="footer__service-heading">Chính sách
+                                    <span class="hide-on-pc">
+                                        <i class="footer__service-icon fas fa-chevron-down"></i>
+                                    </span>
+                                </h3>
+                                <ul class="footer__service-list">
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Trang chủ</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">GiớI thiệu</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Tour trong nước</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Tour nước ngoài</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Dịch vụ tour</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Cẩm nang du lịch</a>
+                                    </li>
+                                    <li class="footer__service-item">
+                                        <a href="" class="footer__service-link">Liên hệ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__license">
+                <div class="grid">
+                    <div class="row">
+                        <div class="col l-12 m-12 c-12">
+                            <div class="footer__license-text">
+                                <span class="footer__license-text-text-1">© Bản quyền thuộc về </span>
+                                <span class="footer__license-text-2">Kiến Vàng</span>
+                                <span class="footer__license-text-4 hide-on-mobile">|</span>
+                                <span class="footer__license-text-3">Cung cấp bởi 
+                                    <a href="#" class="footer__license-text-link">Sapo</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                if($(this).scrollTop() ) {
+                    $('#backup').fadeIn();
+                } else {
+                    $('#backup').fadeOut();
+                };
+            });
+            $('#backup').click(function() {
+                $('html, body').animate({scrollTop: 0}, 500);
+            });
+        });
+    </script>
+</body>
+
+</html>

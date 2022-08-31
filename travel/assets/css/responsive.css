@@ -1,0 +1,282 @@
+/* PC */
+@media (min-width: 64em) {
+  .hide-on-pc {
+    display: none;
+  }
+}
+/* Mobile & Tablet */
+@media (max-width: 63.9375em) {
+  .hide-on-mobile-tablet {
+    display: none;
+  }
+
+  .header__container {
+    border-bottom: unset;
+    padding: 5px 0;
+  }
+
+  .container__search-tour {
+    padding: 5px 0;
+  }
+
+  .tour__holiday-image-link {
+    top: 0;
+  }
+
+  .tour__domestic {
+      min-height: 59vh;
+  }
+
+  .tour__wraper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .tour__wraper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header__container-search {
+    padding: 5px 0;
+  }
+
+  .header__container-wrap {
+    margin-left: 115%;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .logo-wrap {
+      max-height: 64px;
+  }
+
+  .logo-img {
+    width: 150px;
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .container__search-tour {
+    display: flex;
+    justify-content: center;
+  }
+
+  .box-bar {
+    display: block;
+  }
+
+  .tour__handbook-s-comment-icon {
+    display: block;
+    float:left;
+    margin-top: 5px;
+  }
+  
+  .tour__handbook-s-comment {
+    display: block;
+  }
+
+  .main__contact-item__zalo {
+    border-radius: 3px;
+    position: fixed;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    bottom: 100px;
+    right: 10px;
+  }
+
+  .main__contact-zalo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .main__contact-zalo-img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .main__contact-item__phone {
+    position: fixed;
+    z-index: 2;
+    bottom: 55px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+  }
+
+  .main__contact-phone-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .main__contact-phone-img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .main__contact-phone-text::before,
+  .main__contact-zalo-text::before {
+    display: none;
+  }
+}
+
+/* Tablet */
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+  .hide-on-tablet {
+    display: none;
+  }
+
+  .grid.wide {
+    width: 708px;
+  }
+
+  .tour__holiday {
+    min-height: 70vh;
+  }
+
+  .footer__service {
+    padding-top: 5px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 46.1875em) {
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .box-bar-icon {
+    left: 10px;
+  }
+
+  .container__search-tour {
+    padding: 5px 7px;
+  }
+  
+  .container__search-tour {
+    padding: 5px 7px;
+  }
+
+  .title__wrap {
+    margin-bottom: 30px;
+  }
+
+  .title {
+    padding: 0 7px;
+  }
+
+  .title__heading {
+    font-size: 25px;
+  }
+
+  .title__paragraph {
+    line-height: 23px;
+  }
+
+  .t-1,
+  .t-3 {
+    width: 80px;
+  }
+
+  .t-2 {
+    width: 12px;
+    height: 12px;
+  }
+
+  .tour-wrap {
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+
+  .tour__new {
+    padding: 40px 0;
+  }
+
+  .tour__holiday-intro-wrap {
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  .tour__holiday {
+    min-height: 83vh;
+    padding: 0 7px;
+  }
+
+  .tour__favorite {
+    padding: 40px 0;
+  }
+
+  .tour__wraper {
+    margin-right: -7px;
+    margin-left: -7px;
+  }
+
+  .tour__favorite-content-wrap {
+    padding: 0 7px;
+  }
+
+  .tour__handbook-box {
+    padding: 0 7px;
+  }
+
+  .tour__handbook-s-box {
+    padding: 0 7px;
+  }
+
+  .footer__contact {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .footer__service {
+    padding: 0;
+    height: 38px;
+    overflow: hidden;
+    padding: 0 7px;
+  }
+
+  .footer__service-list {
+    display: none;
+  }
+
+  .footer__service-heading {
+    padding: 7px 0;
+  }
+
+  .footer__service-heading:active ~ .footer__service {
+    display: block;
+    height: 100%;
+    overflow: unset;
+  }
+
+  .footer__service-heading:active ~ .footer__service-list {
+    display: block;
+  } 
+
+  .tour__holiday-text {
+    font-size: 32px;
+    line-height: 55px;
+  }
+  
+  .tour__selection-item-icon {
+    display: block;
+  }
+
+  .tour__selection-item--active {
+    display: flex;
+    align-items: center;
+  }
+}

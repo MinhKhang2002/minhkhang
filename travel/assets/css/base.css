@@ -1,0 +1,54 @@
+:root {
+  --white-color: #fff;
+  --black-color: #000;
+  --text-color: #333333;
+  --header-text: #dfe0e1;
+  --primary-color: #1ba0e2;
+  --hover-color: #1ba0e2;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62,5%;
+  line-height: 16px;
+  font-family: "Roboto", sans-serif;
+  box-sizing: inherit;
+  scroll-behavior: smooth;
+}
+
+/* Animation */
+@keyframes faceIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes growUp {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Hover */
+.header__top-list-register:hover,
+.header__top-list-login:hover,
+.header__top-list-mail:hover,
+.header__top-list-phone:hover {
+  color: var(--hover-color);
+}
+
+/* Button style */
+
+/* Modal */
