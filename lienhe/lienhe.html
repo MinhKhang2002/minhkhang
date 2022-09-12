@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Nhập</title>
+    <title>Liên Hệ</title>
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+
 </head>
 <body>
     <div class="main">
@@ -23,50 +24,52 @@
             <a href="https://minhkhang2002.github.io/minhkhang/lienhe/#">Liên Hệ</a>
         </div>
         <div class="content">
-            <fieldset style="width: 530px;">
-                <legend> <b>ĐĂNG NHẬP</b> </legend>
-                <form method="post" enctype="application/x-www-form-urlencoded">
-                    <table>
+            <h2> Liên Hệ </h2>
+            <img src="./images/lienhe/check-in.png" alt="">
+            <h2><b>Địa chỉ: 0123, Toà Nhà ABC, TP Cần Thơ</b></h1>
+            <p>Nếu bạn có góp ý, vui lòng liên hệ bằng thư điện tử hoặc sử dụng biểu mẫu bên dưới. 
+                <br>Xin cảm ơn.</p>
+            <fieldset style="width: 520px;">
+                <legend>Góp ý</legend>
+                <table style="width: 100%;">
+                    <form method="post" enctype="application/x-www-form-urlencoded">
+                        <tr>
+                            <td style="float: left;">Họ tên:</th>
+                            <td style="width: 80%;">
+                                <input type="text" placeholder="Vui lòng nhập Họ tên của bạn" size="22" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float: left;">Email:</td>
+                            <td>
+                                <input type="email" placeholder="Vui lòng nhập địa chỉ Email" size="22" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float: left;">Chủ đề:</td>
+                            <td>
+                                <select name="topic" size="1">
+                                    <option value="Về sản phẩm/Dịch vụ">Về Sản Phẩm/Dịch Vụ</option>
+                                    <option value="Về Ưu Đãi Thành Viên">Về Ưu Đãi Thành Viên</option>
+                                    <option value="">Về Tín Truyền Thông</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nội dung:</td>
+                        </tr>
                         <tr>
                             <td colspan="2">
-                                <img src="./images/dangnhap/userlogin.png" alt="" width="40%" style="position: relative; left: 25%;">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="float: left;">Email</th>
-                            <td>
-                                <input type="email" placeholder="Nhập email" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="float: left;">Mật khẩu</th>
-                            <td>
-                                <input type="password" placeholder="Nhập mật khẩu" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <td style="
-                                        position: relative;
-                                        left: 4%;">
-                                <input type="submit" value="Đăng Nhập" style="position: relative;
-                                                                                left: 4px;">
-                                <input type="reset" value="Huỷ">
+                                <textarea name="" cols="50" rows="7" required></textarea>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <b>Bạn quên 
-                                    <a href="#">Mật Khẩu?</a>
-                                </b>
-                                <input type="checkbox" checked>
-                                <b>
-                                    Ghi nhớ cho lần đăng nhập sau
-                                </b>
+                                <input type="submit" value="Gửi" style="display: flex; position: relative; left: 33%;">
                             </td>
                         </tr>
-                    </table>
-                </form>
+                    </form>
+                </table>
             </fieldset>
         </div>
         <div class="footer">
