@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Thành Viên</title>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <a href="dangky.html">
+                <img src="./images/logo.png" alt="logo">
+            </a>
+            <br>
+            <a href="trangchu.html" style="color: #0000ee;">Trang Chủ</a>
+            <a href="gioithieu.html">Giới Thiệu</a>
+            <a href="sanpham.html" style="color: #0000ee;">Sản Phẩm</a>
+            <a href="tintuc.html" style="color: #0000ee;">Tin Tức</a>
+            <a href="dangnhap.html">Đăng Nhập</a>
+            <a href="dangky.h tml">Đăng Ký</a>
+            <a href="lienhe.html">Liên Hệ</a>
+        </div>
+        <div class="content">
+            <fieldset style="width:530px">
+                <legend><b>ĐĂNG KÝ</b></legend>
+                <table style="width:100%">
+                    <form>
+                        <tr>
+                            <th style="float: left;">Email</th>
+                            <td>
+                                <input size="20" type="text" placeholder="Vui lòng nhập email" required autofocus>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="float: left;">Mật Khẩu</th>
+                            <td>
+                                <input size="20" type="password" maxlength="20" name="psw" placeholder="Vui lòng nhập mật khẩu" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="float: left;">Nhập lại mật khẩu</th>
+                            <td>
+                                <input size="20" type="password" maxlength="20" name="psw2" placeholder="Vui lòng nhập mật khẩu" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="float: left;">Cấp độ thành viên</th>
+                            <td>
+                                <b>
+                                    <input type="radio" name="rank" id="bac" required checked value="Bạc">
+                                    <label for="bac">Bạc</label>
+                                    <input type="radio" name="rank" id="vang" required>
+                                    <label for="vang">Vàng</label>
+                                    <input type="radio" name="rank" id="bachkim" required >
+                                    <label for="bachkim">Bạch Kim</label>
+                                </b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="float: left;">Ảnh đại diện</th>
+                            <td>
+                                <input type="file" accept=".png, jpg, .gif" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <b>Thông qua việc tạo tài khoản, bạn đã đồng ý với </b>
+                                <a href="#">
+                                    <b>Điều kiện & Quyền riêng  tư của chúng tôi.</b>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="reset" value="Huỷ">
+                                <input type="submit" value="Đăng ký">
+                            </td>
+                        </tr>
+                    </form>
+                </table>
+            </fieldset>
+        </div>
+        <div class="footer">
+            <b>
+                <p>&copy 2021 Bản quyền thuộc về FreeezeVN, 
+                    <a href="facebook.com">facebook</a>
+                    <a href="twitter.com">twitter</a>
+                    <a href="pinterrest.com">pinterest</a>
+                    <a href="#" style="color: #0000ee;">Về Đầu Trang</a>
+                </p>
+            </b>
+        </div>
+    </div>
+</body>
+</html>
