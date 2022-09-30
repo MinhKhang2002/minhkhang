@@ -6,81 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liên Hệ</title>
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./grid.css">
+    <link rel="stylesheet" href="./lienhe.css">
 
 </head>
 <body>
-    <div class="main">
+    <div class="main" id="logo">
         <div class="header">
-            <a href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html">
-                <img src="./images/logo.png" alt="logo">
-            </a>
-            <br>
-            <a href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html" style="color: #0000ee;">Trang Chủ</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/gioithieu/gioithieu.html" style="color: #0000ee;">Giới Thiệu</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/sanpham/sanpham.html" style="color: #0000ee;">Sản Phẩm</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/tintuc/tintuc.html" style="color: #0000ee;">Tin Tức</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/dangnhap/dangnhap.html" style="color: #0000ee;">Đăng Nhập</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/dangky/dangky.html" style="color: #0000ee;">Đăng Ký</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/lienhe/lienhe.html" style="color: #0000ee;">Liên Hệ</a>
+            <div class="header--wrap">
+                <a href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html">
+                    <img src="./images/logo.png" alt="logo">
+                </a>
+                <img src="./images/header-img1.png" alt="" class="header_1">
+                <img src="./images/header-img2.png" alt="" class="header_2">
+                <img src="./images/header-img3.png" alt="" class="header_3">
+                <br>
+                <div class="nav_link">
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html">Trang Chủ</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/gioithieu/gioithieu.html">Giới Thiệu</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/sanpham/sanpham.html">Sản Phẩm</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/tintuc/tintuc.html">Tin Tức</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/dangnhap/dangnhap.html">Đăng Nhập</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/dangky/dangky.html">Đăng Ký</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/lienhe/lienhe.html">Liên Hệ</a>
+                    
+                </div>
+                <div class="search_store">
+                    <input class="input-search" type="text" placeholder="Nhập nội dung cần tìm...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+            </div>
         </div>
         <div class="content">
-            <h2> Liên Hệ </h2>
-            <img src="./images/lienhe/check-in.png" alt="">
-            <h2><b>Địa chỉ: 0123, Toà Nhà ABC, TP Cần Thơ</b></h1>
-            <p>Nếu bạn có góp ý, vui lòng liên hệ bằng thư điện tử hoặc sử dụng biểu mẫu bên dưới. 
-                <br>Xin cảm ơn.</p>
-            <fieldset style="width: 520px;">
-                <legend>Góp ý</legend>
-                <table style="width: 100%;">
-                    <form method="post" enctype="application/x-www-form-urlencoded">
-                        <tr>
-                            <td style="float: left;">Họ tên:</th>
-                            <td style="width: 80%;">
-                                <input type="text" placeholder="Vui lòng nhập Họ tên của bạn" size="22" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="float: left;">Email:</td>
-                            <td>
-                                <input type="email" placeholder="Vui lòng nhập địa chỉ Email" size="22" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="float: left;">Chủ đề:</td>
-                            <td>
-                                <select name="topic" size="1">
-                                    <option value="Về sản phẩm/Dịch vụ">Về Sản Phẩm/Dịch Vụ</option>
-                                    <option value="Về Ưu Đãi Thành Viên">Về Ưu Đãi Thành Viên</option>
-                                    <option value="">Về Tín Truyền Thông</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Nội dung:</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <textarea name="" cols="50" rows="7" required></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <input type="submit" value="Gửi" style="display: flex; position: relative; left: 33%;">
-                            </td>
-                        </tr>
-                    </form>
-                </table>
-            </fieldset>
+            <h2 class="heading"> Liên Hệ </h2>
+            <p class="heading--phararap">
+                <i class="fa-solid fa-location-dot location-icon"></i>
+                <b>Địa chỉ: 0123, Toà Nhà ABC, TP Cần Thơ</b>
+                Nếu bạn có góp ý, vui lòng liên hệ bằng thư điện tử hoặc sử dụng biểu mẫu bên dưới.
+                Xin cảm ơn.
+            </p>
+                <h2 class="heading">Góp ý</h2>
+                <div class="feedback grid">
+                    <div class="row">
+                        <i class="fa-solid fa-user user-icon"></i>
+                        <input type="text" placeholder="Vui lòng nhập Họ tên của bạn" size="22" required>
+                    </div>
+                    <div class="row">
+                        <i class="fa-solid fa-envelope mail-icon"></i>
+                        <input type="email" placeholder="Vui lòng nhập địa chỉ Email" size="22" required>
+                    </div>
+                    <div class="row">
+                        <i class="fa-solid fa-list list-icon"></i>
+                        <select name="topic" size="1">
+                            <option value="Về sản phẩm/Dịch vụ">Về Sản Phẩm/Dịch Vụ</option>
+                            <option value="Về Ưu Đãi Thành Viên">Về Ưu Đãi Thành Viên</option>
+                            <option value="">Về Tín Truyền Thông</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <i class="fa-regular fa-note-sticky note-icon"></i>
+                        <textarea name="" cols="50" rows="7" required></textarea>
+                    </div>
+                    <input type="submit" value="Gửi">
+                </div>
+        </div>
+        <div class="return-top">
+            <a href="#logo">
+                <img src="./images/top.png" alt="" class="logo-return">
+            </a>
         </div>
         <div class="footer">
-            <b>
-                <p>&copy 2021 Bản quyền thuộc về FreeezeVN, 
-                    <a href="facebook.com">facebook</a>
-                    <a href="twitter.com">twitter</a>
-                    <a href="pinterrest.com">pinterest</a>
-                    <a href="#" style="color: #0000ee;">Về Đầu Trang</a>
-                </p>
-            </b>
+            <div class="footer-warp">
+                <p class="footer-text">&copy 2021 Bản quyền thuộc về FreeezeVN.</p>
+                <i class="icon-footert fa-brands fa-facebook-f"></i>
+                <i class="icon-footert fa-brands fa-twitter"></i>
+                <i class="icon-footert fa-brands fa-pinterest"></i>
+            </div>
         </div>
     </div>
 </body>

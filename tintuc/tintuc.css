@@ -179,9 +179,9 @@ ol {
     bottom: 2%;
 }
 
-/* .return-top {
+.return-top {
     position: fixed;
-} */
+}
 
 /* =============Heading================== */
 
@@ -206,7 +206,7 @@ ol {
     background-image: linear-gradient(to left , #fff, #cddc39, #cddc39, #fff );
     width: 200px;
     height: 3px;
-    top: 36px;
+    bottom: -3px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -221,7 +221,7 @@ ol {
     /* text-align: center; */
     /* position: relative; */
     display: block;
-    text-align: center;
+    text-align: left;
 }
 
 .heading-3 {
@@ -234,32 +234,49 @@ ol {
     /* position: relative; */
 }
 
-/* =======Product========= */
+/* ======================================= */
+.content-wrap{
+    margin-left: 3px;
+    width: 100%;
+}
 
-.product-wrap {
-    margin: 3px;
-    /* display: flex; */
-    border: solid 1px #dbd7d9;
+.content {
+    border: solid 1px #ccc7c8;
     border-radius: 5px;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(236,236,236,0) 87%, rgba(205,220,57,0.9282407407407407) 95%);
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
-.product_phararap {
-    margin: 2px 0;
-    min-height: 120px;
+.content--phararap {
     text-align: justify;
-    padding: 10px 8px 0 8px;
 }
 
-.product-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.content--phararap:last-child {
+    margin-bottom: 0;
 }
 
-.form_number {
-    display: flex;
-    justify-content: center;
-    bottom: 5px;
+.content-img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.content-c3 {
+    padding-left: 6px;
+    padding-right: 8px;
+}
+
+.content-phara {
+    text-align: justify;
+    width: 66%;
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.content-image {
+    width: 29%;
+    float: right;
+    border-radius: 5px;
+    flex: 1;
 }

@@ -179,9 +179,9 @@ ol {
     bottom: 2%;
 }
 
-/* .return-top {
+.return-top {
     position: fixed;
-} */
+}
 
 /* =============Heading================== */
 
@@ -234,32 +234,63 @@ ol {
     /* position: relative; */
 }
 
-/* =======Product========= */
+/* ========================================================= */
 
-.product-wrap {
-    margin: 3px;
-    /* display: flex; */
-    border: solid 1px #dbd7d9;
+.content {
+    margin-top: 25px;
+    border: solid 1px #ccc7c8;
     border-radius: 5px;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(236,236,236,0) 87%, rgba(205,220,57,0.9282407407407407) 95%);
 }
 
-.product_phararap {
-    margin: 2px 0;
-    min-height: 120px;
-    text-align: justify;
-    padding: 10px 8px 0 8px;
+.location-icon {
+    background-color: #cddc39;
+    color: #ed4190;
+    min-width: 30px;
+    padding: 4px;
+    text-align: center;
+    float: left;
+    margin-right: 5px;
+    margin-left: 10px;
 }
 
-.product-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.heading--phararap {
+    margin: 0;
+    line-height: 25px;  
 }
 
-.form_number {
-    display: flex;
-    justify-content: center;
-    bottom: 5px;
+.feedback {
+    margin-left: 25%;
+}
+
+.user-icon {
+    background-color: #cddc39;
+    color: #fff;
+    min-width: 28px;
+    padding: 4px;
+    text-align: center;
+}
+
+.mail-icon {
+    background-color: #cddc39;
+    color: #fff;
+    min-width: 28px;
+    padding: 4px;
+    text-align: center;
+}
+
+.list-icon {
+    background-color: #cddc39;
+    color: #fff;
+    min-width: 28px;
+    padding: 4px;
+    text-align: center;
+}
+
+.note-icon {
+    background-color: #cddc39;
+    color: #fff;
+    min-width: 28px;
+    padding: 4px;
+    text-align: center;
+    margin-bottom: 4px;
 }
