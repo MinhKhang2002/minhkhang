@@ -6,93 +6,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Ký Thành Viên</title>
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./dangky.css">
+    <!-- <link rel="stylesheet" href="./grid.css"> -->
 
 </head>
 <body>
     <div class="main">
-        <div class="header">
-            <a href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html">
-                <img src="./images/logo.png" alt="logo">
-            </a>
-            <br>
-            <a href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html" style="color: #0000ee;">Trang Chủ</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/gioithieu/gioithieu.html" style="color: #0000ee;">Giới Thiệu</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/sanpham/sanpham.html" style="color: #0000ee;">Sản Phẩm</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/tintuc/tintuc.html" style="color: #0000ee;">Tin Tức</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/dangnhap/dangnhap.html" style="color: #0000ee;">Đăng Nhập</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/dangky/dangky.html" style="color: #0000ee;">Đăng Ký</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/lienhe/lienhe.html" style="color: #0000ee;">Liên Hệ</a>
+        <div class="header" id="logo">
+            <div class="header--wrap">
+                <a href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html">
+                    <img src="./images/logo.png" alt="logo">
+                </a>
+                <img src="./images/header-img1.png" alt="" class="header_1">
+                <img src="./images/header-img2.png" alt="" class="header_2">
+                <img src="./images/header-img3.png" alt="" class="header_3">
+                <br>
+                <div class="nav_link">
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html">Trang Chủ</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/gioithieu/gioithieu.html">Giới Thiệu</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/sanpham/sanpham.html">Sản Phẩm</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/tintuc/tintuc.html">Tin Tức</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/dangnhap/dangnhap.html">Đăng Nhập</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/dangky/dangky.html">Đăng Ký</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/lienhe/lienhe.html">Liên Hệ</a>
+                    
+                </div>
+                <div class="search_store">
+                    <input class="input-search" type="text" placeholder="Nhập nội dung cần tìm...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+            </div>
         </div>
         <div class="content">
-            <fieldset style="width:530px">
-                <legend><b>ĐĂNG KÝ</b></legend>
-                <table style="width:100%">
-                    <form>
-                        <tr>
-                            <th style="float: left;">Email</th>
-                            <td>
-                                <input size="20" type="text" placeholder="Vui lòng nhập email" required autofocus>
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="float: left;">Mật Khẩu</th>
-                            <td>
-                                <input size="20" type="password" maxlength="20" name="psw" placeholder="Vui lòng nhập mật khẩu" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="float: left;">Nhập lại mật khẩu</th>
-                            <td>
-                                <input size="20" type="password" maxlength="20" name="psw2" placeholder="Vui lòng nhập mật khẩu" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="float: left;">Cấp độ thành viên</th>
-                            <td>
-                                <b>
-                                    <input type="radio" name="rank" id="bac" required checked value="Bạc">
-                                    <label for="bac">Bạc</label>
-                                    <input type="radio" name="rank" id="vang" required>
-                                    <label for="vang">Vàng</label>
-                                    <input type="radio" name="rank" id="bachkim" required >
-                                    <label for="bachkim">Bạch Kim</label>
-                                </b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th style="float: left;">Ảnh đại diện</th>
-                            <td>
-                                <input type="file" accept=".png, jpg, .gif" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <b>Thông qua việc tạo tài khoản, bạn đã đồng ý với </b>
-                                <a href="#">
-                                    <b>Điều kiện & Quyền riêng  tư của chúng tôi.</b>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="reset" value="Huỷ">
-                                <input type="submit" value="Đăng ký">
-                            </td>
-                        </tr>
-                    </form>
-                </table>
-            </fieldset>
+            <h2 class="heading">ĐĂNG KÝ</h2>
+            <form action="">
+                <div class="grid register">
+                    <div class="row register-wrap">
+                        <i class="fa-solid fa-envelope mail-icon"></i>
+                        <input size="20" type="text" placeholder="Vui lòng nhập email" required autofocus>
+                    </div>
+                    <div class="row register-wrap">
+                        <i class="fa-solid fa-key key-icon"></i>
+                        <input size="20" type="password" maxlength="20" name="psw" placeholder="Vui lòng nhập mật khẩu" required>
+                    </div>
+                    <div class="row register-wrap">
+                        <i class="fa-solid fa-key key-icon"></i>
+                        <input size="20" type="password" maxlength="20" name="psw" placeholder="Vui lòng nhập lại mật khẩu" required>
+                    </div>
+                    <div class="row register-wrap">
+                        <i class="fa-solid fa-users group-user-icon"></i>
+                        <input type="radio" name="rank" id="bac" required checked value="Bạc">
+                        <label for="bac">Bạc</label>
+                        <input type="radio" name="rank" id="vang" required>
+                        <label for="vang">Vàng</label>
+                        <input type="radio" name="rank" id="bachkim" required >
+                        <label for="bachkim">Bạch Kim</label>
+                    </div>
+                    <div class="row register-wrap">
+                        <i class="fa-regular fa-id-badge loadfile-icon"></i>
+                        <input type="file" accept=".png, jpg, .gif" required>
+                    </div>
+                    <div class="row register-wrap">
+                        <p class="register--phararap">
+                            Thông qua việc tạo tài khoản, bạn đã đồng ý với 
+                            <u class="register--phararap_u">Điều khoảng & Quyền riêng  tư của chúng tôi.</u>
+                        </p>
+                    </div>
+                    <div class="row register-wrap">
+                        <input type="submit" value="Đăng Ký">
+                        <input type="reset" value="Huỷ">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="return-top">
+            <a href="#logo">
+                <img src="./images/top.png" alt="" class="logo-return">
+            </a>
         </div>
         <div class="footer">
-            <b>
-                <p>&copy 2021 Bản quyền thuộc về FreeezeVN, 
-                    <a href="facebook.com">facebook</a>
-                    <a href="twitter.com">twitter</a>
-                    <a href="pinterrest.com">pinterest</a>
-                    <a href="#" style="color: #0000ee;">Về Đầu Trang</a>
-                </p>
-            </b>
+            <div class="footer-warp">
+                <p class="footer-text">&copy 2021 Bản quyền thuộc về FreeezeVN.</p>
+                <i class="icon-footert fa-brands fa-facebook-f"></i>
+                <i class="icon-footert fa-brands fa-twitter"></i>
+                <i class="icon-footert fa-brands fa-pinterest"></i>
+            </div>
         </div>
     </div>
 </body>

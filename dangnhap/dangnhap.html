@@ -6,24 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập</title>
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./dangnhap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="main">
-        <!-- <div class="header">
-            <a href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html">
-                <img src="./images/logo.png" alt="logo">
-            </a>
-            <br>
-            <a href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html" style="color: #0000ee;">Trang Chủ</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/gioithieu/gioithieu.html" style="color: #0000ee;">Giới Thiệu</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/sanpham/sanpham.html" style="color: #0000ee;">Sản Phẩm</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/tintuc/tintuc.html" style="color: #0000ee;">Tin Tức</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/dangnhap/dangnhap.html" style="color: #0000ee;">Đăng Nhập</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/dangky/dangky.html" style="color: #0000ee;">Đăng Ký</a>
-            <a href="https://minhkhang2002.github.io/minhkhang/lienhe/lienhe.html" style="color: #0000ee;">Liên Hệ</a>
-        </div> -->
-        <div class="content" style="">
-            <fieldset style="width: 530px; background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);">
+        <div class="header" id="logo">
+            <div class="header--wrap">
+                <a href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html">
+                    <img src="./images/logo.png" alt="logo">
+                </a>
+                <img src="./images/header-img1.png" alt="" class="header_1">
+                <img src="./images/header-img2.png" alt="" class="header_2">
+                <img src="./images/header-img3.png" alt="" class="header_3">
+                <br>
+                <div class="nav_link">
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/trangchu/trangchu.html">Trang Chủ</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/gioithieu/gioithieu.html">Giới Thiệu</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/sanpham/sanpham.html">Sản Phẩm</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/tintuc/tintuc.html">Tin Tức</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/dangnhap/dangnhap.html">Đăng Nhập</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/dangky/dangky.html">Đăng Ký</a>
+                    <a class="button_nav" href="https://minhkhang2002.github.io/minhkhang/lienhe/lienhe.html">Liên Hệ</a>
+                    
+                </div>
+                <div class="search_store">
+                    <input class="input-search" type="text" placeholder="Nhập nội dung cần tìm...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <fieldset>
                 <legend style="font-family: Arial, Helvetica, sans-serif;"> <b>ĐĂNG NHẬP</b> </legend>
                 <form method="post" enctype="application/x-www-form-urlencoded">
                     <table>
@@ -69,14 +84,18 @@
                 </form>
             </fieldset>
         </div>
+        <div class="return-top">
+            <a href="#logo">
+                <img src="./images/top.png" alt="" class="logo-return">
+            </a>
+        </div>
         <div class="footer">
-            <b>
-                <p>&copy 2021 Bản quyền thuộc về Google, 
-                    <a href="facebook.com" style="text-decoration: none">Facebook</a>
-                    <a href="twitter.com" style="text-decoration: none">Twitter</a>
-                    <a href="pinterrest.com" style="text-decoration: none">Pinterest</a>
-                </p>
-            </b>
+            <div class="footer-warp">
+                <p class="footer-text">&copy 2021 Bản quyền thuộc về FreeezeVN.</p>
+                <i class="icon-footert fa-brands fa-facebook-f"></i>
+                <i class="icon-footert fa-brands fa-twitter"></i>
+                <i class="icon-footert fa-brands fa-pinterest"></i>
+            </div>
         </div>
     </div>
 </body>
