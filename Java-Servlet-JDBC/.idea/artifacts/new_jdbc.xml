@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="new-jdbc">
+    <output-path>$PROJECT_DIR$/.idea/artifacts</output-path>
+    <root id="root" />
+  </artifact>
+</component>

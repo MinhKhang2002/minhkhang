@@ -1,0 +1,9 @@
+127.0.0.1 - - [19/Sep/2023:10:04:52 +0700] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [19/Sep/2023:10:04:55 +0700] "GET /new-jdbc/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [19/Sep/2023:10:04:57 +0700] "GET /new-jdbc/trang-chu HTTP/1.1" 200 8536
+0:0:0:0:0:0:0:1 - - [19/Sep/2023:10:04:57 +0700] "GET /favicon.ico HTTP/1.1" 404 1085
+0:0:0:0:0:0:0:1 - - [19/Sep/2023:10:05:09 +0700] "GET /new-jdbc/admin-home HTTP/1.1" 200 7631
+0:0:0:0:0:0:0:1 - - [19/Sep/2023:10:05:09 +0700] "GET /new-jdbc/ckeditor/ckeditor.js HTTP/1.1" 404 1111
+0:0:0:0:0:0:0:1 - - [19/Sep/2023:10:05:10 +0700] "GET /new-jdbc/template/paging/jquery.twbsPagination.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [19/Sep/2023:10:05:13 +0700] "GET /new-jdbc/admin-new HTTP/1.1" 500 3261
+0:0:0:0:0:0:0:1 - - [19/Sep/2023:10:05:18 +0700] "GET /new-jdbc/admin-new HTTP/1.1" 500 3261

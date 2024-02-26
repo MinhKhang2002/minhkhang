@@ -1,0 +1,9 @@
+127.0.0.1 - - [26/Sep/2023:22:10:44 +0700] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [26/Sep/2023:22:10:45 +0700] "GET /new-jdbc/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [26/Sep/2023:22:10:49 +0700] "GET /new-jdbc/trang-chu HTTP/1.1" 200 8318
+0:0:0:0:0:0:0:1 - - [26/Sep/2023:22:10:49 +0700] "GET /new-jdbc/template/web/css/style.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [26/Sep/2023:22:10:49 +0700] "GET /new-jdbc/template/web/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [26/Sep/2023:22:10:49 +0700] "GET /new-jdbc/template/web/jquery/jquery.min.js HTTP/1.1" 304 -
+127.0.0.1 - - [26/Sep/2023:22:13:05 +0700] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [26/Sep/2023:22:13:06 +0700] "GET /new-jdbc/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [26/Sep/2023:22:13:07 +0700] "GET /new-jdbc/trang-chu HTTP/1.1" 200 8318

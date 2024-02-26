@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.laptrinhjavaweb.dao.GennericDAO&apos; to &apos;GenericDAO&apos;&#x0D;&#x0A;- Original project: &apos;new-jdbc&apos;&#x0D;&#x0A;- Original element: &apos;com.laptrinhjavaweb.dao.GennericDAO&apos;&#x0D;&#x0A;- Renamed element: &apos;com.laptrinhjavaweb.dao.GenericDAO&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;GennericDAO&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java&lt;com.laptrinhjavaweb.dao{GennericDAO.java[GennericDAO" matchStrategy="1" name="GenericDAO" qualified="false" references="true" similarDeclarations="false" stamp="1693820294905" textual="false" version="1.0"/>
+</session>

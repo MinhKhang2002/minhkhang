@@ -1,0 +1,12 @@
+127.0.0.1 - - [05/Sep/2023:11:21:21 +0700] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [05/Sep/2023:11:21:22 +0700] "GET /new-jdbc/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [05/Sep/2023:11:22:02 +0700] "GET /new-jdbc/trang-chu HTTP/1.1" 200 8485
+0:0:0:0:0:0:0:1 - - [05/Sep/2023:11:22:02 +0700] "GET /new-jdbc/template/web/css/style.css HTTP/1.1" 200 196
+0:0:0:0:0:0:0:1 - - [05/Sep/2023:11:22:02 +0700] "GET /new-jdbc/template/web/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 155758
+0:0:0:0:0:0:0:1 - - [05/Sep/2023:11:22:02 +0700] "GET /new-jdbc/template/web/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1" 200 78635
+0:0:0:0:0:0:0:1 - - [05/Sep/2023:11:22:02 +0700] "GET /new-jdbc/template/web/jquery/jquery.min.js HTTP/1.1" 200 88145
+0:0:0:0:0:0:0:1 - - [05/Sep/2023:11:22:13 +0700] "GET /favicon.ico HTTP/1.1" 404 1085
+127.0.0.1 - - [05/Sep/2023:22:04:48 +0700] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [05/Sep/2023:22:04:49 +0700] "GET /new-jdbc/ HTTP/1.1" 302 -
+127.0.0.1 - - [05/Sep/2023:22:14:19 +0700] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [05/Sep/2023:22:14:19 +0700] "GET /new-jdbc/ HTTP/1.1" 302 -

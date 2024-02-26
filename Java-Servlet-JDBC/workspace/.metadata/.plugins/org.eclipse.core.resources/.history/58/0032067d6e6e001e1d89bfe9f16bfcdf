@@ -1,0 +1,147 @@
+package com.laptrinhjavaweb.controller.web;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.laptrinhjavaweb.constant.SystemConstant;
+import com.laptrinhjavaweb.dao.IUserDAO;
+import com.laptrinhjavaweb.model.CommentModel;
+import com.laptrinhjavaweb.model.NewModel;
+import com.laptrinhjavaweb.model.UserModel;
+import com.laptrinhjavaweb.paging.PageRequest;
+import com.laptrinhjavaweb.paging.Pageble;
+import com.laptrinhjavaweb.service.ICategoryService;
+import com.laptrinhjavaweb.service.ICommentService;
+import com.laptrinhjavaweb.service.INewService;
+import com.laptrinhjavaweb.service.IUserService;
+import com.laptrinhjavaweb.sort.Sorter;
+import com.laptrinhjavaweb.utils.FormUtil;
+import com.laptrinhjavaweb.utils.MessageUtil;
+import com.laptrinhjavaweb.utils.SessionUtil;
+
+@WebServlet(urlPatterns = {"/trang-chu", "/dang-nhap", "/thoat", "/dang-ky"})
+public class HomeController extends HttpServlet {
+	
+	@Inject
+	private ICategoryService categoryService;
+	
+	@Inject
+	private IUserService userService;
+
+	@Inject
+	INewService newService;
+
+	@Inject
+	private IUserDAO userDao;
+
+	
+	private static final long serialVersionUID = 2686801510274002166L;
+
+	ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		NewModel model = FormUtil.toModel(NewModel.class, request);
+		String action = request.getParameter("action");
+//		String view = "";
+		if (action != null && action.equals("login")) {
+			String message = request.getParameter("message");
+			String alert = request.getParameter("alert");
+			if (message != null && alert != null) {
+				request.setAttribute("message", resourceBundle.getString(message));
+				request.setAttribute("alert", alert);
+			}
+//			view = "/views/login.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
+			rd.forward(request, response);
+		} else if (action != null && action.equals("register")) {
+			String message = request.getParameter("message");
+			String alert = request.getParameter("alert");
+			if (message != null && alert != null) {
+				request.setAttribute("message", resourceBundle.getString(message));
+				request.setAttribute("alert", alert);
+			}
+			request.setAttribute(SystemConstant.MODEL, model);
+			RequestDispatcher rd = request.getRequestDispatcher("/views/register.jsp");
+			rd.forward(request, response);
+		} else if (action != null && action.equals("logout")) {
+			SessionUtil.getInstance().removeValue(request, "USERMODEL");
+			response.sendRedirect(request.getContextPath()+"/trang-chu");
+		} else {
+			Pageble pageble = new PageRequest(model.getPage(), model.getMaxPageItem(),
+					new Sorter(model.getSortName(), model.getSortBy()));
+			model.setListResult(newService.findAll(pageble));
+
+			// Đảo ngược danh sách ở đây trước khi truyền cho trang JSP
+			List<NewModel> reversedList = new ArrayList<NewModel>(model.getListResult());
+			Collections.reverse(reversedList);
+			request.setAttribute("reversedList", reversedList);
+
+			request.setAttribute("categories", categoryService.findAll());
+			if (model != null && model.getType() != null && model.getType().equals(SystemConstant.ITEM)) {
+				if (model.getId() != null) {
+					model = newService.findOne(model.getId());
+					request.setAttribute(SystemConstant.MODEL, model);
+				}
+				request.setAttribute("categories", categoryService.findAll());
+//				view = "/views/web/item.jsp";
+
+				// Lấy newId từ yêu cầu (thường truyền qua URL hoặc form)
+				// Sử dụng newId để lấy danh sách comment
+				// Chuyển newId từ String sang Long
+				// Đặt danh sách comment vào thuộc tính của request
+				/*String newIdParam = request.getParameter("id");
+				List<CommentModel> comments = commentService.getCommentsByNewId(Long.valueOf(newIdParam));
+				request.setAttribute("comments", comments);*/
+
+				RequestDispatcher rd = request.getRequestDispatcher("/views/web/item.jsp");
+				rd.forward(request, response);
+			} else {
+//			view = "/views/web/home.jsp";
+				request.setAttribute(SystemConstant.MODEL, model);
+				RequestDispatcher rd = request.getRequestDispatcher("/views/web/home.jsp");
+				rd.forward(request, response);
+			}
+		}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("action");
+		if (action != null && action.equals("login")) {
+			UserModel model = FormUtil.toModel(UserModel.class, request);
+//			model.setStatus(1);
+			model = userService.findByUserNameAndPasswordAndStatus(model.getUserName(), model.getPassword(), 1);
+//			System.out.printf(model.getUserName(), model.getPassword());
+			if (model != null) {
+				SessionUtil.getInstance().putValue(request, "USERMODEL", model);
+				if (model.getRole().getCode().equals("USER")) {
+					response.sendRedirect(request.getContextPath()+"/trang-chu");
+				} else if (model.getRole().getCode().equals("ADMIN")) {
+					response.sendRedirect(request.getContextPath()+"/admin-home");
+				}
+			} else {
+				response.sendRedirect(request.getContextPath()+"/dang-nhap?action=login&message=username_password_invalid&alert=danger");
+			}
+		} else if (action != null && action.equals("register")) {
+			UserModel model = FormUtil.toModel(UserModel.class, request);
+
+			// Tiến hành thêm người dùng mới
+			UserModel userId = userService.addUser(model);
+			if (userId != null) {
+				// Người dùng đã được thêm thành công
+				model = userService.findOne(model.getId()); // Lấy thông tin người dùng vừa thêm
+				request.setAttribute("model", model);
+			}
+		}
+	}
+}
