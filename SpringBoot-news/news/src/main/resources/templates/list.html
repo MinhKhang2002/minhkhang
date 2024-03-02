@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your HTML Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+<!--    <script src="/template/paging/jquery.twbsPagination.js"></script>-->
+    <script th:src="@{/static/template/paging/jquery.twbsPagination.js}"></script>
+
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            // Hàm để cập nhật nội dung của bảng
+            function updateTable(newsList) {
+                $("table tbody").empty(); // Xóa nội dung của tbody trước khi thêm hàng mới
+
+                // Sử dụng Thymeleaf để tạo dòng HTML cho mỗi tin tức
+                $.each(newsList, function (index, news) {
+                    var row = "<tr>" +
+                        "<td>" + news.title + "</td>" +
+                        "<td>" + news.content + "</td>" +
+                        "<td>" + news.shortDescription + "</td>" +
+                        "</tr>";
+                    $("table").append(row);
+                });
+            }
+
+            // Hàm để thực hiện yêu cầu AJAX và cập nhật bảng khi thành công
+            function fetchAndDisplayData(pageNumber, limit) {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8081/new",
+                    data: {
+                        page: pageNumber,
+                        limit: limit
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data)
+                        updatePagination(data.totalPage);
+                        updateTable(data.listResult);
+                    },
+                    error: function (error) {
+                        console.error("Lỗi khi lấy dữ liệu từ API:", error);
+                    }
+                });
+            }
+
+            function updatePagination(totalPages) {
+                window.pagObj = $('#pagination').twbsPagination({
+                    totalPages: totalPages, // Số trang tổng cộng
+                    visiblePages: 10, // Số trang hiển thị
+                    onPageClick: function (event, page) {
+                        fetchAndDisplayData(page, 3); // Gọi hàm để lấy và hiển thị dữ liệu cho trang mới
+                    }
+                });
+            }
+
+            fetchAndDisplayData(1, 3);
+
+        });
+    </script>
+</head>
+<body>
+<div>
+    <h2>Danh sách tin tức</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>ShortDescription</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <ul class="pagination" id="pagination"></ul>
+</div>
+</body>
+</html>

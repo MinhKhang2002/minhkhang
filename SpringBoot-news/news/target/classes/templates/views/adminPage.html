@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{/views/admin/head :: head}"></head>
+
+<body class="sb-nav-fixed">
+<nav th:insert="~{/views/admin/header :: header}"></nav>
+<div id="layoutSidenav">
+    <div th:insert="~{/views/admin/menu :: menu}"></div>
+    <div id="layoutSidenav_content">
+        <main id="main-content" th:fragment="main-content">
+
+        </main>
+        <footer th:insert="~{/views/admin/footer :: footer}"></footer>
+    </div>
+</div>
+</body>
+</html>
