@@ -6,10 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.laptrinhjavaweb.converter.NewConverter;
@@ -31,6 +28,9 @@ public class NewService implements INewService{
 	
 	@Autowired
 	private NewConverter newConverter;
+
+	@Autowired
+	private NewConverter newMapper;
 
 	@Override
 	public NewDTO save(NewDTO newDTO, String loggedInUser, String action) {
@@ -200,5 +200,4 @@ public class NewService implements INewService{
 		}
 		return result;
 	}*/
-
 }

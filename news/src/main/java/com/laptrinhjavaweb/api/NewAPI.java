@@ -1,5 +1,9 @@
 package com.laptrinhjavaweb.api;
 
+import com.laptrinhjavaweb.repository.UserRepository;
+import com.laptrinhjavaweb.service.IUserService;
+import com.laptrinhjavaweb.service.impl.NewService;
+import com.laptrinhjavaweb.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +17,7 @@ import com.laptrinhjavaweb.dto.NewDTO;
 import com.laptrinhjavaweb.service.INewService;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -41,34 +46,30 @@ public class NewAPI {
 	/*@GetMapping(value = "/new")
 	public NewOutput showNew(@RequestParam(value = "page", required = false) Integer page,
 							 @RequestParam(value = "limit", required = false) Integer limit,
-							 @RequestParam(value = "status", required = false) Integer status) {
+							 HttpServletRequest request) {
 		NewOutput result = new NewOutput();
+		int status = 1; // Đặt giá trị status là 1
+
+		// Lấy mã vai trò từ yêu cầu API thông qua interceptor
+		String userRole = (String) request.getAttribute("userRole");
+
 		if (page != null && limit != null) {
 			result.setPage(page);
-			Pageable pageable = PageRequest.of(page - 1, limit);
-			if (status != null) {
+			if (userRole != null) {
+				// Nếu có mã vai trò, sử dụng nó để lọc bài viết
+				Pageable pageable = PageRequest.of(page - 1, limit);
+				result.setListResult(newService.findAllByCategory(userRole, pageable, status));
+				result.setTotalPage((int) Math.ceil((double) (newService.totalItemByCategory(userRole, status)) / limit));
+			} else {
+				// Nếu không có mã vai trò, hiển thị tất cả các bài viết
+				Pageable pageable = PageRequest.of(page - 1, limit);
 				result.setListResult(newService.findAll(pageable, status));
 				result.setTotalPage((int) Math.ceil((double) (newService.totalItem(status)) / limit));
-			} else {
-				result.setListResult(newService.findAll(pageable));
-				result.setTotalPage((int) Math.ceil((double) (newService.totalItem()) / limit));
 			}
 		} else {
 			result.setListResult(newService.findAll());
 		}
-		return result;
-	}*/
-	/*public NewOutput showNew(@RequestParam(value = "page", required = false) Integer page,
-							 @RequestParam(value = "limit", required = false) Integer limit) {
-		NewOutput result = new NewOutput();
-		if(page != null && limit != null) {
-			result.setPage(page);
-			Pageable pageable =  PageRequest.of(page-1,limit);
-			result.setListResult(newService.findAll(pageable));
-			result.setTotalPage((int) Math.ceil( (double) (newService.totalItem()) / limit));
-		} else {
-			result.setListResult(newService.findAll());
-		}
+
 		return result;
 	}*/
 
