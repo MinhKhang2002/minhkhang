@@ -7,8 +7,8 @@ public class NewDTO extends AbstractDTO<NewDTO> {
 	private String shortDescription;
 	private String categoryCode;
 	private String thumbnail;
-
 	private String role;
+	private Integer status;
 	
 	public String getTitle() {
 		return title;
@@ -56,5 +56,13 @@ public class NewDTO extends AbstractDTO<NewDTO> {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }

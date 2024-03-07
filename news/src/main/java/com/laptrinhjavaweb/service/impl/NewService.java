@@ -2,9 +2,11 @@ package com.laptrinhjavaweb.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -64,6 +66,20 @@ public class NewService implements INewService{
 	}
 
 	@Override
+	public List<NewDTO> findAll(Pageable pageable, Integer status) {
+		List<NewDTO> result = new ArrayList<>();
+		List<NewEntity> entities = newRepository.findAllByStatus(status, pageable);
+		for (NewEntity item : entities) {
+			NewDTO newDTO = newConverter.toDTO(item);
+			// Lấy giá trị categoryCode từ category
+			if (item.getCategory() != null) {
+				newDTO.setCategoryCode(item.getCategory().getCode());
+			}
+			result.add(newDTO);
+		}
+		return result;
+	}
+	@Override
 	public List<NewDTO> findAll(Pageable pageable) {
 		List<NewDTO> result = new ArrayList<>();
 		List<NewEntity> entities = newRepository.findAll(pageable).getContent();
@@ -79,10 +95,32 @@ public class NewService implements INewService{
 	}
 
 	@Override
+	public int totalItem(Integer status) {
+		return (int) newRepository.countByStatus(status);
+	}
+
+	@Override
 	public int totalItem() {
 		return (int) newRepository.count();
 	}
 
+	/*@Override
+	public NewDTO getNewById(Long id) {
+		NewEntity newEntity = newRepository.findOneByIdAndStatus(id, 1); // Thêm điều kiện status = 1 vào truy vấn
+
+		if (newEntity != null) {
+			NewDTO newDTO = newConverter.toDTO(newEntity);
+			// Kiểm tra xem newEntity có chứa category hay không
+			if (newEntity.getCategory() != null) {
+				// Nếu có, thì set categoryCode vào DTO
+				newDTO.setCategoryCode(newEntity.getCategory().getCode());
+			}
+			return newDTO;
+		} else {
+			// Trả về null hoặc xử lý theo ý bạn
+			return null;
+		}
+	}*/
 	@Override
 	public NewDTO getNewById(Long id) {
 		NewEntity newEntity = newRepository.findOneById(id);
@@ -108,6 +146,32 @@ public class NewService implements INewService{
 	}
 
 	@Override
+	public void updateStatus(long[] ids, int status) {
+		for(long id : ids) {
+			Optional<NewEntity> optionalNewEntity = newRepository.findById(id);
+			if (optionalNewEntity.isPresent()) {
+				NewEntity newEntity = optionalNewEntity.get();
+				newEntity.setStatus(status);
+				newRepository.save(newEntity);
+			} else {
+				// Xử lý nếu không tìm thấy bài viết
+			}
+		}
+	}
+
+	@Override
+	public void updateStatus(Long id, int status) {
+		Optional<NewEntity> optionalNewEntity = newRepository.findById(id);
+		if (optionalNewEntity.isPresent()) {
+			NewEntity newEntity = optionalNewEntity.get();
+			newEntity.setStatus(status);
+			newRepository.save(newEntity);
+		} else {
+			// Xử lý nếu không tìm thấy bài viết
+		}
+	}
+
+	@Override
 	public List<NewDTO> findAll() {
 		List<NewDTO> result = new ArrayList<>();
 		List<NewEntity> entities = newRepository.findAll();
@@ -121,4 +185,20 @@ public class NewService implements INewService{
 		}
 		return result;
 	}
+
+	/*@Override
+	public List<NewDTO> findAllByStatus(Integer status) {
+		List<NewDTO> result = new ArrayList<>();
+		List<NewEntity> entities = newRepository.findAllByStatus(status);
+		for (NewEntity item : entities) {
+			NewDTO newDTO = newConverter.toDTO(item);
+			// Lấy giá trị categoryCode từ category
+			if (item.getCategory() != null) {
+				newDTO.setCategoryCode(item.getCategory().getCode());
+			}
+			result.add(newDTO);
+		}
+		return result;
+	}*/
+
 }

@@ -26,6 +26,9 @@ public class NewEntity extends BaseEntity {
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
+	@Column(name = "status")
+	private Integer status;
+
 	public String getTitle() {
 		return title;
 	}
@@ -64,5 +67,13 @@ public class NewEntity extends BaseEntity {
 
 	public void setCategory(CategoryEntity category) {
 		this.category = category;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }

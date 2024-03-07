@@ -16,4 +16,9 @@ public class NewController {
     public String getAllNew(ModelMap modelMap) {
         return "list";
     }
+
+    @GetMapping("/teststatus")
+    public String GetNewStatus(ModelMap modelMap) {
+        return "/views/admin/approve";
+    }
 }

@@ -46,12 +46,12 @@ $(document).ready(function () {
             totalPages: totalPages, // Số trang tổng cộng
             visiblePages: 10, // Số trang hiển thị
             onPageClick: function (event, page) {
-                fetchAndDisplayData(page, 3); // Gọi hàm để lấy và hiển thị dữ liệu cho trang mới
+                fetchAndDisplayData(page, 5); // Gọi hàm để lấy và hiển thị dữ liệu cho trang mới
             }
         });
     }
 
-    fetchAndDisplayData(1, 3);
+    fetchAndDisplayData(1, 5);
 });
 
 // Xử lý sự kiện click vào nút hiển thị form

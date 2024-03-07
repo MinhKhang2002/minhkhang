@@ -47,6 +47,7 @@ public class NewConverter {
 		dto.setCreatedBy(entity.getCreatedBy());
 		dto.setModifiedDate(entity.getModifiedDate());
 		dto.setModifiedBy(entity.getModifiedBy());
+		dto.setStatus(entity.getStatus());
 		return dto;
 	}
 	
