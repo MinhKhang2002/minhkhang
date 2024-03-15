@@ -10,4 +10,9 @@ public class PageController {
     public String getIndexPage() {
         return "index";
     }
+
+    @GetMapping("/phong-vien")
+    public String showPagePhongVien() {
+        return "/views/phongvien/index";
+    }
 }

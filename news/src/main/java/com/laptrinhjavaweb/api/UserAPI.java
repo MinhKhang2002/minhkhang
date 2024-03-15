@@ -1,30 +1,39 @@
 package com.laptrinhjavaweb.api;
 
+import com.laptrinhjavaweb.service.impl.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/users")
 public class UserAPI {
 
-    @GetMapping("")
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/users")
     public ResponseEntity<?> getListUser() {
         return null;
     }
 
-    @PostMapping("")
+    @PostMapping("/users")
     public ResponseEntity<?> createUser() {
         return null;
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/users/{id}")
     public ResponseEntity<?> updateUser() {
         return null;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser() {
         return null;
     }
 
+    @GetMapping("/categories/{id}")
+    public String getCategoriesByUserId(@PathVariable Long id) {
+        return userService.getCategoriesByUserId(id);
+    }
 }

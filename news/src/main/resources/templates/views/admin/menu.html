@@ -3,7 +3,7 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Interface</div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN'}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Quản lý bài viết
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -22,7 +22,7 @@
                         }
                     </script>
                 </div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN'}" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                     <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Quản lý đăng tin
@@ -35,8 +35,21 @@
                         </a>
                     </nav>
                 </div>
+                <a class="nav-link collapsed" th:if="${roleCode == 'phong-vien'}" href="#" data-bs-toggle="collapse" data-bs-target="#show-phong-vien" aria-expanded="false" aria-controls="show-phong-vien">
+                    <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Quản lý bài viết phóng viên
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="show-phong-vien" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion">
+                        <a id="phong-vien" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#phong-van" aria-expanded="false" aria-controls="phong-van">
+                            Tất cả bài viết
+                        </a>
+                    </nav>
+                </div>
                 <div class="sb-sidenav-menu-heading">Addons</div>
-                <a class="nav-link" href="">
+                <a class="nav-link" th:if="${roleCode == 'ADMIN'}" href="">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Charts
                 </a>

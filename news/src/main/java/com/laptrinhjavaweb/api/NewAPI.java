@@ -1,9 +1,13 @@
 package com.laptrinhjavaweb.api;
 
+import com.laptrinhjavaweb.controller.LoginController;
+import com.laptrinhjavaweb.entity.UserEntity;
 import com.laptrinhjavaweb.repository.UserRepository;
 import com.laptrinhjavaweb.service.IUserService;
 import com.laptrinhjavaweb.service.impl.NewService;
 import com.laptrinhjavaweb.service.impl.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,14 +23,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
 @RestController
 public class NewAPI {
 
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
 	@Autowired
 	private INewService newService;
+
+	@Autowired UserService userService;
 
 	@GetMapping(value = "/new")
 	public NewOutput showNew(@RequestParam(value = "page", required = false) Integer page,
@@ -125,22 +134,113 @@ public class NewAPI {
 	}
 
 	//Lọc bài viết theo thể loại mà ADMIN đã đăng nhập vào
-	@GetMapping(value = "/new/category/{category}")
-	public NewOutput showNewByCategory(@PathVariable String category) {
+	@GetMapping(value = "/new/category")
+	public NewOutput showNewByCategory(@RequestParam(value = "category", required = false) String queryCategory,
+									   HttpSession session,
+									   @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+									   @RequestParam(value = "limit", required = false, defaultValue = "5") Integer limit) {
 		NewOutput result = new NewOutput();
-		result.setListResult(newService.findByCategory(category));
+		int status = 1; // Đặt giá trị status là 1
+		Pageable pageable;
+
+		String categories = (String) session.getAttribute("categories");
+		if (categories != null && !categories.isEmpty()) {
+			// Sử dụng categories từ session để lọc bài viết
+			queryCategory = categories;
+		}
+
+		if (queryCategory != null && !queryCategory.isEmpty()) {
+			// Xử lý khi categories được chỉ định
+			int totalItem = newService.totalItemByCategoryAndStatus(queryCategory, status); // Đếm số lượng bài viết theo thể loại và status là 1
+			pageable = PageRequest.of(page - 1, limit);
+			result.setPage(page);
+			result.setListResult(newService.findByCategoryAndStatus(queryCategory, status, pageable)); // Phân trang theo thể loại và status là 1
+			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
+		} else {
+			// Xử lý khi không có categories được chỉ định
+			pageable = PageRequest.of(page - 1, limit);
+			result.setPage(page);
+			int totalItem = newService.totalItem(status); // Đếm số lượng bài viết có status là 1
+			result.setListResult(newService.findAll(pageable, status)); // Phân trang tất cả bài viết có status là 1
+			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
+		}
+
 		return result;
 	}
 
-	/*@GetMapping(value = "/new", params = "status")
-	public List<NewDTO> showNewByStatus(@RequestParam(value = "status") int status) {
-		return newService.findAllByStatus(status);
-	}*/
+	@GetMapping(value = "/new/userName")
+	public NewOutput showNewByUserName(@RequestParam(value = "userName", required = false) String queryUserName,
+									   HttpSession session,
+									   @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+									   @RequestParam(value = "limit", required = false, defaultValue = "5") Integer limit) {
+		NewOutput result = new NewOutput();
+		int status = 1; // Đặt giá trị status là 1
+		Pageable pageable;
+
+		String userName = (String) session.getAttribute("loggedInUser");
+		if (userName != null && !userName.isEmpty()) {
+			// Sử dụng userName từ session để lọc bài viết
+			queryUserName = userName;
+		}
+
+		if (queryUserName != null && !queryUserName.isEmpty()) {
+			// Xử lý khi categories được chỉ định
+			int totalItem = newService.totelItemByCreateByAndStatus(queryUserName, status); // Đếm số lượng bài viết theo userName và status là 1
+			pageable = PageRequest.of(page - 1, limit);
+			result.setPage(page);
+			result.setListResult(newService.findByCreatedByAndStatus(queryUserName, status, pageable)); // Phân trang theo thể loại và status là 1
+			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
+		} else {
+			// Xử lý khi không có categories được chỉ định
+			pageable = PageRequest.of(page - 1, limit);
+			result.setPage(page);
+			int totalItem = newService.totalItem(status); // Đếm số lượng bài viết có status là 1
+			result.setListResult(newService.findAll(pageable, status)); // Phân trang tất cả bài viết có status là 1
+			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
+		}
+
+		return result;
+	}
+
 	@GetMapping(value = "/new/approve")
+	public NewOutput showNewByStatusAndCategory(@RequestParam(value = "category", required = false) String queryCategory,
+									 HttpSession session,
+									 @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+									 @RequestParam(value = "limit", required = false, defaultValue = "5") Integer limit) {
+		NewOutput result = new NewOutput();
+		int status = 0; // Đặt giá trị status là 0
+		Pageable pageable;
+
+		String categories = (String) session.getAttribute("categories");
+		if (categories != null && !categories.isEmpty()) {
+			// Sử dụng categories từ session để lọc bài viết
+			queryCategory = categories;
+		}
+
+		if (queryCategory != null && !queryCategory.isEmpty()) {
+			result.setPage(page);
+			pageable = PageRequest.of(page - 1, limit);
+			int totalItem = newService.totalItemByCategoryAndStatus(queryCategory, status);
+			result.setListResult(newService.findByCategoryAndStatus(queryCategory, status, pageable));
+			/*result.setTotalPage((int) Math.ceil((double) (newService.totalItem(status)) / limit));*/
+			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
+		} else {
+			// Xử lý khi không có categories được chỉ định
+			pageable = PageRequest.of(page - 1, limit);
+			result.setPage(page);
+			int totalItem = newService.totalItem(status); // Đếm số lượng bài viết có status là 1
+			result.setListResult(newService.findAll(pageable, status)); // Phân trang tất cả bài viết có status là 1
+			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
+		}
+		return result;
+	}
+
+	/*@GetMapping(value = "/new/approve")
 	public NewOutput showNewByStatus(@RequestParam(value = "page", required = false) Integer page,
 									 @RequestParam(value = "limit", required = false) Integer limit) {
 		NewOutput result = new NewOutput();
-		int status = 0; // Đặt giá trị status là 1
+		int status = 0; // Đặt giá trị status là 0
+
 		if (page != null && limit != null) {
 			result.setPage(page);
 			Pageable pageable = PageRequest.of(page - 1, limit);
@@ -150,18 +250,8 @@ public class NewAPI {
 			result.setListResult(newService.findAll());
 		}
 		return result;
-	}
-
-	/*@PutMapping("/approve")
-	public ResponseEntity<String> approveNews(@RequestParam(value = "status") int status, @RequestBody long[] ids) {
-		if (ids.length == 0) {
-			return ResponseEntity.badRequest().body("Ids list is empty");
-		}
-
-		newService.updateStatus(ids, status);
-
-		return ResponseEntity.ok("Updated successfully");
 	}*/
+
 	@PutMapping(value = "/new/{id}/approve")
 	public ResponseEntity<?> approveNew(@PathVariable("id") Long id) {
 		newService.updateStatus(id, 1); // 1 là trạng thái đã duyệt

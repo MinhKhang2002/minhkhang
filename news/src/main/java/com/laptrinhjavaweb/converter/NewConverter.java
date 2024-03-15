@@ -20,6 +20,7 @@ public class NewConverter {
 		entity.setContent(dto.getContent());
 		entity.setShortDescription(dto.getShortDescription());
 		entity.setThumbnail(dto.getThumbnail());
+		entity.setStatus(dto.getStatus());
 		// Thiết lập giá trị của category thông qua categoryCode
 		/*CategoryEntity categoryEntity = categoryRepository.findOneByCode(dto.getCategoryCode());
 		entity.setCategory(categoryEntity);*/
@@ -56,6 +57,7 @@ public class NewConverter {
 		entity.setContent(dto.getContent());
 		entity.setShortDescription(dto.getShortDescription());
 		entity.setThumbnail(dto.getThumbnail());
+		entity.setStatus(dto.getStatus());
 		return entity;
 	}
 }

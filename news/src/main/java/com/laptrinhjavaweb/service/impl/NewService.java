@@ -36,6 +36,12 @@ public class NewService implements INewService{
 	public NewDTO save(NewDTO newDTO, String loggedInUser, String action) {
 		NewEntity newEntity = new NewEntity();
 
+		// Kiểm tra nếu không phải là PUT (cập nhật) và không phải là PUT
+		if (!"PUT".equalsIgnoreCase(action) && "POST".equalsIgnoreCase(action)) {
+			// Đặt status thành 0 khi thêm mới bài viết
+			newDTO.setStatus(0);
+		}
+
 		if (newDTO.getId() != null) {
 			NewEntity oldNewEntity = newRepository.findOneById(newDTO.getId());
 			newEntity = newConverter.toEntity(newDTO, oldNewEntity);
@@ -79,6 +85,7 @@ public class NewService implements INewService{
 		}
 		return result;
 	}
+
 	@Override
 	public List<NewDTO> findAll(Pageable pageable) {
 		List<NewDTO> result = new ArrayList<>();
@@ -171,6 +178,56 @@ public class NewService implements INewService{
 		}
 	}
 
+	/*@Override
+	public int totalItemByCategoryAndStatus(String category, int status) {
+		return newRepository.countByCategoryAndStatus(category, status);
+	}*/
+
+	@Override
+	public int totalItemByCategoryAndStatus(String category, int status) {
+		// Đảm bảo rằng category không null và không trống
+		if (category == null || category.isEmpty()) {
+			throw new IllegalArgumentException("Category cannot be null or empty");
+		}
+		// Gọi phương thức countByCategoryCodeAndStatus thay vì countByCategoryAndStatus
+		return newRepository.countByCategoryCodeAndStatus(category, status);
+	}
+
+	@Override
+	public int totelItemByCreateByAndStatus(String createBy, int status) {
+		return newRepository.countByCreatedByAndStatus(createBy, status);
+	}
+
+	@Override
+	public List<NewDTO> findByCategoryAndStatus(String category, int status, Pageable pageable) {
+		List<NewDTO> result = new ArrayList<>();
+		List<NewEntity> entities = newRepository.findByCategoryCodeAndStatus(category, status, pageable);
+		for (NewEntity item : entities) {
+			NewDTO newDTO = newConverter.toDTO(item);
+			// Lấy giá trị categoryCode từ category
+			if (item.getCategory() != null) {
+				newDTO.setCategoryCode(item.getCategory().getCode());
+			}
+			result.add(newDTO);
+		}
+		return result;
+	}
+
+	@Override
+	public List<NewDTO> findByCreatedByAndStatus(String createdBy, int status, Pageable pageable) {
+		List<NewDTO> result = new ArrayList<>();
+		List<NewEntity> entities = newRepository.findByCreatedByAndStatus(createdBy, status, pageable);
+		for (NewEntity item : entities) {
+			NewDTO newDTO = newConverter.toDTO(item);
+			// Thêm logic xử lý tương tự cho categoryCode
+			if (item.getCategory() != null) {
+				newDTO.setCategoryCode(item.getCategory().getCode());
+			}
+			result.add(newDTO);
+		}
+		return result;
+	}
+
 	@Override
 	public List<NewDTO> findAll() {
 		List<NewDTO> result = new ArrayList<>();
@@ -186,18 +243,4 @@ public class NewService implements INewService{
 		return result;
 	}
 
-	/*@Override
-	public List<NewDTO> findAllByStatus(Integer status) {
-		List<NewDTO> result = new ArrayList<>();
-		List<NewEntity> entities = newRepository.findAllByStatus(status);
-		for (NewEntity item : entities) {
-			NewDTO newDTO = newConverter.toDTO(item);
-			// Lấy giá trị categoryCode từ category
-			if (item.getCategory() != null) {
-				newDTO.setCategoryCode(item.getCategory().getCode());
-			}
-			result.add(newDTO);
-		}
-		return result;
-	}*/
 }

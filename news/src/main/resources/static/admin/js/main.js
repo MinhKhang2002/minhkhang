@@ -22,12 +22,16 @@ $(document).ready(function () {
 
     // Hàm để thực hiện yêu cầu AJAX và cập nhật bảng khi thành công
     function fetchAndDisplayData(pageNumber, limit) {
+        // Lấy categories từ local storage hoặc session
+        var categories = localStorage.getItem('categories'); // hoặc sessionStorage.getItem('categories')
+        console.log("Thể loại người quản lý", categories)
         $.ajax({
             type: "GET",
-            url: "http://localhost:8081/new",
+            url: "http://localhost:8081/new/category",
             data: {
                 page: pageNumber,
-                limit: limit
+                limit: limit,
+                category: categories // Truyền categories vào tham số query
             },
             dataType: "json",
             success: function (data) {

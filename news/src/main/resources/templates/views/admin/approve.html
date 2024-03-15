@@ -13,62 +13,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
     <script th:src="@{/static/template/paging/jquery.twbsPagination.js}"></script>
     <script th:src="@{/static/admin/js/approve.js}"></script>
-
-    <!--<script>
-        $(document).ready(function () {
-            function fetchAndDisplayData(pageNumber, limit) {
-                $.ajax({
-                    type: "GET",
-                    url: "http://localhost:8081/new/approve",
-                    data: {
-                        page: pageNumber,
-                        limit: limit
-                    },
-                    dataType: "json",
-                    success: function (data) {
-                        // Xóa nội dung hiện có của tbody trước khi thêm mới
-                        $("table tbody").empty();
-                        updatePagination(data.totalPage);
-
-                        // Duyệt qua mỗi phần tử trong dữ liệu trả về
-                        $.each(data.listResult, function (index, item) {
-                            // Tạo một hàng mới trong bảng
-                            var row = "<tr>" +
-                                "<td><input type='checkbox' class='checkbox-del' data-id="+ item.id +" id='checkbox_" + item.id + "' value='" + item.id + "'></td>" +
-                                "<td>" + item.title + "</td>" +
-                                "<td>" + item.content + "</td>" +
-                                "<td>" + item.shortDescription + "</td>" +
-                                "<td><a class=\"updateNews\" href=\"#\" title='Chi tiết' data-id=" + item.id + ">\n" +
-                                "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
-                                // "       <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n" +
-                                "    </a></td>" +
-                                "<td><a class = \"approveNew\" href=\"#\" title='Duyệt' data-id=" + item.id + ">\n" +
-                                        "<i class=\"fa-solid fa-check\"></i>\n" +
-                                "</a></td>"+
-                                "</tr>";
-                            // Thêm hàng mới vào tbody của bảng
-                            $("table tbody").append(row);
-                        });
-                    },
-                    error: function (error) {
-                        console.error("Lỗi khi lấy dữ liệu từ API:", error);
-                    }
-                });
-            }
-            function updatePagination(totalPages) {
-                window.pagObj = $('#pagination').twbsPagination({
-                    totalPages: totalPages, // Số trang tổng cộng
-                    visiblePages: 10, // Số trang hiển thị
-                    onPageClick: function (event, page) {
-                        fetchAndDisplayData(page, 5); // Gọi hàm để lấy và hiển thị dữ liệu cho trang mới
-                    }
-                });
-            }
-
-            // Gọi hàm fetchAndDisplayData để lấy và hiển thị dữ liệu khi trang được tải
-            fetchAndDisplayData(1, 5);
-        })
-    </script>-->
 </head>
 <body id="container">
     <div th:fragment="main-content" class="container magin-top">
@@ -79,6 +23,40 @@
                 Danh sách chờ duyệt
             </div>
             <div class="card-body">
+                <form id="formContainer" style="display: none">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" placeholder="">
+                        <!--                    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="">-->
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <input type="text" class="form-control" id="content" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="shortDescription">shortDescription</label>
+                        <input type="text" class="form-control" id="shortDescription" placeholder="">
+                    </div>
+                    <select id="categorySelect" class="form-select">
+                        <!-- Dữ liệu từ API sẽ được thêm vào đây -->
+                        <option value="" selected disabled>Chọn thể loại</option>
+                    </select>
+
+                    <div class="form-group">
+                        <!-- Thẻ img để hiển thị ảnh đã chọn -->
+                        <img id="displayThumbnail" src="" alt="Selected Thumbnail">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="thumbnail">Thumbnail</label>
+                        <input type="file" class="form-control" id="thumbnail">
+                        <!--                    <button id="uploadButton" type="button" style="display: none">Upload Ảnh</button>-->
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <!--                <button type="submit" class="btn btn-primary">UPDATE NEWS</button>-->
+                </form>
+
+                <div class="overlay" id="overlay"></div>
                 <table class="table table-bordered">
                     <thead>
                     <tr>

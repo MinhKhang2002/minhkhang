@@ -29,6 +29,9 @@ public class NewEntity extends BaseEntity {
 	@Column(name = "status")
 	private Integer status;
 
+	/*@Column(name = "categories")
+	private String categories;*/
+
 	public String getTitle() {
 		return title;
 	}
@@ -76,4 +79,12 @@ public class NewEntity extends BaseEntity {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
+	/*public String getCategories() {
+		return categories;
+	}
+
+	public void setCategories(String categories) {
+		this.categories = categories;
+	}*/
 }
