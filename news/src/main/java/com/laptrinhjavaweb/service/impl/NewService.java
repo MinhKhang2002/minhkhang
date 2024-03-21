@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.laptrinhjavaweb.entity.ImageEntity;
+import com.laptrinhjavaweb.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,12 +34,15 @@ public class NewService implements INewService{
 	@Autowired
 	private NewConverter newMapper;
 
+	@Autowired
+	private ImageRepository imageRepository;
+
 	@Override
 	public NewDTO save(NewDTO newDTO, String loggedInUser, String action) {
 		NewEntity newEntity = new NewEntity();
 
 		// Kiểm tra nếu không phải là PUT (cập nhật) và không phải là PUT
-		if (!"PUT".equalsIgnoreCase(action) && "POST".equalsIgnoreCase(action)) {
+		if ("POST".equalsIgnoreCase(action)) {
 			// Đặt status thành 0 khi thêm mới bài viết
 			newDTO.setStatus(0);
 		}
@@ -55,7 +60,13 @@ public class NewService implements INewService{
 		// Thiết lập người tạo và người sửa
 		newEntity.setCreatedBy(loggedInUser);
 
-		if ("PUT".equalsIgnoreCase(action)) {
+		/*if ("PUT".equalsIgnoreCase(action)) {
+			// Nếu là PUT, thêm thông tin người sửa bài viết
+			newEntity.setModifiedBy(loggedInUser);
+			// Đặt status thành 1 khi thêm mới bài viết
+			newDTO.setStatus(1);
+		}*/
+		if ("PUT".equals(action)) {
 			// Nếu là PUT, thêm thông tin người sửa bài viết
 			newEntity.setModifiedBy(loggedInUser);
 		}
@@ -229,6 +240,11 @@ public class NewService implements INewService{
 	}
 
 	@Override
+	public List<ImageEntity> getAllImage() {
+		return imageRepository.findAll();
+	}
+
+	@Override
 	public List<NewDTO> findAll() {
 		List<NewDTO> result = new ArrayList<>();
 		List<NewEntity> entities = newRepository.findAll();
@@ -242,5 +258,7 @@ public class NewService implements INewService{
 		}
 		return result;
 	}
+
+
 
 }

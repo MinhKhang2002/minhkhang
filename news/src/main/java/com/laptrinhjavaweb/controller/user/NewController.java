@@ -21,4 +21,9 @@ public class NewController {
     public String GetNewStatus(ModelMap modelMap) {
         return "/views/admin/approve";
     }
+
+    @GetMapping ("/ckeditor")
+    private String getEditor(ModelMap modelMap) {
+        return "/views/ckeditor";
+    }
 }

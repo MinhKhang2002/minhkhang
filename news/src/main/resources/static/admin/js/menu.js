@@ -1,3 +1,4 @@
+
 // Sử dụng sự kiện click cho thẻ a
 $(document).on("click", "#approveLink", function () {
     loadApproveContent();
@@ -6,6 +7,17 @@ $(document).on("click", "#approveLink", function () {
 // Hàm để tải nội dung trang "Duyệt tin tức"
 function loadApproveContent() {
     $.get("/teststatus", function(data) {
+        // Thay đổi nội dung của thẻ <main>
+        $("#main-content").html(data);
+    });
+}
+
+$(document).on("click", "#listNew", function () {
+    loadListNew()
+})
+
+function loadListNew() {
+    $.get("/ds-bai-viet", function (data) {
         // Thay đổi nội dung của thẻ <main>
         $("#main-content").html(data);
     });

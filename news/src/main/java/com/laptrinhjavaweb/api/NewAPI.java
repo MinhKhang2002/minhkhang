@@ -1,6 +1,7 @@
 package com.laptrinhjavaweb.api;
 
 import com.laptrinhjavaweb.controller.LoginController;
+import com.laptrinhjavaweb.entity.ImageEntity;
 import com.laptrinhjavaweb.entity.UserEntity;
 import com.laptrinhjavaweb.repository.UserRepository;
 import com.laptrinhjavaweb.service.IUserService;
@@ -116,6 +117,7 @@ public class NewAPI {
 
 		// Thêm thông tin người dùng vào trường modifiedBy của model
 		model.setModifiedBy(loggedInUser);
+//		model.setStatus(1);
 
 		// Thiết lập ID cho model
 		model.setId(id);
@@ -123,6 +125,7 @@ public class NewAPI {
 		// Thực hiện cập nhật bài viết với thông tin người dùng
 		NewDTO updatedNew = newService.save(model, loggedInUser, "PUT");
 
+		newService.updateStatus(id, 1);
 		// Thêm logic của bạn ở đây
 
 		return updatedNew;
@@ -256,5 +259,11 @@ public class NewAPI {
 	public ResponseEntity<?> approveNew(@PathVariable("id") Long id) {
 		newService.updateStatus(id, 1); // 1 là trạng thái đã duyệt
 		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping(value = "/image")
+	public ResponseEntity<List<ImageEntity>> getAllImages() {
+		List<ImageEntity> imageEntities = newService.getAllImage();
+		return ResponseEntity.ok(imageEntities);
 	}
 }

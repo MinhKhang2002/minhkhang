@@ -1,12 +1,17 @@
 package com.laptrinhjavaweb.converter;
 
+import com.laptrinhjavaweb.dto.ImageDTO;
 import com.laptrinhjavaweb.entity.CategoryEntity;
+import com.laptrinhjavaweb.entity.ImageEntity;
 import com.laptrinhjavaweb.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.laptrinhjavaweb.dto.NewDTO;
 import com.laptrinhjavaweb.entity.NewEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class NewConverter {
@@ -41,9 +46,8 @@ public class NewConverter {
 		if (category != null) {
 			dto.setCategoryCode(category.getCode());
 		}
-//		dto.setCategoryCode(entity.getCategory().getCode());
-		dto.setThumbnail(entity.getThumbnail());
-//		dto.setThumbnail(cloudinaryService.generateTransformedImageUrl(entity.getThumbnail(), 300, 200));
+//		dto.setThumbnail(entity.getThumbnail());
+		dto.setImages(entity.getImages());
 		dto.setCreatedDate(entity.getCreatedDate());
 		dto.setCreatedBy(entity.getCreatedBy());
 		dto.setModifiedDate(entity.getModifiedDate());
@@ -59,5 +63,16 @@ public class NewConverter {
 		entity.setThumbnail(dto.getThumbnail());
 		entity.setStatus(dto.getStatus());
 		return entity;
+	}
+
+	private List<ImageDTO> mapImagesToDTOs(List<ImageEntity> images) {
+		List<ImageDTO> imageDTOs = new ArrayList<>();
+		for (ImageEntity imageEntity : images) {
+			ImageDTO imageDTO = new ImageDTO();
+			// Sao chép dữ liệu từ ImageEntity sang ImageDTO
+			// Ví dụ: imageDTO.setUrl(imageEntity.getUrl());
+			imageDTOs.add(imageDTO);
+		}
+		return imageDTOs;
 	}
 }

@@ -1,5 +1,10 @@
 package com.laptrinhjavaweb.dto;
 
+import com.laptrinhjavaweb.entity.ImageEntity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class NewDTO extends AbstractDTO<NewDTO> {
 	
 	private String title;
@@ -9,6 +14,7 @@ public class NewDTO extends AbstractDTO<NewDTO> {
 	private String thumbnail;
 	private String role;
 	private Integer status;
+	private List<ImageEntity> images = new ArrayList<>();
 //	private String categories;
 	
 	public String getTitle() {
@@ -65,6 +71,14 @@ public class NewDTO extends AbstractDTO<NewDTO> {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public List<ImageEntity> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ImageEntity> images) {
+		this.images = images;
 	}
 
 	/*public String getCategories() {

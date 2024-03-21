@@ -1,10 +1,10 @@
 package com.laptrinhjavaweb.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "new")
@@ -28,6 +28,10 @@ public class NewEntity extends BaseEntity {
 
 	@Column(name = "status")
 	private Integer status;
+
+	@OneToMany(mappedBy = "newEntity", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<ImageEntity> images = new ArrayList<>();
 
 	/*@Column(name = "categories")
 	private String categories;*/
@@ -78,6 +82,14 @@ public class NewEntity extends BaseEntity {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public List<ImageEntity> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ImageEntity> images) {
+		this.images = images;
 	}
 
 	/*public String getCategories() {

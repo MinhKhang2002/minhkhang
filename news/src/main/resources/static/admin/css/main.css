@@ -32,3 +32,11 @@
 .alert-danger {
     display: none;
 }
+
+.auto-height {
+    resize: none;
+}
+
+.d-0{
+    display: none;
+}

@@ -13,6 +13,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
     <script th:src="@{/static/template/paging/jquery.twbsPagination.js}"></script>
     <script th:src="@{/static/admin/js/approve.js}"></script>
+    <script th:src="@{/static/admin/js/aggregate.js}"></script>
 </head>
 <body id="container">
     <div th:fragment="main-content" class="container magin-top">
@@ -22,7 +23,21 @@
                 <i class="fas fa-table me-1"></i>
                 Danh sách chờ duyệt
             </div>
+            <div class="alert alert-success">
+                <strong>Success!</strong>
+            </div>
+            <div class="alert alert-danger">
+                <strong>Danger!</strong>
+            </div>
             <div class="card-body">
+                <div class="icon">
+                    <a id="showFromAddNews">
+                        <i class="fa-regular fa-square-plus showFromAddNews"></i>
+                    </a>
+                    <a id="deleteNews">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </a>
+                </div>
                 <form id="formContainer" style="display: none">
                     <div class="form-group">
                         <label for="title">Title</label>

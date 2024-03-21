@@ -56,10 +56,13 @@ $(document).ready(function () {
     }
 
     fetchAndDisplayData(1, 5);
-});
+
+
+    // CKEDITOR.replace('editor');
+})
 
 // Xử lý sự kiện click vào nút hiển thị form
-$(document).on("click", ".showFromAddNews", function () {
+$(document).on("click", "#showFromAddNews", function () {
     var formContainer = $("#formContainer");
     var categorySelect = $("#categorySelect");
     $("#displayThumbnail").hide();
@@ -122,6 +125,7 @@ function loadIndexContent() {
 $(document).on("click", ".updateNews", function () {
     var idToUpdate = $(this).data("id");
     var urlThumbnail = $("#thumbnailUrl").val();
+    var editor = $("#editor");
     console.log("Url từ input ẩn:", urlThumbnail)
 
     // Lấy dữ liệu từ API hoặc nguồn dữ liệu khác dựa trên idToUpdate
@@ -135,9 +139,12 @@ $(document).on("click", ".updateNews", function () {
             console.log("Data:", data)
             // Điền dữ liệu vào các trường input của form
             $("#title").val(data.title);
-            $("#content").val(data.content);
+            // $("#content").val(data.content);
             $("#shortDescription").val(data.shortDescription);
-            displaySelectedThumbnail(data.thumbnail)
+            // displaySelectedThumbnail(data.thumbnail)
+            data.images.forEach(image => {
+                displaySelectedThumbnail(image.thumbnail);
+            });
 
             // Set data-id cho form để sử dụng trong quá trình submit
             $("#formContainer").data("id", idToUpdate);
@@ -150,6 +157,12 @@ $(document).on("click", ".updateNews", function () {
 
             // Load thể loại vào thẻ select
             loadCategoriesSelect(selectedCategoryCode);
+            // Hiển thị nội dung vào trong CKEditor
+            if (window.editor) {
+                window.editor.setData(data.content);
+            } else {
+                console.error("CKEditor chưa được khởi tạo hoặc gán cho biến editor.");
+            }
         },
         error: function (error) {
             console.error("Lỗi khi lấy dữ liệu bài viết:", error);
@@ -241,55 +254,6 @@ function loadCategoriesSelect(selectedCategoryCode) {
     });
 }
 
-// Thêm sự kiện cho input file thumbnail
-$("#thumbnail").on("change", function (e) {
-    const file = e.target.files[0];
-
-    if (file) {
-        // Gọi hàm uploadToCloudinary để tải ảnh lên Cloudinary
-        uploadToCloudinary(file)
-    }
-    $("#thumbnail").click();
-});
-
-// Thêm image vào Cloudinary
-function uploadToCloudinary(file) {
-    const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dd1grolgr/image/upload";
-    const uploadPreset = "auto-tag";
-    const formData = new FormData();
-
-    formData.append("file", file);
-    formData.append("upload_preset", uploadPreset);
-
-    return fetch(cloudinaryUrl, {
-        method: "POST",
-        body: formData
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log("Cloudinary response:", data);
-
-        // Kiểm tra xem selector có lỗi không
-        console.log("Selector exists:", $("#thumbnailUrl").length);
-
-        try {
-            // Cập nhật trường thumbnail của form với URL trả về từ Cloudinary
-            $("#thumbnailUrl").val(data.secure_url);
-            displaySelectedThumbnail(data.secure_url);
-            console.log("Test: ",$("#thumbnailUrl").val(data.secure_url))
-        } catch (error) {
-            console.error("Error updating thumbnailUrl:", error);
-        }
-
-        // Trả về URL an toàn của tệp
-        return data.secure_url;
-    })
-    .catch((error) => {
-        console.error("Error uploading to Cloudinary:", error);
-        return null;
-    });
-}
-
 // Hàm hiển thị ảnh đã chọn ngay trên form
 function displaySelectedThumbnail(imageUrl) {
     // Ẩn thẻ hiển thị ảnh nếu nó đang ẩn
@@ -325,6 +289,11 @@ $("#formContainer").submit(function (e) {
     submitForm(idToUpdate, newData);
 });
 
+// Đảm bảo rằng CKEditor đã được tải trước khi thực hiện bất kỳ thao tác nào
+/*document.addEventListener("DOMContentLoaded", function() {
+    CKEDITOR.replace('editor');
+});*/
+
 // Hàm chung để submit form
 function submitForm(idToUpdate, newData) {
     var form = $("#formContainer");
@@ -335,13 +304,26 @@ function submitForm(idToUpdate, newData) {
         return;
     }
 
+    // Lấy nội dung từ CKEditor thay vì trường textarea thông thường
+    var content = window.editor.getData();
+    newData.content = content;
+    console.log("Content: ", content)
+
     // Kiểm tra xem đã có URL từ Cloudinary chưa
     var thumbnailUrl = $("#thumbnailUrl").val();
 
-    if (!thumbnailUrl) {
-        console.error("Vui lòng tải ảnh lên Cloudinary trước khi submit form.");
-        return;
-    }
+    // Kiểm tra xem đang thực hiện thêm mới hoặc cập nhật
+    /*var isUpdating = !!$("#formContainer").data("id");
+
+    if (!isUpdating) {
+        // Nếu đang thực hiện thêm mới, kiểm tra xem đã có URL từ Cloudinary chưa
+        var thumbnailUrl = $("#thumbnailUrl").val();
+
+        if (!thumbnailUrl) {
+            console.error("Vui lòng tải ảnh lên Cloudinary trước khi submit form.");
+            return;
+        }
+    }*/
 
     form.data('isSubmitted', true);
 
@@ -385,3 +367,135 @@ function submitForm(idToUpdate, newData) {
 
     $.ajax(ajaxSettings);
 }
+
+// Thêm sự kiện cho input file thumbnail
+$("#thumbnail").on("change", function (e) {
+    const file = e.target.files[0];
+
+    if (file) {
+        // Gọi hàm uploadToCloudinary để tải ảnh lên Cloudinary
+        uploadToCloudinary(file)
+    }
+    $("#thumbnail").click();
+});
+/*$("#thumbnail").on("change", function (e) {
+    const file = e.target.files[0];
+
+    if (file) {
+        // Lấy URL của ảnh cũ từ trường input hidden thumbnailUrl
+        const oldImageUrl = $("#thumbnailUrl").val();
+
+        // Kiểm tra xem có URL của ảnh cũ hay không
+        if (oldImageUrl) {
+            // Lấy public ID của ảnh cũ từ URL của nó
+            const publicId = getPublicIdFromImageUrl(oldImageUrl);
+
+            // Gọi hàm deleteFromCloudinary để xóa ảnh cũ từ Cloudinary
+            deleteFromCloudinary(publicId)
+                .then(() => {
+                    // Sau khi xóa ảnh cũ thành công, tiếp tục tải lên ảnh mới
+                    uploadToCloudinary(file);
+                })
+                .catch((error) => {
+                    console.error("Error deleting old image from Cloudinary:", error);
+                });
+        } else {
+            // Nếu không có URL của ảnh cũ, tiếp tục tải lên ảnh mới
+            uploadToCloudinary(file);
+        }
+    }
+    // Gọi click để người dùng có thể chọn lại cùng một tệp ảnh sau khi đã xóa ảnh cũ
+    $("#thumbnail").click();
+});*/
+
+// Thêm image vào Cloudinary
+function uploadToCloudinary(file) {
+    const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dd1grolgr/image/upload";
+    const uploadPreset = "auto-tag";
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+
+    return fetch(cloudinaryUrl, {
+        method: "POST",
+        body: formData
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Cloudinary response:", data);
+
+            // Kiểm tra xem selector có lỗi không
+            console.log("Selector exists:", $("#thumbnailUrl").length);
+
+            try {
+                // Cập nhật trường thumbnail của form với URL trả về từ Cloudinary
+                $("#thumbnailUrl").val(data.secure_url);
+                displaySelectedThumbnail(data.secure_url);
+                console.log("Test: ",$("#thumbnailUrl").val(data.secure_url))
+            } catch (error) {
+                console.error("Error updating thumbnailUrl:", error);
+            }
+
+            // Trả về URL an toàn của tệp
+            return data.secure_url;
+        })
+        .catch((error) => {
+            console.error("Error uploading to Cloudinary:", error);
+            return null;
+        });
+}
+
+function deleteFromCloudinary(imagePublicId) {
+    const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dd1grolgr/image/destroy`;
+
+    const requestBody = {
+        public_id: imagePublicId,
+        api_key: "165223227289875",
+        api_secret: "KuEgKknBTrJ7-FdsAHGJYa_Jx4c",
+    };
+
+    return fetch(cloudinaryUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Cloudinary delete response:", data);
+            return data;
+        })
+        .catch((error) => {
+            console.error("Error deleting from Cloudinary:", error);
+            return null;
+        });
+}
+
+document.querySelector('.textarea').addEventListener('input', function(event) {
+    var rowLength = 138; // Độ dài tối đa của mỗi hàng
+    var content = this.value;
+
+    // Kiểm tra xem phím được nhấn là Enter hay không
+    if (event.inputType === 'insertLineBreak') {
+        // Nếu là Enter, cập nhật số lượng hàng
+        var rowCount = this.rows + 1;
+        this.rows = rowCount;
+        return; // Ngắt và không tiếp tục xử lý
+    }
+
+    // Tính toán số lượng hàng dựa trên độ dài của nội dung
+    var rowCount = Math.ceil(content.length / rowLength);
+
+    // Tính toán số lượng ký tự trên hàng cuối cùng
+    var lastRowLength = content.length % rowLength || rowLength;
+
+    // Nếu nội dung vượt quá độ dài mỗi hàng, cập nhật số lượng hàng của textarea
+    if (lastRowLength !== 0 && content.length > rowLength) {
+        this.rows = rowCount;
+    } else {
+        // Nếu không, giữ số lượng hàng ở mức mặc định
+        this.rows = 1;
+    }
+})

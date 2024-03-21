@@ -3,6 +3,7 @@ package com.laptrinhjavaweb.service;
 import java.util.List;
 
 import com.laptrinhjavaweb.entity.CategoryEntity;
+import com.laptrinhjavaweb.entity.ImageEntity;
 import com.laptrinhjavaweb.entity.NewEntity;
 import org.springframework.data.domain.Pageable;
 
@@ -29,4 +30,6 @@ public interface INewService {
 	int totelItemByCreateByAndStatus(String createBy, int status);
 	List<NewDTO> findByCategoryAndStatus(String category, int status, Pageable pageable);
 	List<NewDTO> findByCreatedByAndStatus(String createdBy, int status, Pageable pageable);
+
+	List<ImageEntity> getAllImage();
 }
