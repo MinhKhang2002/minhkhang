@@ -71,29 +71,15 @@ public class UserService implements IUserService {
     }
 
     /*public boolean hasAdminRole(String userName) {
-        String query = "SELECT COUNT(*) FROM UserEntity u JOIN u.roles r WHERE u.userName = :userName AND r.code = 'ADMIN'";
-        Long count = entityManager.createQuery(query, Long.class)
-                .setParameter("userName", userName)
-                .getSingleResult();
-        return count > 0;
-    }
-
-    public boolean hasAdminTheThao(String userName) {
-        String query = "SELECT COUNT(*) FROM UserEntity u JOIN u.roles r WHERE u.userName = :userName AND r.code = 'ADMIN1'";
-        Long count = entityManager.createQuery(query, Long.class)
-                .setParameter("userName", userName)
-                .getSingleResult();
-        return count > 0;
-    }*/
-    /*public boolean hasAdminRole(String userName) {
-        String query = "SELECT COUNT(*) FROM UserEntity u JOIN u.roles r WHERE u.userName = :userName AND r.code LIKE 'ADMIN%'";
-        Long count = entityManager.createQuery(query, Long.class)
-                .setParameter("userName", userName)
-                .getSingleResult();
-        return count > 0;
-    }*/
-    public boolean hasAdminRole(String userName) {
         String query = "SELECT COUNT(*) FROM UserEntity u JOIN u.roles r WHERE (u.userName = :userName OR (u.userName = 'phong-vien' AND r.code LIKE 'ADMIN%'))";
+        Long count = entityManager.createQuery(query, Long.class)
+                .setParameter("userName", userName)
+                .getSingleResult();
+        return count > 0;
+    }*/
+
+    public boolean hasAdminRole(String userName) {
+        String query = "SELECT COUNT(*) FROM UserEntity u JOIN u.roles r WHERE u.userName = :userName AND (r.code = 'phong-vien' OR r.code LIKE 'ADMIN%')";
         Long count = entityManager.createQuery(query, Long.class)
                 .setParameter("userName", userName)
                 .getSingleResult();

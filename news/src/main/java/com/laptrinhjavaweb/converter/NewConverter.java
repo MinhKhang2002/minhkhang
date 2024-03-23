@@ -46,7 +46,7 @@ public class NewConverter {
 		if (category != null) {
 			dto.setCategoryCode(category.getCode());
 		}
-//		dto.setThumbnail(entity.getThumbnail());
+		dto.setThumbnail(entity.getThumbnail());
 		dto.setImages(entity.getImages());
 		dto.setCreatedDate(entity.getCreatedDate());
 		dto.setCreatedBy(entity.getCreatedBy());

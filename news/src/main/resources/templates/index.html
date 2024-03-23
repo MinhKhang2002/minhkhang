@@ -141,7 +141,7 @@
     </div>
 
     <script>
-        CKEDITOR.ClassicEditor
+        /*CKEDITOR.ClassicEditor
             .create(document.getElementById("editor"), {
             // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
             toolbar: {
@@ -211,7 +211,7 @@
             htmlSupport: {
                 allow: [
                     {
-                        name: /.*/,
+                        name: /.*!/,
                         attributes: true,
                         classes: true,
                         styles: true
@@ -295,9 +295,9 @@
             // Đoạn mã trong then được thực thi khi CKEditor đã được tạo thành công
             window.editor = editor;
         })
-            .catch(error => {
-                console.error('Đã xảy ra lỗi khi tạo CKEditor:', error);
-            });
+        .catch(error => {
+            console.error('Đã xảy ra lỗi khi tạo CKEditor:', error);
+        });*/
     </script>
 </body>
 </html>
