@@ -1,16 +1,15 @@
 $(document).ready(function () {
 
-    // Hàm để cập nhật nội dung của bảng
     function updateTable(newsList) {
         $("table tbody").empty(); // Xóa nội dung của tbody trước khi thêm hàng mới
 
         // Sử dụng Thymeleaf để tạo dòng HTML cho mỗi tin tức
         $.each(newsList, function (index, news) {
+            // Tạo dòng HTML
             var row = "<tr>" +
-                // "<td>" + <input type="checkbox" id="checkbox_news.id" value="news.id"></input> + "</td>" +
                 "<td><input type='checkbox' class='checkbox-del' data-id="+ news.id +" id='checkbox_" + news.id + "' value='" + news.id + "'></td>" +
                 "<td>" + news.title + "</td>" +
-                "<td>" + news.content + "</td>" +
+                "<td class='truncated-content'>" + extractFirstParagraph(news.content) + "</td>" +  // Sử dụng hàm này để lấy thẻ <p> đầu tiên
                 "<td>" + news.shortDescription + "</td>" +
                 "<td><a class=\"updateNews\" href=\"#\" title='Cập nhật' data-id=" + news.id + ">\n" +
                 "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
@@ -18,6 +17,14 @@ $(document).ready(function () {
                 "</tr>";
             $("table").append(row);
         });
+    }
+
+// Hàm để lấy nội dung của thẻ <p> đầu tiên
+    function extractFirstParagraph(content) {
+        var temp = document.createElement("div");
+        temp.innerHTML = content;
+        var firstParagraph = temp.querySelector("p");
+        return firstParagraph ? firstParagraph.innerText : content;
     }
 
     // Hàm để thực hiện yêu cầu AJAX và cập nhật bảng khi thành công
@@ -35,6 +42,7 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (data) {
+
                 updatePagination(data.totalPage);
                 updateTable(data.listResult);
                 console.log(data)
@@ -56,9 +64,6 @@ $(document).ready(function () {
     }
 
     fetchAndDisplayData(1, 5);
-
-
-    // CKEDITOR.replace('editor');
 })
 
 // Xử lý sự kiện click vào nút hiển thị form
@@ -682,3 +687,4 @@ CKEDITOR.ClassicEditor
     .catch(error => {
         console.error('Đã xảy ra lỗi khi tạo CKEditor:', error);
     });
+

@@ -15,7 +15,7 @@
             </div>
                 <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN'}" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                     <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-list-check"></i></div>
                     Quản lý đăng tin
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
@@ -36,6 +36,32 @@
                     <nav class="sb-sidenav-menu-nested nav accordion">
                         <a id="phong-vien" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#phong-van" aria-expanded="false" aria-controls="phong-van">
                             Tất cả bài viết
+                        </a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#show-category" aria-expanded="false" aria-controls="show-category">
+                    <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Quản lý thể loại
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="show-category" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion">
+                        <a id="ds-category" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="" aria-expanded="false" aria-controls="">
+                            Danh sách thể loại
+                        </a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#show-user" aria-expanded="false" aria-controls="show-user">
+                    <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                    Quản lý người dùng
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="show-user" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion">
+                        <a id="ds-user" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="" aria-expanded="false" aria-controls="">
+                            Danh sách người dùng
                         </a>
                     </nav>
                 </div>

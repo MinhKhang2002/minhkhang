@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +46,8 @@ public class NewAPI {
 		int status = 1; // Đặt giá trị status là 1
 		if (page != null && limit != null) {
 			result.setPage(page);
-			Pageable pageable = PageRequest.of(page - 1, limit);
+//			Pageable pageable = PageRequest.of(page - 1, limit);
+			Pageable pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
 			result.setListResult(newService.findAll(pageable, status)); // Truyền tham số status vào phương thức findAll
 			result.setTotalPage((int) Math.ceil((double) (newService.totalItem(status)) / limit));
 		} else {
@@ -155,13 +157,15 @@ public class NewAPI {
 		if (queryCategory != null && !queryCategory.isEmpty()) {
 			// Xử lý khi categories được chỉ định
 			int totalItem = newService.totalItemByCategoryAndStatus(queryCategory, status); // Đếm số lượng bài viết theo thể loại và status là 1
-			pageable = PageRequest.of(page - 1, limit);
+//			pageable = PageRequest.of(page - 1, limit);
+			pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
 			result.setPage(page);
 			result.setListResult(newService.findByCategoryAndStatus(queryCategory, status, pageable)); // Phân trang theo thể loại và status là 1
 			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
 		} else {
 			// Xử lý khi không có categories được chỉ định
-			pageable = PageRequest.of(page - 1, limit);
+//			pageable = PageRequest.of(page - 1, limit);
+			pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
 			result.setPage(page);
 			int totalItem = newService.totalItem(status); // Đếm số lượng bài viết có status là 1
 			result.setListResult(newService.findAll(pageable, status)); // Phân trang tất cả bài viết có status là 1
@@ -189,13 +193,15 @@ public class NewAPI {
 		if (queryUserName != null && !queryUserName.isEmpty()) {
 			// Xử lý khi categories được chỉ định
 			int totalItem = newService.totelItemByCreateByAndStatus(queryUserName, status); // Đếm số lượng bài viết theo userName và status là 1
-			pageable = PageRequest.of(page - 1, limit);
+//			pageable = PageRequest.of(page - 1, limit);
+			pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
 			result.setPage(page);
 			result.setListResult(newService.findByCreatedByAndStatus(queryUserName, status, pageable)); // Phân trang theo thể loại và status là 1
 			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
 		} else {
 			// Xử lý khi không có categories được chỉ định
-			pageable = PageRequest.of(page - 1, limit);
+//			pageable = PageRequest.of(page - 1, limit);
+			pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
 			result.setPage(page);
 			int totalItem = newService.totalItem(status); // Đếm số lượng bài viết có status là 1
 			result.setListResult(newService.findAll(pageable, status)); // Phân trang tất cả bài viết có status là 1
@@ -222,14 +228,16 @@ public class NewAPI {
 
 		if (queryCategory != null && !queryCategory.isEmpty()) {
 			result.setPage(page);
-			pageable = PageRequest.of(page - 1, limit);
+//			pageable = PageRequest.of(page - 1, limit);
+			pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
 			int totalItem = newService.totalItemByCategoryAndStatus(queryCategory, status);
 			result.setListResult(newService.findByCategoryAndStatus(queryCategory, status, pageable));
 			/*result.setTotalPage((int) Math.ceil((double) (newService.totalItem(status)) / limit));*/
 			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
 		} else {
 			// Xử lý khi không có categories được chỉ định
-			pageable = PageRequest.of(page - 1, limit);
+//			pageable = PageRequest.of(page - 1, limit);
+			pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
 			result.setPage(page);
 			int totalItem = newService.totalItem(status); // Đếm số lượng bài viết có status là 1
 			result.setListResult(newService.findAll(pageable, status)); // Phân trang tất cả bài viết có status là 1
