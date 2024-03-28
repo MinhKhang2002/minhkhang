@@ -20,6 +20,7 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService implements IUserService {
@@ -128,4 +129,25 @@ public class UserService implements IUserService {
             return roleCodes.get(0);
         }
     }
+    @Override
+    @Transactional
+    public void saveUser(UserDTO userDTO) {
+        UserEntity userEntity = userConverter.toEntity(userDTO);
+        RoleEntity defaultRole = roleRepository.findById(2L).orElse(null);
+        List<RoleEntity> defaultRoles = new ArrayList<>();
+        if (defaultRole != null) {
+            defaultRoles.add(defaultRole);
+        }
+
+        // Gán danh sách Role mặc định cho User
+        userEntity.setRoles(defaultRoles);
+        userRepository.save(userEntity);
+    }
+    @Override
+    @Transactional(readOnly = true)
+    public UserDTO getUserById(Long userId) {
+        UserEntity userEntity = userRepository.findById(userId).orElse(null);
+        return userEntity != null ? userConverter.toDTO(userEntity) : null;
+    }
+
 }

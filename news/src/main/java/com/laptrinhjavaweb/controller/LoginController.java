@@ -80,6 +80,7 @@ public class LoginController {
             model.addAttribute("error", "Invalid credentials");
         }
         return "login";
+
     }
 
     @GetMapping("/logout")
@@ -92,5 +93,9 @@ public class LoginController {
 
         // Chuyển hướng về trang chủ
         return "/views/userPage";
+    }
+    @GetMapping("/register")
+    public String showRegisterForm() {
+        return "register";
     }
 }

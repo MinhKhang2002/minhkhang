@@ -18,6 +18,7 @@ public class ItemNewControler {
 
         if (loggedInUserDetails != null) {
             modelMap.addAttribute("fullname", loggedInUserDetails.getFullName());
+            modelMap.addAttribute("userId", loggedInUserDetails.getId());
             // Add other user details to the model as needed
         }
         return "/views/user/item/item";

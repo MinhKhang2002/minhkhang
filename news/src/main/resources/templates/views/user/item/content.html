@@ -6,135 +6,280 @@
             <div class="col-md-6">
                 <div class="small mb-1 category-item"></div>
                 <h1 class="display-5 fw-bolder" id="title-item"></h1>
-                <div class="fs-5 mb-5">
-<!--                    <span class="text-decoration-line-through">$45.00</span>-->
-<!--                    <span>$40.00</span>-->
-                </div>
-                <!--<div id="container">
-                    <div id="editor">
-                        &lt;!&ndash;                    <p class="lead content-item"></p>&ndash;&gt;
-                    </div>
-                </div>-->
+
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to cart
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi bi-bookmark-heart-fill"></i>
+                        Yêu thích
                     </button>
                 </div>
             </div>
+            <p class="lead content-item"></p>
         </div>
-        <div id="container">
-            <div id="editor">
-                <!--                    <p class="lead content-item"></p>-->
+    </div>
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="comments-area">
+                    <h4></h4>
+                    <div class="comment-list" id="get-cmt-list">
+                        <div class="single-comment justify-content-between d-flex">
+                            <div class="user justify-content-between d-flex">
+                                <div class="desc">
+
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <h5 class="name-comment" id="get-cmt-name"></h5>
+                                            <p class="date" id="get-cmt-date"></p>
+                                        </div>
+                                    </div>
+                                    <p class="comment comment-content" id="get-cmt-content"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="comment-form">
+                    <!--                    <input type="hidden" id="userId" value="${userId}"/>-->
+                    <h4>Viết bình luận</h4>
+                    <form class="form-contact comment_form" action="#" id="commentForm">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                              <textarea class="form-control w-100" name="content_comment" id="content_comment" cols="30" rows="9"
+                                        placeholder="Viết bình luận"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" th:value="${userId}" id="userId" name="userId" />
+
+                        <div class="form-group">
+                            <button type="button" class="button button-contactForm btn_1 boxed-btn" id="submitCommentBtn" >Gửi bình luận</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </section>
-<!--
-&lt;!&ndash; Related items section&ndash;&gt;
-<section class="py-5 bg-light">
-    <div class="container px-4 px-lg-5 mt-5">
-        <h2 class="fw-bolder mb-4">Related products</h2>
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <div class="col mb-5">
-                <div class="card h-100">
-                    &lt;!&ndash; Product image&ndash;&gt;
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    &lt;!&ndash; Product details&ndash;&gt;
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            &lt;!&ndash; Product name&ndash;&gt;
-                            <h5 class="fw-bolder">Fancy Product</h5>
-                            &lt;!&ndash; Product price&ndash;&gt;
-                            $40.00 - $80.00
-                        </div>
-                    </div>
-                    &lt;!&ndash; Product actions&ndash;&gt;
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-5">
-                <div class="card h-100">
-                    &lt;!&ndash; Sale badge&ndash;&gt;
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                    &lt;!&ndash; Product image&ndash;&gt;
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    &lt;!&ndash; Product details&ndash;&gt;
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            &lt;!&ndash; Product name&ndash;&gt;
-                            <h5 class="fw-bolder">Special Item</h5>
-                            &lt;!&ndash; Product reviews&ndash;&gt;
-                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                            &lt;!&ndash; Product price&ndash;&gt;
-                            <span class="text-muted text-decoration-line-through">$20.00</span>
-                            $18.00
-                        </div>
-                    </div>
-                    &lt;!&ndash; Product actions&ndash;&gt;
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-5">
-                <div class="card h-100">
-                    &lt;!&ndash; Sale badge&ndash;&gt;
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                    &lt;!&ndash; Product image&ndash;&gt;
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    &lt;!&ndash; Product details&ndash;&gt;
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            &lt;!&ndash; Product name&ndash;&gt;
-                            <h5 class="fw-bolder">Sale Item</h5>
-                            &lt;!&ndash; Product price&ndash;&gt;
-                            <span class="text-muted text-decoration-line-through">$50.00</span>
-                            $25.00
-                        </div>
-                    </div>
-                    &lt;!&ndash; Product actions&ndash;&gt;
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-5">
-                <div class="card h-100">
-                    &lt;!&ndash; Product image&ndash;&gt;
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                    &lt;!&ndash; Product details&ndash;&gt;
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            &lt;!&ndash; Product name&ndash;&gt;
-                            <h5 class="fw-bolder">Popular Item</h5>
-                            &lt;!&ndash; Product reviews&ndash;&gt;
-                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                                <div class="bi-star-fill"></div>
-                            </div>
-                            &lt;!&ndash; Product price&ndash;&gt;
-                            $40.00
-                        </div>
-                    </div>
-                    &lt;!&ndash; Product actions&ndash;&gt;
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const submitCommentBtn = document.getElementById('submitCommentBtn');
+        const urlParams = new URLSearchParams(window.location.search);
+        const newId = urlParams.get('id'); // Lấy id từ URL
+        const commentForm = document.getElementById('commentForm');
+        const userIdInput = document.getElementById('userId');
+        let submitting = false; // Biến cờ để kiểm tra trạng thái gửi dữ liệu
+
+        // Lấy giá trị của biến userId từ thuộc tính value của phần tử input
+        const userId = userIdInput.getAttribute('value');
+
+        commentForm.addEventListener('click', function(event) {
+            // Ngăn chặn việc gửi form mặc định
+
+            // Nếu đang trong quá trình gửi dữ liệu thì không thực hiện gửi nữa
+            if (submitting) {
+                return;
+            }
+
+            submitting = true; // Đánh dấu đang thực hiện gửi dữ liệu
+
+            const content_comment = document.getElementById('content_comment').value; // Lấy nội dung bình luận
+
+            const commentData = {
+                content_comment: content_comment,
+                userId: userId,
+                newId: newId
+            };
+
+            // Gửi yêu cầu POST đến đường dẫn '/comments' với dữ liệu bình luận
+            fetch('/comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(commentData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Lỗi khi đăng bình luận');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+
+                    console.log('Đăng bình luận thành công:', data);
+
+                })
+                .catch(error => {
+                    console.error('Lỗi khi đăng bình luận:', error);
+                    // Thêm logic ở đây để xử lý lỗi khi đăng bình luận, nếu cần
+                })
+                .finally(() => {
+                    submitting = false; // Đánh dấu đã hoàn thành việc gửi dữ liệu
+                });
+
+        });
+    });
+
+    $(document).ready(function () {
+
+        function updateTable(commentList) {
+            var commentContainer = $("#get-cmt-list");
+            commentContainer.empty(); // Xóa tất cả các comment hiện tại trong container
+            var count = 0;
+            // Lặp qua danh sách comment và tạo comment cho mỗi comment
+            $.each(commentList, function (index, comment) {
+                // Tạo một comment mới từ mẫu HTML
+                var commentItem = $("<div class='single-comment justify-content-between d-flex'>" +
+                    "<div class='user justify-content-between d-flex'>" +
+                    "<div class='desc'>" +
+                    "<div class='d-flex justify-content-between'>" +
+                    "<div class='d-flex align-items-center'>" +
+                    "<h5 class='name-comment' ></h5>" +
+                    "<p class='date'></p>" +
+                    "</div>" +
+                    "</div>" +
+                    "<p class='comment comment-content'></p>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>");
+
+                commentItem.find(".comment-content").text(comment.content_comment);
+                commentItem.find(".date").text(comment.createdDate);
+                // Tăng giá trị của biến count lên 1 mỗi khi thêm một bình luận
+                count++;
+
+                var userIdInput = $("<input type='hidden' class='user-id' value='" + comment.userId + "'>");
+                commentItem.append(userIdInput);
+                commentContainer.append(commentItem);
+            });
+            $(".comments-area h4").text(count + " Comments");
+            // Gọi hàm để lấy fullname thông qua userId
+            getFullnames();
+        }
+        // Hàm để lấy fullname thông qua userId
+        function getFullnames() {
+            $(".user-id").each(function() {
+                var userId = $(this).val();
+                var nameElement = $(this).closest(".single-comment").find(".name-comment");
+
+                // Gọi AJAX để lấy fullname từ userId
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8081/users/" + userId, // Thay đổi đường dẫn tương ứng với API của bạn
+                    dataType: "json",
+                    success: function (user) {
+                        // Nếu lấy được thông tin user thành công, cập nhật fullname của comment
+                        nameElement.text(user.fullName);
+                    },
+                    error: function (error) {
+                        console.error("Lỗi khi lấy thông tin user:", error);
+                    }
+                });
+            });
+        }
+
+        function fetchAndDisplayData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const newId = urlParams.get('id'); // Thay thế bằng newId tương ứng của bạn
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8081/comment/" + newId,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    updateTable(data);
+                },
+                error: function (error) {
+                    console.error("Lỗi khi lấy dữ liệu từ API:", error);
+                }
+            });
+        }
+
+        fetchAndDisplayData();
+    });
+
+</script>
+
+<style>
+    /* Phần Comment */
+    .comments-area {
+        margin-top: 30px;
+    }
+
+    .comment-list {
+        margin-bottom: 20px;
+    }
+
+    .single-comment {
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ccc; /* Thêm đường kẻ phân chia giữa các comment */
+        padding-bottom: 20px; /* Khoảng cách dưới của mỗi comment */
+    }
+    .comment-list .user .desc .name-comment {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .comment-list .user .desc .comment-content {
+        font-size: 22px;
+        line-height: 1.6;
+    }
+
+    .comment-list .user .thumb {
+        margin-right: 20px;
+    }
+
+    .comment-list .user .desc {
+        flex: 1;
+    }
+
+    .comment-list .user .desc .date {
+        font-size: 14px;
+        color: #888;
+        margin-left: 30px;
+        white-space: nowrap; /* Ngăn chặn việc ngắt dòng */
+        overflow: hidden; /* Ẩn phần vượt quá chiều rộng */
+        text-overflow: ellipsis;
+    }
+
+
+    .comment-list .user .desc .btn-reply {
+        font-size: 14px;
+        color: #007bff;
+    }
+
+    /* Phần Form Comment */
+    .comment-form {
+        margin-top: 50px;
+    }
+
+    .comment-form h4 {
+        margin-bottom: 20px;
+    }
+
+    .comment_form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .comment_form textarea {
+        height: 150px;
+        resize: none;
+    }
+
+    .comment_form button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .comment_form button:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+

@@ -3,12 +3,7 @@
 	import java.util.ArrayList;
 	import java.util.List;
 
-	import javax.persistence.Column;
-	import javax.persistence.Entity;
-	import javax.persistence.JoinColumn;
-	import javax.persistence.JoinTable;
-	import javax.persistence.ManyToMany;
-	import javax.persistence.Table;
+	import javax.persistence.*;
 
 	@Entity
 	@Table(name = "user")
@@ -70,5 +65,15 @@
 
 		public void setRoles(List<RoleEntity> roles) {
 			this.roles = roles;
+		}
+		@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+		private List<CommentEntity> commentList = new ArrayList<>();
+
+		public List<CommentEntity> getCommentList() {
+			return commentList;
+		}
+
+		public void setCommentList(List<CommentEntity> commentList) {
+			this.commentList = commentList;
 		}
 	}
