@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @CrossOrigin
 @RestController
 public class UserAPI {
@@ -51,5 +53,18 @@ public class UserAPI {
     @GetMapping("/categories/{id}")
     public String getCategoriesByUserId(@PathVariable Long id) {
         return userService.getCategoriesByUserId(id);
+    }
+
+    @PostMapping("/addUser")
+    public Long createUser(@RequestBody UserDTO model,
+                           @RequestParam(name = "roleId") Long roleId,
+                           HttpSession session) {
+        // Lấy thông tin người dùng từ session
+        String loggedInUser = (String) session.getAttribute("loggedInUser");
+
+        // Thêm thông tin người dùng vào trường createdBy của model
+        model.setCreatedBy(loggedInUser);
+
+        return userService.addUser(model, loggedInUser, roleId);
     }
 }

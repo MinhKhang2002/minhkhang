@@ -3,7 +3,7 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Interface</div>
-                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN'}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN' || roleCode == 'ADMIN_MANAGE'}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Quản lý bài viết
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -13,7 +13,7 @@
                     <a class="nav-link" id="listNew" href="#">Danh sách bài viết</a>
                 </nav>
             </div>
-                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN'}" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN' || roleCode == 'ADMIN_MANAGE'}" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                     <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-list-check"></i></div>
                     Quản lý đăng tin
@@ -39,7 +39,7 @@
                         </a>
                     </nav>
                 </div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#show-category" aria-expanded="false" aria-controls="show-category">
+                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN'}" href="#" data-bs-toggle="collapse" data-bs-target="#show-category" aria-expanded="false" aria-controls="show-category">
                     <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Quản lý thể loại
@@ -52,7 +52,7 @@
                         </a>
                     </nav>
                 </div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#show-user" aria-expanded="false" aria-controls="show-user">
+                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN'}" href="#" data-bs-toggle="collapse" data-bs-target="#show-user" aria-expanded="false" aria-controls="show-user">
                     <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                     Quản lý người dùng

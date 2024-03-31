@@ -12,6 +12,16 @@ function loadApproveContent() {
     });
 }
 
+$(document).on("click", "#ds-user", function () {
+    loadAddUser()
+})
+
+function loadAddUser() {
+    $.get("/addUser", function (data) {
+        $("#main-content").html(data);
+    })
+}
+
 $(document).on("click", "#listNew", function () {
     loadListNew()
 })

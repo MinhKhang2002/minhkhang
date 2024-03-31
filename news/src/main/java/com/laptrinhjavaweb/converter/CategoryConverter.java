@@ -27,15 +27,8 @@ public class CategoryConverter {
     public List<CategoryDTO> toDtoList(List<CategoryEntity> entities) {
         // Khai báo một danh sách (List) để lưu trữ các đối tượng DTO
         List<CategoryDTO> dtos = new ArrayList<>();
-
         // Lặp qua từng đối tượng CategoryEntity trong danh sách entities
         for (CategoryEntity entity : entities) {
-
-            /*// Gọi phương thức toDTO để chuyển đổi từ CategoryEntity sang CategoryDTO
-            CategoryDTO dto = toDTO(entity);
-            // Thêm đối tượng DTO đã chuyển đổi vào danh sách dtos
-            dtos.add(dto);*/
-
             // Thay thế để ngắn gọn hơn cách trên
             // Gọi phương thức toDTO để chuyển đổi từ CategoryEntity sang CategoryDTO
             // Thêm đối tượng DTO đã chuyển đổi vào danh sách dtos

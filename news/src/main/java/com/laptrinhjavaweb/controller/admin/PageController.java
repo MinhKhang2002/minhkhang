@@ -15,4 +15,9 @@ public class PageController {
     public String showPagePhongVien() {
         return "/views/phongvien/index";
     }
+
+    @GetMapping("/addUser")
+    public String addUser() {
+        return "/views/admin/addUser";
+    }
 }

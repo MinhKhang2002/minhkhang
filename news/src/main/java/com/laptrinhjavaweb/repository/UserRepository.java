@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     @Query("SELECT ur.roleId FROM UserRoleEntity ur WHERE ur.userId = :userId")
     Long findRoleIdByUserId(@Param("userId") Long userId);
+
+    boolean existsByUserName(String username);
 }

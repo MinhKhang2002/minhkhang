@@ -11,9 +11,12 @@ public class UserConverter {
         UserEntity userEntity = new UserEntity();
         userEntity.setUserName(userDTO.getUserName());
         userEntity.setFullName(userDTO.getFullName());
+        userEntity.setPassword(userDTO.getPassword());
         userEntity.setStatus(userDTO.getStatus());
-        // Chuyển đổi các trường khác
-
+        userEntity.setCreatedDate(userDTO.getCreatedDate());
+        userEntity.setModifiedDate(userDTO.getModifiedDate());
+        userEntity.setCreatedBy(userDTO.getCreatedBy());
+        userEntity.setModifiedBy(userDTO.getModifiedBy());
         return userEntity;
     }
 
@@ -21,9 +24,12 @@ public class UserConverter {
         UserDTO userDTO = new UserDTO();
         userDTO.setUserName(userEntity.getUserName());
         userDTO.setFullName(userEntity.getFullName());
+        userDTO.setPassword(userEntity.getPassword());
         userDTO.setStatus(userEntity.getStatus());
-        // Chuyển đổi các trường khác
-
+        userDTO.setCreatedBy(userEntity.getCreatedBy());
+        userDTO.setCreatedDate(userEntity.getCreatedDate());
+        userDTO.setModifiedBy(userEntity.getModifiedBy());
+        userDTO.setCreatedDate(userEntity.getCreatedDate());
         return userDTO;
     }
 }

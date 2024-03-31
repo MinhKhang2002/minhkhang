@@ -6,6 +6,7 @@ import com.laptrinhjavaweb.dto.UserDTO;
 import com.laptrinhjavaweb.entity.RoleEntity;
 import com.laptrinhjavaweb.entity.UserEntity;
 import com.laptrinhjavaweb.entity.UserRoleEntity;
+import com.laptrinhjavaweb.entity.UserRoleKey;
 import com.laptrinhjavaweb.repository.RoleRepository;
 import com.laptrinhjavaweb.repository.UserRepository;
 import com.laptrinhjavaweb.repository.UserRoleRepository;
@@ -148,6 +149,39 @@ public class UserService implements IUserService {
     public UserDTO getUserById(Long userId) {
         UserEntity userEntity = userRepository.findById(userId).orElse(null);
         return userEntity != null ? userConverter.toDTO(userEntity) : null;
+    }
+
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUserName(username);
+    }
+
+    public Long addUser(UserDTO userDTO, String loggedInUser, Long roleId) {
+        UserEntity userEntity = new UserEntity();
+        // Kiểm tra tính duy nhất của username trước khi thêm
+        if (existsByUsername(userDTO.getUserName())) {
+            throw new IllegalArgumentException("Username already exists");
+        }
+        userEntity = userConverter.toEntity(userDTO);
+        userEntity.setStatus(1);
+        userEntity.setCreatedBy(loggedInUser);
+        // Lưu (persist) người dùng mới vào cơ sở dữ liệu
+        UserEntity savedUser = userRepository.save(userEntity);
+
+        addUserRole(savedUser.getId(), roleId);
+
+        // Trả về ID của người dùng vừa được thêm
+        return savedUser.getId();
+    }
+
+    public void addUserRole(Long userId, Long roleId){
+        UserRoleEntity userRoleEntity = new UserRoleEntity();
+        UserEntity userEntity = new UserEntity();
+        RoleEntity roleEntity = new RoleEntity();
+        userRoleEntity.setUserId(userId);
+        userRoleEntity.setRoleId(roleId);
+
+        userEntity.getRoles().add(roleEntity);
+        userRoleRepository.save(userRoleEntity);
     }
 
 }
