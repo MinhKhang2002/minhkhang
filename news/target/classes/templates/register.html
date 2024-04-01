@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Đăng Ký</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body id="LoginForm">
+<div class="container">
+    <!-- <h1 class="form-heading">login Form</h1> -->
+    <div class="login-form">
+        <div class="main-div">
+
+            <form action="/register" method="post" onsubmit="return validateForm()"  th:object="${userDTO}">
+                <div class="form-group ">
+                    <input type="text" class="form-control " id="fullname" name="fullName"
+                           placeholder="Họ và tên" required>
+                </div>
+                <div class="form-group ">
+                    <input type="text" class="form-control " id="username" name="userName"
+                           placeholder="Tên đăng nhập" required>
+                </div>
+                <div class="form-group ">
+                    <input type="password" class="form-control " id="password" name="password"
+                           placeholder="Mật khẩu" required>
+                    <button type="button"class="btn-show-password btn btn-primary" id="togglePassword">Show Password</button>
+                </div>
+                <input type="hidden" name="roleId" value="2">
+                <button type="submit" class="btn-dangky btn btn-primary" >Đăng Ký</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+<script>
+    // Hàm kiểm tra xem một chuỗi có chứa ký tự đặc biệt hay không
+    function containsSpecialCharacters(str) {
+        var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+        return format.test(str);
+    }
+
+    // Hàm kiểm tra xem một chuỗi có chứa số hay không
+    function containsNumber(str) {
+        return /\d/.test(str);
+    }
+
+    // Hàm kiểm tra điều kiện nhập của form
+    function validateForm() {
+        var fullName = document.getElementById("fullname").value;
+        var userName = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        if (fullName.trim() === '' || userName.trim() === '' || password.trim() === '') {
+            alert("Vui lòng điền đầy đủ thông tin.");
+            return false;
+        }
+
+        if (containsSpecialCharacters(fullName) || containsNumber(fullName)) {
+            alert("Họ và tên không được chứa số hoặc ký tự đặc biệt.");
+            return false;
+        }
+
+        if (password.length < 6) {
+            alert("Mật khẩu phải có ít nhất 6 ký tự.");
+            return false;
+        }
+
+        return true; // Form hợp lệ
+    }
+    document.getElementById("togglePassword").addEventListener("click", function() {
+        var passwordField = document.getElementById("password");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            this.textContent = "Hide";
+        } else {
+            passwordField.type = "password";
+            this.textContent = "Show";
+        }
+    });
+</script>
+<style>
+    body#LoginForm {
+        background-image:
+                url("https://www.shutterstock.com/shutterstock/photos/2277328299/display_1500/stock-photo-newspaper-magazine-collage-background-texture-torn-clippings-scrap-paper-black-and-white-2277328299.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        padding: 10px;
+    }
+
+    .form-heading {
+        color: #208cc6;
+        font-size: 23px;
+    }
+    .btn-show-password{
+        margin-top: 10px;
+    }
+    .panel h2 {
+        color: #ffffff;
+        font-size: 18px;
+        margin: 0 0 8px 0;
+    }
+    .form-white{
+        background-color: aliceblue;
+    }
+    .btn-dangky{
+        margin-top: 20px;
+        color: #208cc6;
+    }
+    .btn-dangnhap{
+        margin-top: 20px;
+        color: #208cc6;
+    }
+    .panel p {
+        color: #fffdfd;
+        font-size: 14px;
+        margin-bottom: 30px;
+        line-height: 24px;
+    }
+
+    .login-form .form-control {
+        background: #ffffff none repeat scroll 0 0;
+        border: 1px solid #d4d4d4;
+        border-radius: 4px;
+        font-size: 14px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .main-div {
+        background: #ffffff none repeat scroll 0 0;
+        border-radius: 2px;
+        margin: 10px auto 30px;
+        max-width: 38%;
+        padding: 50px 70px 70px 71px;
+    }
+
+    .login-form .form-group {
+        margin-bottom: 10px;
+    }
+
+    .login-form {
+        text-align: center;
+    }
+
+    .forgot a {
+        color: #777777;
+        font-size: 14px;
+        text-decoration: underline;
+    }
+
+    .login-form  .btn.btn-primary {
+        background: #f0ad4e none repeat scroll 0 0;
+        border-color: #f0ad4e;
+        color: #ffffff;
+        font-size: 14px;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
+    }
+
+    .forgot {
+        text-align: left;
+        margin-bottom: 30px;
+    }
+
+    .botto-text {
+        color: #ffffff;
+        font-size: 14px;
+        margin: auto;
+    }
+
+    .login-form .btn.btn-primary.reset {
+        background: #ff9900 none repeat scroll 0 0;
+    }
+
+    .back {
+        text-align: left;
+        margin-top: 10px;
+    }
+
+    .back a {
+        color: #444444;
+        font-size: 13px;
+        text-decoration: none;
+    }
+</style>
+</body>
+</html>

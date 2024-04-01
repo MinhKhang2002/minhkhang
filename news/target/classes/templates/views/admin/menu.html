@@ -1,0 +1,84 @@
+<div th:fragment="menu" id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <div class="sb-sidenav-menu-heading">Interface</div>
+                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN' || roleCode == 'ADMIN_MANAGE'}" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Quản lý bài viết
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" id="listNew" href="#">Danh sách bài viết</a>
+                </nav>
+            </div>
+                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN' || roleCode == 'ADMIN_MANAGE'}" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                    <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-list-check"></i></div>
+                    Quản lý đăng tin
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                        <a id="approveLink" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                            Duyệt tin tức
+                        </a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" th:if="${roleCode == 'phong-vien'}" href="#" data-bs-toggle="collapse" data-bs-target="#show-phong-vien" aria-expanded="false" aria-controls="show-phong-vien">
+                    <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Bài viết phóng viên
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="show-phong-vien" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion">
+                        <a id="phong-vien" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#phong-van" aria-expanded="false" aria-controls="phong-van">
+                            Tất cả bài viết
+                        </a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN'}" href="#" data-bs-toggle="collapse" data-bs-target="#show-category" aria-expanded="false" aria-controls="show-category">
+                    <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Quản lý thể loại
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="show-category" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion">
+                        <a id="ds-category" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="" aria-expanded="false" aria-controls="">
+                            Danh sách thể loại
+                        </a>
+                    </nav>
+                </div>
+                <a class="nav-link collapsed" th:if="${roleCode == 'ADMIN'}" href="#" data-bs-toggle="collapse" data-bs-target="#show-user" aria-expanded="false" aria-controls="show-user">
+                    <!--<div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                    Quản lý người dùng
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="show-user" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav accordion">
+                        <a id="ds-user" class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="" aria-expanded="false" aria-controls="">
+                            Danh sách người dùng
+                        </a>
+                    </nav>
+                </div>
+                <div class="sb-sidenav-menu-heading">Addons</div>
+                <a class="nav-link" th:if="${roleCode == 'ADMIN'}" href="">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    Charts
+                </a>
+                <a class="nav-link" href="tables.html">
+                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                    Tables
+                </a>
+            </div>
+        </div>
+        <div class="sb-sidenav-footer">
+            <div class="small">Logged in as:</div>
+            Start Bootstrap
+        </div>
+    </nav>
+</div>

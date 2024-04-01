@@ -57,7 +57,8 @@ public class UserController {
 
         if (loggedInUser == null) {
             // Xử lý khi session không tồn tại
-            return "redirect:/views/userPage"; // Chuyển hướng đến trang chủ
+//            return "redirect:/views/userPage"; // Chuyển hướng đến trang chủ
+            return "/views/userPage"; // Chuyển hướng đến trang chủ
         }
 
         UserEntity user = userRepository.findByUserName(loggedInUser);

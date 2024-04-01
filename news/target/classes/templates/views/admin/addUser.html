@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
+    <!--    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+
+    <script th:src="@{/static/admin/js/menu.js}"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Vertical (basic) form</h2>
+    <form>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+        </div>
+        <select id="RoleNameSelect" class="form-select">
+            <!-- Dữ liệu từ API sẽ được thêm vào đây -->
+            <option value="" selected disabled>Chọn thể loại</option>
+        </select>
+        <div class="checkbox">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+<script>
+    // Hàm để lấy danh sách role và thẻ select
+    function loadRolesSelect() {
+        var roleSelect = $("#RoleNameSelect");
+        roleSelect.empty();
+
+        // Thêm tùy chọn mặc định
+        roleSelect.append($("<option>", { value: '', text: 'Chọn vai trò' }));
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8081/allRole",
+            dataType: "json",
+            success: function (roles) {
+                // Thêm tất cả các vai trò vào thẻ select
+                $.each(roles, function (index, role) {
+                    var option = $("<option>", { value: role.code, text: role.name });
+                    roleSelect.append(option);
+                });
+            },
+            error: function (error) {
+                console.error("Lỗi khi lấy dữ liệu role:", error);
+            }
+        });
+    }
+
+    loadRolesSelect()
+</script>
+</body>
+</html>

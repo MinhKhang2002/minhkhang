@@ -1,0 +1,38 @@
+#displayThumbnail {
+    display: none;
+    /*Thay đổi giá trị tối đa theo ý muốn của bạn*/
+    max-width: 300px;
+    /*Thay đổi giá trị tối đa theo ý muốn của bạn*/
+    max-height: 200px;
+    /*Duy trì tỉ lệ khung hình*/
+    width: auto;
+    /*Duy trì tỉ lệ khung hình*/
+    height: auto;
+    margin-top: 20px;
+    border-radius: 3px;
+}
+
+.truncated-content {
+    max-height: 100px;  /* Giới hạn chiều cao tối đa */
+    overflow: hidden;   /* Ẩn nội dung dư thừa */
+    position: relative; /* Để chứa nút "Xem thêm" */
+}
+
+.truncated-content.collapsed {
+    max-height: none;
+}
+
+.read-more {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 5px;
+    cursor: pointer;
+    color: blue;
+}
+
+.icon-add-del {
+    margin: 5px;
+    font-size: 20px;
+}
