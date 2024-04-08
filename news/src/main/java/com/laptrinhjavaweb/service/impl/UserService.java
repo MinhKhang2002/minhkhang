@@ -6,18 +6,17 @@ import com.laptrinhjavaweb.dto.UserDTO;
 import com.laptrinhjavaweb.entity.RoleEntity;
 import com.laptrinhjavaweb.entity.UserEntity;
 import com.laptrinhjavaweb.entity.UserRoleEntity;
-import com.laptrinhjavaweb.entity.UserRoleKey;
 import com.laptrinhjavaweb.repository.RoleRepository;
 import com.laptrinhjavaweb.repository.UserRepository;
 import com.laptrinhjavaweb.repository.UserRoleRepository;
 import com.laptrinhjavaweb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -184,4 +183,22 @@ public class UserService implements IUserService {
         userRoleRepository.save(userRoleEntity);
     }
 
+    public List<UserDTO> getAllUser() {
+        List<UserEntity> userEntityList = userRepository.findAll();
+        return userConverter.toDtoList(userEntityList);
+    }
+
+    /*public List<UserDTO> getAllUserPaging(Pageable pageable) {
+        List<UserDTO> result = new ArrayList<>();
+        List<UserEntity> entities = userRepository.findAllAndPaging(pageable);
+        for(UserEntity item : entities) {
+            UserDTO userDTO = userConverter.toDTO(item);
+            result.add(userDTO);
+        }
+        return result;
+    }
+
+    public int totalItem() {
+        return (int) userRepository.countAllUser();
+    }*/
 }

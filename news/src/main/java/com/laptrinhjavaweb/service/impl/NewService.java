@@ -32,9 +32,6 @@ public class NewService implements INewService{
 	private NewConverter newConverter;
 
 	@Autowired
-	private NewConverter newMapper;
-
-	@Autowired
 	private ImageRepository imageRepository;
 
 	@Override

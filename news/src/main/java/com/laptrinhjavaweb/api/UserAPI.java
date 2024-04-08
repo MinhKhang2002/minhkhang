@@ -1,13 +1,18 @@
 package com.laptrinhjavaweb.api;
 
+import com.laptrinhjavaweb.api.output.UserOutput;
 import com.laptrinhjavaweb.dto.UserDTO;
 import com.laptrinhjavaweb.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -67,4 +72,27 @@ public class UserAPI {
 
         return userService.addUser(model, loggedInUser, roleId);
     }
+
+    @GetMapping("/getAllUser")
+    public ResponseEntity<List<UserDTO>> getAllUser() {
+        List<UserDTO> userDTOs = userService.getAllUser();
+        return new ResponseEntity<>(userDTOs, HttpStatus.OK);
+    }
+
+    /*@GetMapping("/user")
+    public UserOutput showAllUserPaging(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                        @RequestParam(value = "limit", required = false, defaultValue = "5") Integer limit){
+
+        UserOutput result = new UserOutput();
+        if (page != null && limit != null) {
+            result.setPage(page);
+			Pageable pageable = PageRequest.of(page - 1, limit);
+//            Pageable pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
+            result.setListResult(userService.getAllUserPaging(pageable));
+            result.setTotalPage((int) Math.ceil((double) (userService.totalItem()) / limit));
+        } else {
+            result.setListResult(userService.getAllUser());
+        }
+        return result;
+    }*/
 }

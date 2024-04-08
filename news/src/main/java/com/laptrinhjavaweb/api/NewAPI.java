@@ -2,15 +2,10 @@ package com.laptrinhjavaweb.api;
 
 import com.laptrinhjavaweb.controller.LoginController;
 import com.laptrinhjavaweb.entity.ImageEntity;
-import com.laptrinhjavaweb.entity.UserEntity;
-import com.laptrinhjavaweb.repository.UserRepository;
-import com.laptrinhjavaweb.service.IUserService;
-import com.laptrinhjavaweb.service.impl.NewService;
 import com.laptrinhjavaweb.service.impl.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,11 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import com.laptrinhjavaweb.api.output.NewOutput;
 import com.laptrinhjavaweb.dto.NewDTO;
 import com.laptrinhjavaweb.service.INewService;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin

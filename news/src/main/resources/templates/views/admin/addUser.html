@@ -11,28 +11,34 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
 
     <script th:src="@{/static/admin/js/menu.js}"></script>
+    <script th:src="@{/static/admin/js/addUser.js}"></script>
 </head>
 <body>
 
 <div class="container">
     <h2>Vertical (basic) form</h2>
-    <form>
+    <form id="addUserForm">
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+            <label for="fullName">Full Name:</label>
+            <input type="text" class="form-control" id="fullName" placeholder="Enter fullName" name="fullName">
+        </div>
+        <div class="form-group">
+            <label for="userName">User Name:</label>
+            <input type="text" class="form-control" id="userName" placeholder="Enter userName" name="userName">
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
         </div>
+        <div class="form-group">
+            <label for="pwdConfirm">Confirm Password:</label>
+            <input type="password" class="form-control" id="pwdConfirm" placeholder="Confirm password" name="pwdConfirm">
+        </div>
         <select id="RoleNameSelect" class="form-select">
             <!-- Dữ liệu từ API sẽ được thêm vào đây -->
             <option value="" selected disabled>Chọn thể loại</option>
         </select>
-        <div class="checkbox">
-            <label><input type="checkbox" name="remember"> Remember me</label>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-success" style="margin-top: 15px">Submit</button>
     </form>
 </div>
 
@@ -52,7 +58,7 @@
             success: function (roles) {
                 // Thêm tất cả các vai trò vào thẻ select
                 $.each(roles, function (index, role) {
-                    var option = $("<option>", { value: role.code, text: role.name });
+                    var option = $("<option>", { value: role.id, text: role.name });
                     roleSelect.append(option);
                 });
             },
