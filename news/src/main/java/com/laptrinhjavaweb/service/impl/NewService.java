@@ -1,8 +1,8 @@
 package com.laptrinhjavaweb.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.laptrinhjavaweb.entity.ImageEntity;
@@ -256,6 +256,34 @@ public class NewService implements INewService{
 		return result;
 	}
 
+	/*public int countNewPostsByDateRange(Date startDate, Date endDate) {
+		return newRepository.countByDateRange(startDate, endDate);
+	}*/
 
+	public List<Map<String, Object>> getNewPostCountsByDateRange(Date startDate, Date endDate) {
+		List<Object[]> counts = newRepository.countByDateRange(startDate, endDate);
 
+		Map<String, Long> dateCountsMap = new HashMap<>();
+
+		for (Object[] count : counts) {
+			String dateString = ((Date) count[0]).toInstant().truncatedTo(ChronoUnit.DAYS).toString();
+			Long currentCount = (Long) count[1];
+
+			dateCountsMap.put(dateString, dateCountsMap.getOrDefault(dateString, 0L) + currentCount);
+		}
+
+		List<Map<String, Object>> result = new ArrayList<>();
+
+		for (Map.Entry<String, Long> entry : dateCountsMap.entrySet()) {
+			Map<String, Object> formattedEntry = new HashMap<>();
+			formattedEntry.put("date", entry.getKey());
+			formattedEntry.put("count", entry.getValue());
+			result.add(formattedEntry);
+		}
+
+		// Sắp xếp lại danh sách theo ngày
+		result.sort((e1, e2) -> ((String) e1.get("date")).compareTo((String) e2.get("date")));
+
+		return result;
+	}
 }

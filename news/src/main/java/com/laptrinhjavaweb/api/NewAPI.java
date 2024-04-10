@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,10 @@ import com.laptrinhjavaweb.dto.NewDTO;
 import com.laptrinhjavaweb.service.INewService;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -265,5 +269,41 @@ public class NewAPI {
 	public ResponseEntity<List<ImageEntity>> getAllImages() {
 		List<ImageEntity> imageEntities = newService.getAllImage();
 		return ResponseEntity.ok(imageEntities);
+	}
+
+	@GetMapping(value = "/newPaging/categoryCode")
+	public NewOutput PagingCategory(@RequestParam(value = "category", required = false, defaultValue = "") String Category,
+												@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+												@RequestParam(value = "limit", required = false, defaultValue = "5") Integer limit) {
+		NewOutput result = new NewOutput();
+		int status = 1; // Đặt giá trị status là 0
+		Pageable pageable;
+
+		if (Category != null && !Category.isEmpty()) {
+			result.setPage(page);
+//			pageable = PageRequest.of(page - 1, limit);
+			pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
+			int totalItem = newService.totalItemByCategoryAndStatus(Category, status);
+			result.setListResult(newService.findByCategoryAndStatus(Category, status, pageable));
+			/*result.setTotalPage((int) Math.ceil((double) (newService.totalItem(status)) / limit));*/
+			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
+		} else {
+			// Xử lý khi không có categories được chỉ định
+			pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
+			result.setPage(page);
+			int totalItem = newService.totalItem(status); // Đếm số lượng bài viết có status là 1
+			result.setListResult(newService.findAll(pageable, status)); // Phân trang tất cả bài viết có status là 1
+			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
+		}
+		return result;
+	}
+
+	@GetMapping("/new/countByDateRange")
+	public ResponseEntity<List<Map<String, Object>>> countNewPostsByDateRange(
+			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate) {
+
+		Date endDate = new Date(); // Lấy ngày và giờ hiện tại
+		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
+		return ResponseEntity.ok(counts);
 	}
 }

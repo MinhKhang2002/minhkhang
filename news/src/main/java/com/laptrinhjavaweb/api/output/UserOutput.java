@@ -1,6 +1,5 @@
 package com.laptrinhjavaweb.api.output;
 
-import com.laptrinhjavaweb.dto.NewDTO;
 import com.laptrinhjavaweb.dto.UserDTO;
 
 import java.util.ArrayList;

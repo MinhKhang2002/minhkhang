@@ -79,20 +79,18 @@ public class UserAPI {
         return new ResponseEntity<>(userDTOs, HttpStatus.OK);
     }
 
-    /*@GetMapping("/user")
-    public UserOutput showAllUserPaging(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                        @RequestParam(value = "limit", required = false, defaultValue = "5") Integer limit){
-
+    @GetMapping(value = "/userList")
+    public UserOutput showAllUserPaging(@RequestParam(value = "page", required = false) Integer page,
+                                        @RequestParam(value = "limit", required = false) Integer limit){
         UserOutput result = new UserOutput();
         if (page != null && limit != null) {
             result.setPage(page);
 			Pageable pageable = PageRequest.of(page - 1, limit);
-//            Pageable pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
-            result.setListResult(userService.getAllUserPaging(pageable));
+            result.setListResult(userService.findAll(pageable));
             result.setTotalPage((int) Math.ceil((double) (userService.totalItem()) / limit));
         } else {
             result.setListResult(userService.getAllUser());
         }
         return result;
-    }*/
+    }
 }

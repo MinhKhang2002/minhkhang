@@ -1,6 +1,9 @@
 package com.laptrinhjavaweb.service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.laptrinhjavaweb.entity.CategoryEntity;
 import com.laptrinhjavaweb.entity.ImageEntity;
@@ -32,4 +35,7 @@ public interface INewService {
 	List<NewDTO> findByCreatedByAndStatus(String createdBy, int status, Pageable pageable);
 
 	List<ImageEntity> getAllImage();
+
+//	int countNewPostsByDateRange(Date startDate, Date endDate);
+	List<Map<String, Object>> getNewPostCountsByDateRange(Date startDate, Date endDate);
 }

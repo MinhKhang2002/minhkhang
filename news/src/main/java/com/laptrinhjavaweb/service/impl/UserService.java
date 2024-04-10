@@ -29,16 +29,12 @@ public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private UserConverter userConverter;
-
     @Autowired
     private EntityManager entityManager;
-
     @Autowired
     private RoleRepository roleRepository;
-
     @Autowired
     private UserRoleRepository userRoleRepository;
 
@@ -188,6 +184,22 @@ public class UserService implements IUserService {
         return userConverter.toDtoList(userEntityList);
     }
 
+    @Override
+    public List<UserDTO> findAll(Pageable pageable) {
+        List<UserDTO> results = new ArrayList<>();
+        List<UserEntity> entities = userRepository.findAll(pageable).getContent();
+        for(UserEntity item: entities){
+            UserDTO userDTO = userConverter.toDTO(item);
+            results.add(userDTO);
+        }
+        return results;
+    }
+
+    @Override
+    public int totalItem() {
+        return (int) userRepository.count();
+    }
+
     /*public List<UserDTO> getAllUserPaging(Pageable pageable) {
         List<UserDTO> result = new ArrayList<>();
         List<UserEntity> entities = userRepository.findAllAndPaging(pageable);
@@ -199,6 +211,6 @@ public class UserService implements IUserService {
     }
 
     public int totalItem() {
-        return (int) userRepository.countAllUser();
+        return (int) userRepository.count();
     }*/
 }

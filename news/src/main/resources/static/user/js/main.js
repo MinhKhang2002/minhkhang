@@ -1,39 +1,4 @@
 $(document).ready(function () {
-    /*// Hàm để cập nhật nội dung của bảng
-    function updateTable(newsList) {
-        $("#product-item").empty(); // Xóa nội dung của tbody trước khi thêm hàng mới
-
-        // Sử dụng Thymeleaf để tạo dòng HTML cho mỗi tin tức
-        $.each(newsList, function (index, news) {
-            var productHtml =
-                "<div class='col mb-5'>" +
-                    "<div class='card h-100'>" +
-                // "<img class='card-img-top' src='https://dummyimage.com/450x300/dee2e6/6c757d.jpg' alt='...' />" +
-                        "<img class='card-img-top' src=" + news.thumbnail + "/>" +
-                        "<div class='card-body p-4'>" +
-                            "<div class='text-center'>" +
-                                "<h5 class='fw-bolder'>"+ news.title +"</h5>" +
-                                "$40.00 - $80.00" +
-                            "</div>" +
-                        "</div>" +
-                        "<div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>" +
-                            "<div class='text-center'><a class='btn btn-outline-dark mt-auto btn-viewsmore' href='/item?id="+news.id+"' data-id = " + news.id +">View options</a></div>" +
-                        "</div>" +
-                    "</div>" +
-                "</div>";
-
-            $("#product-item").append(productHtml); // Thêm sản phẩm vào phần tử có ID là "product-item"
-        });
-    }*/
-    // Hàm để cập nhật nội dung của bảng
-    /*function updateTable(newsList) {
-
-        // Sử dụng Thymeleaf để tạo dòng HTML cho mỗi tin tức
-        $.each(newsList, function (index, news) {
-            $(".thumbnail-item").attr("src", news.thumbnail)
-            $("#title-item").text(news.title)
-        });
-    }*/
     function updateTable(newsList) {
         // Lấy danh sách sản phẩm
         var productContainer = $("#product-item");
@@ -99,5 +64,46 @@ $(document).ready(function () {
         });
     }
 
+    document.addEventListener("DOMContentLoaded", function() {
+        let dropdownItems = document.querySelectorAll(".dropdown-menu .dropdown-item");
+
+        dropdownItems.forEach(function(item) {
+            item.addEventListener("click", function(event) {
+                event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ <a>
+
+                let category = event.target.getAttribute('data-category'); // Lấy giá trị từ thuộc tính data-category
+                console.log("Clicked category:", category); // Kiểm tra giá trị category đã lấy được
+
+                let pageNumber = 1; // Trang số 1
+                let limit = 5; // Giới hạn bản ghi
+
+                FilterNewByCategory(category, pageNumber, limit);
+            });
+        });
+    });
+
+    function FilterNewByCategory(category, pageNumber, limit) {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8081/newPaging/categoryCode",
+            data: {
+                category: category,
+                page: pageNumber,
+                limit: limit
+            },
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                updatePagination(data.totalPage);
+                updateTable(data.listResult);
+            },
+            error: function (error) {
+                console.error("Lỗi khi lấy dữ liệu từ API:", error);
+            }
+        });
+    }
+
     fetchAndDisplayData(1, 8);
+
+
 });
