@@ -150,6 +150,11 @@ public class UserService implements IUserService {
         return userRepository.existsByUserName(username);
     }
 
+    @Override
+    public boolean existsByUsername1(String username) {
+        return userRepository.existsByUserName(username);
+    }
+
     public Long addUser(UserDTO userDTO, String loggedInUser, Long roleId) {
         UserEntity userEntity = new UserEntity();
         // Kiểm tra tính duy nhất của username trước khi thêm

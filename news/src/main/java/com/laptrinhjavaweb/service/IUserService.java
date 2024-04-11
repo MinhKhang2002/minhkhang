@@ -9,6 +9,9 @@ import java.util.List;
 public interface IUserService {
     void saveUser(UserDTO userDTO);
     UserDTO getUserById(Long userId);
+
+    boolean existsByUsername1(String username);
+
     Long addUser(UserDTO userDTO, String loggedInUser, Long roleId);
     void addUserRole(Long userId, Long roleId);
 //    UserEntity getUserByUsernameAndPassword(String username, String password);
