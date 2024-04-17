@@ -24,4 +24,13 @@ public class CategoryService implements ICategoryService {
         List<CategoryEntity> categories = categoryRepository.findAll();
         return categoryConverter.toDtoList(categories);
     }
+
+    @Override
+    public Long addCategory(CategoryDTO categoryDTO) {
+        CategoryEntity categoryEntity = categoryConverter.toEntity(categoryDTO);
+        categoryEntity = categoryRepository.save(categoryEntity);
+        return categoryEntity.getId();
+    }
+
+
 }

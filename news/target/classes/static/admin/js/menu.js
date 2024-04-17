@@ -57,3 +57,13 @@ function loadContent() {
         $("#main-content").html(data);
     });
 }
+
+$(document).on("click", "#ds-category", function () {
+    showCategoryList()
+})
+
+function showCategoryList() {
+    $.get("/categoryList", function (data) {
+        $("#main-content").html(data)
+    })
+}

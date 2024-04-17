@@ -25,4 +25,9 @@ public class PageController {
     public String listUser() {
         return "/views/admin/userList";
     }
+
+    @GetMapping("/categoryList")
+    public String categoryList() {
+        return "/views/admin/categoryList";
+    }
 }

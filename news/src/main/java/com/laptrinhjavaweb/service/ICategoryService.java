@@ -6,4 +6,5 @@ import com.laptrinhjavaweb.entity.CategoryEntity;
 
 public interface ICategoryService {
     List<CategoryDTO> getAllCategories();
+    Long addCategory(CategoryDTO categoryDTO);
 }

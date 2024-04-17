@@ -1,0 +1,119 @@
+$(document).ready(function () {
+
+    function updateTable(categoriesList) {
+        $("table tbody").empty(); // Xóa nội dung của tbody trước khi thêm hàng mới
+
+        // Sử dụng Thymeleaf để tạo dòng HTML cho mỗi tin tức
+        $.each(categoriesList, function (index, category) {
+            // Tạo dòng HTML
+            var row = "<tr>" +
+                "<td><input type='checkbox' class='checkbox-del' data-id="+ category.id +" id='checkbox_" + category.id + "' value='" + category.id + "'></td>" +
+                "<td>" + category.name + "</td>" +
+                "<td>" + category.code + "</td>" +
+                "<td style='display: none'><a class=\"updateNews\" href=\"#\" title='Cập nhật' data-id=" + category.id + ">\n" +
+                "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
+                "    </a></td>" +
+                "</tr>";
+            $("table").append(row);
+        });
+    }
+
+    // Hàm để thực hiện yêu cầu AJAX và cập nhật bảng khi thành công
+    function fetchAndDisplayData() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8081/categories",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+
+                console.log("Data: ", data)
+                // updatePagination(data.totalPage);
+                updateTable(data);
+            },
+            error: function (error) {
+                console.error("Lỗi khi lấy dữ liệu từ API:", error);
+            }
+        });
+    }
+
+    /*function updatePagination(totalPages) {
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: totalPages, // Số trang tổng cộng
+            visiblePages: 10, // Số trang hiển thị
+            onPageClick: function (event, page) {
+                fetchAndDisplayData(page, 5); // Gọi hàm để lấy và hiển thị dữ liệu cho trang mới
+            }
+        });
+    }
+
+    fetchAndDisplayData(1, 5);*/
+
+    fetchAndDisplayData();
+})
+
+$(document).on("click", "#fromAddCategory", function () {
+    $("#formContainer").toggle()
+    $("#overlay").toggle()
+})
+
+$(document).on("click", "#overlay", function () {
+    cancelForm()
+})
+
+$(document).on("click", ".cancel", function () {
+    cancelForm()
+})
+
+function cancelForm() {
+    $("#formContainer").hide()
+    $("#overlay").hide()
+}
+
+$("#formContainer").submit( function (event) {
+    submitFrom(event)
+})
+
+function submitFrom(event) {
+    event.preventDefault(); // Ngăn chặn việc submit form
+
+    var name = $("#category-name").val()
+    var code = $("#category-code").val()
+
+    addCategory(name, code)
+}
+
+function addCategory(name, code) {
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8081/add-Category",
+        data: JSON.stringify({
+            name: name,
+            code: code
+        }),
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response) {
+
+            cancelForm()
+
+            // Hiển thị thông báo xoá thành công
+            $(".alert-success").text("Thêm thành công!").show();
+
+            // Hide the alert after 3 seconds
+            setTimeout(function() {
+                $(".alert-success").hide();
+            }, 3000);
+        },
+        error: function (error) {
+
+            // Hiển thị thông báo xoá thành công
+            $(".alert-danger").text("Lỗi! Thêm không thành công.").show();
+
+            // Hide the alert after 3 seconds
+            setTimeout(function() {
+                $(".alert-danger").hide();
+            }, 3000);
+        }
+    })
+}

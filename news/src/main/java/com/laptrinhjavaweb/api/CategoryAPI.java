@@ -9,9 +9,9 @@ import com.laptrinhjavaweb.service.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 @CrossOrigin
 @RestController
@@ -24,5 +24,16 @@ public class CategoryAPI {
     public ResponseEntity<List<CategoryDTO>> getAllCategories() {
         List<CategoryDTO> categories = categoryService.getAllCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+
+    @PostMapping("/add-Category")
+    public Long createCategory(@RequestBody CategoryDTO categoryDTO,
+                               HttpSession session) {
+        // Lấy thông tin người dùng từ session
+        String loggedInUser = (String) session.getAttribute("loggedInUser");
+
+        // Thêm thông tin người dùng vào trường createdBy của model
+        categoryDTO.setCreatedBy(loggedInUser);
+        return categoryService.addCategory(categoryDTO);
     }
 }
