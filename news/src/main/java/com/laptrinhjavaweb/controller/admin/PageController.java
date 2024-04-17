@@ -20,4 +20,9 @@ public class PageController {
     public String addUser() {
         return "/views/admin/addUser";
     }
+
+    @GetMapping("/listUser")
+    public String listUser() {
+        return "/views/admin/userList";
+    }
 }

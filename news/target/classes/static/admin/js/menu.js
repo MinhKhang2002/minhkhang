@@ -13,11 +13,11 @@ function loadApproveContent() {
 }
 
 $(document).on("click", "#ds-user", function () {
-    loadAddUser()
+    loadListUser()
 })
 
-function loadAddUser() {
-    $.get("/addUser", function (data) {
+function loadListUser() {
+    $.get("/listUser", function (data) {
         $("#main-content").html(data);
     })
 }

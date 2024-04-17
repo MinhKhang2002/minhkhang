@@ -200,6 +200,10 @@
 						</span>
                 </div>
 
+                <div th:if="${error}" class="alert alert-danger">
+                    <p th:text="${error}"></p>
+                </div>
+
                 <div class="container-login100-form-btn">
                     <button type="submit" class="login100-form-btn">
                         Đăng nhập

@@ -32,7 +32,7 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     public String loginSubmit(@RequestParam String userName, @RequestParam String password, Model model, HttpSession session) {
         logger.info("Username submitted: " + userName);
         UserEntity user = userService.getUserByUsernameAndPassword(userName, password);
@@ -81,6 +81,44 @@ public class LoginController {
         }
         return "login";
 
+    }*/
+
+    @PostMapping("/login")
+    public String loginSubmit(@RequestParam String userName, @RequestParam String password, Model model, HttpSession session) {
+        logger.info("Username submitted: " + userName);
+        UserEntity user = userService.getUserByUsernameAndPassword(userName, password);
+
+        if (user != null) {
+
+            // Lấy categories của user và lưu vào session
+            String categories = userService.getCategoriesByUserId(user.getId());
+            String roleCode = userService.getUserRoleCode(user.getId());
+
+            // Lưu trữ chỉ khi categories không null
+            if (categories != null) {
+                session.setAttribute("categories", categories);
+                model.addAttribute("categories", categories);
+                logger.info("Danh mục được lưu vào session cho người dùng " + user.getId());
+            }
+
+            // ... Code xác thực và chuyển hướng
+            if (userService.hasAdminRole(userName)) {
+                session.setAttribute("loggedInUser", userName);
+                model.addAttribute("categories", categories);
+                return "redirect:/admin";
+            } else if (userService.hasUserRole(userName)) {
+                session.setAttribute("loggedInUser", userName);
+                return "redirect:/user";
+            } else {
+                // Nếu không có quyền Admin hoặc User, trả về thông báo lỗi
+                model.addAttribute("error", "Bạn không có quyền truy cập.");
+                return "login";
+            }
+        } else {
+            // Nếu user không tồn tại, trả về thông báo lỗi
+            model.addAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng.");
+            return "login";
+        }
     }
 
     @GetMapping("/logout")

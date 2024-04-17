@@ -52,3 +52,7 @@ function addUser(userName, fullName, password, roleId) {
         }
     });
 }
+
+$(document).on("click", ".cancel-addUser", function () {
+    loadListUser()
+})
