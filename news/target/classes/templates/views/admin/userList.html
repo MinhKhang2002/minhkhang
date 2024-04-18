@@ -15,6 +15,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script th:src="@{/static/template/paging/jquery.twbsPagination.js}"></script>
     <script th:src="@{/static/admin/js/userList.js}"></script>
+    <style>
+        .add{
+            font-size: 20px;
+            margin: 5px;
+        }
+        .add:hover{
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body id="container">
 <div th:fragment="main-content" class="container-fluid magin-top">
@@ -32,10 +41,10 @@
         </div>
         <div class="card-body">
             <div class="icon">
-                <a id="showFromAddUser">
+                <a id="showFromAddUser" class="add">
                     <i class="fa-regular fa-square-plus showFromAddNews"></i>
                 </a>
-                <a id="deleteUser" style="display: none">
+                <a id="deleteUser" class="delete" style="display: none">
                     <i class="fa-regular fa-trash-can"></i>
                 </a>
             </div>

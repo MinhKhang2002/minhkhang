@@ -20,6 +20,7 @@ import com.laptrinhjavaweb.service.INewService;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -303,6 +304,19 @@ public class NewAPI {
 			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate) {
 
 		Date endDate = new Date(); // Lấy ngày và giờ hiện tại
+		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
+		return ResponseEntity.ok(counts);
+	}
+
+	@GetMapping("/new/countByLast7Days")
+	public ResponseEntity<List<Map<String, Object>>> countNewPostsLast7Days() {
+		Calendar calendar = Calendar.getInstance();
+		Date endDate = calendar.getTime(); // Lấy ngày và giờ hiện tại
+
+		// Trừ 7 ngày từ ngày hiện tại
+		calendar.add(Calendar.DAY_OF_MONTH, -7);
+		Date startDate = calendar.getTime();
+
 		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
 		return ResponseEntity.ok(counts);
 	}
