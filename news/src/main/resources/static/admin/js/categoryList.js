@@ -10,7 +10,7 @@ $(document).ready(function () {
                 "<td><input type='checkbox' class='checkbox-del' data-id="+ category.id +" id='checkbox_" + category.id + "' value='" + category.id + "'></td>" +
                 "<td>" + category.name + "</td>" +
                 "<td>" + category.code + "</td>" +
-                "<td style='display: none'><a class=\"updateNews\" href=\"#\" title='Cập nhật' data-id=" + category.id + ">\n" +
+                "<td><a class=\"updateNews\" href=\"#\" id=\"update\" title='Cập nhật' data-id="+ category.id +" data-name="+category.name+" data-code="+category.code+" >\n" +
                 "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
                 "    </a></td>" +
                 "</tr>";
@@ -36,7 +36,6 @@ $(document).ready(function () {
             }
         });
     }
-
     /*function updatePagination(totalPages) {
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: totalPages, // Số trang tổng cộng
@@ -76,7 +75,6 @@ $("#formContainer").submit( function (event) {
 
 function submitFrom(event) {
     event.preventDefault(); // Ngăn chặn việc submit form
-
     var name = $("#category-name").val()
     var code = $("#category-code").val()
 
@@ -117,3 +115,69 @@ function addCategory(name, code) {
         }
     })
 }
+
+// update ở đây nè
+
+function updateCategory(id, categoryData){
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:8081/categories/" + id,
+        data:JSON.stringify( {
+            name: categoryData.name,
+            code: categoryData.code
+        }),
+        contentType: "application/json",
+        dataType: "json",
+        success: function(result) {
+            alert("Đã sửa danh mục có ID " + id);
+            showCategoryList()
+        },
+        error: function(error) {
+            $(".alert-success").text("Thêm thành công!").show();
+
+            // Hide the alert after 3 seconds
+            setTimeout(function() {
+                $(".alert-success").hide();
+            }, 3000);
+            showCategoryList()
+        }
+    });
+}
+$(document).on("click", "#update", function(e) {
+    e.preventDefault();
+    $("#formContainer-update").show()
+    var categoryId = $(this).data("id");
+    var name = $(this).data("name");
+    var code =$(this).data("code");
+    $("#category-id-update").val(categoryId);
+    $("#category-name-update").val(name);
+    $("#category-code-update").val(code);
+});
+
+$(document).on("click", ".cancel", function () {
+    $("#formContainer-update").hide()
+ })
+$("#formContainer-update").submit( function (event) {
+    submitFromUpdate(event)
+})
+
+function submitFromUpdate(event) {
+    event.preventDefault(); // Ngăn chặn việc submit form
+    var name = $("#category-name-update").val()
+    var code = $("#category-code-update").val()
+    var categoryId = $("#category-id-update").val();
+
+    var categoryData = {
+        name: name,
+        code: code
+    }
+    updateCategory(categoryId, categoryData)
+}
+
+function showCategoryList() {
+    $.get("/categoryList", function (data) {
+        $("#main-content").html(data)
+    })
+}
+
+

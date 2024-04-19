@@ -31,6 +31,22 @@ public class CategoryService implements ICategoryService {
         categoryEntity = categoryRepository.save(categoryEntity);
         return categoryEntity.getId();
     }
+    @Override
+    public CategoryEntity  getCategoryById(Long id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("category not found"));
+    }
+    @Override
+    public Long updateCategory(long id, CategoryDTO categoryDTO) {
+        CategoryEntity existCategory = getCategoryById(id);
+        if (existCategory!=null){
+            existCategory.setName(categoryDTO.getName());
+            existCategory.setCode(categoryDTO.getCode());
+            categoryRepository.save(existCategory);
+        }
 
+
+        return existCategory.getId();
+    }
 
 }

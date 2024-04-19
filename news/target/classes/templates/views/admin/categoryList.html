@@ -58,7 +58,7 @@
                     <i class="fa-regular fa-trash-can"></i>
                 </a>
             </div>
-
+<!--form thêm-->
             <form id="formContainer" class="" style="display: none">
                 <div class="form-outline">
                     <div class="row">
@@ -77,9 +77,31 @@
                 </div>
                 <button type="submit" class="btn btn-primary mt-4">Submit</button>
             </form>
+            <div class="overlay" id="overlay"></div>
+<!--fom update-->
+            <form id="formContainer-update" class="" style="display: none">
+                <input type="hidden" id="category-id-update">
+                <div class="form-outline">
+                    <div class="row">
+                        <div class="col-11">
+                            <label for="category-name-update">Tên thể loại</label>
+                        </div>
+                        <div class="col-1 cancel">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" id="category-name-update" >
+                </div>
+                <div class="form-outline">
+                    <label for="category-code-update">Mã thể loại</label>
+                    <input type="text" class="form-control" id="category-code-update" >
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+            </form>
+<!--            <div class="overlay" id="overlay-update"></div>-->
 
             <!--Lớp mờ-->
-            <div class="overlay" id="overlay"></div>
+
 
             <table class="table table-bordered">
                 <thead>
@@ -87,7 +109,7 @@
                     <th><input type="checkbox" id="checkAll"></th>
                     <th>Tên thể loại</th>
                     <th>Mã thể loại</th>
-                    <th style="display: none">Thao tác</th>
+                    <th >Thao tác</th>
                 </tr>
                 </thead>
                 <tbody>
