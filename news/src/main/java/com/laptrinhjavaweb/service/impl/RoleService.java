@@ -24,4 +24,15 @@ public class RoleService implements IRoleService {
         List<RoleEntity> roleEntities = roleRepository.findAll();
         return roleConverter.toDtoList(roleEntities);
     }
+
+    @Override
+    public RoleDTO addRole(RoleDTO roleDTO) {
+        RoleEntity roleEntity = new RoleEntity();
+        roleEntity.setCode(roleDTO.getCode());
+        roleEntity.setName(roleDTO.getName());
+        roleEntity.setCategories(roleDTO.getCategories());
+
+        RoleEntity savedRole = roleRepository.save(roleEntity);
+        return roleConverter.toDTO(savedRole); // sử dụng converter để chuyển đổi
+    }
 }

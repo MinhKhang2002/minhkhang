@@ -4,46 +4,30 @@ $(document).ready(function (){
     loadRoleCodes()
 })
 // Hàm để lấy danh sách thể loại và cập nhật thẻ select
-function loadCategoriesSelect(selectedCategoryCode) {
-    var categorySelect = $("#categorySelect");
-    categorySelect.empty();
-
-    // Thêm tùy chọn mặc định (nếu cần)
-    categorySelect.append($("<option>", { value: '', text: 'Chọn thể loại' }));
-
+function loadCategoriesSelect() {
     $.ajax({
-        type: "GET",
         url: "http://localhost:8081/categories",
+        type: "GET",
         dataType: "json",
-        success: function (categories) {
-            // Kiểm tra xem selectedCategoryCode có tồn tại hay không
-            if (selectedCategoryCode) {
-                // Tìm thể loại tương ứng với selectedCategoryCode
-                var selectedCategory = categories.find(function(category) {
-                    return category.code === selectedCategoryCode;
-                });
+        success: function(data) {
+            // Lấy select element từ DOM
+            let $selectCategory = $("#categorySelect");
 
-                // Nếu tìm thấy thể loại, thêm vào thẻ select
-                if (selectedCategory) {
-                    var option = $("<option>", { value: selectedCategory.code, text: selectedCategory.name });
-                    categorySelect.append(option);
-                }
-            }
+            // Xóa các option cũ trong select
+            $selectCategory.empty();
 
-            $.each(categories, function (index, category) {
-                var option = $("<option>", { value: category.code, text: category.name });
+            // Thêm option mặc định
+            let defaultOption = $("<option>").val("").text("Chọn thể loại").prop("selected", true).prop("selected", true);
+            $selectCategory.append(defaultOption);
 
-                // Kiểm tra xem category.code có trùng với selectedCategoryCode không
-                if (category.code === selectedCategoryCode) {
-                    // Nếu trùng, đặt selected cho option
-                    option.prop("selected", true);
-                }
-
-                categorySelect.append(option);
+            // Thêm các option từ Set vào select
+            $.each(data, function(index, category) {
+                let option = $("<option>").val(category.code).text(category.name);
+                $selectCategory.append(option);
             });
         },
-        error: function (error) {
-            console.error("Lỗi khi lấy dữ liệu thể loại:", error);
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("Error loading role codes:", textStatus, errorThrown);
         }
     });
 }
@@ -54,16 +38,15 @@ function loadRoleCodes() {
         type: "GET",
         dataType: "json",
         success: function(data) {
+            /*loadRoleName(data)*/
             let uniqueCodes = new Set();
 
             // Lặp qua dữ liệu từ API và thêm các code duy nhất vào Set
             $.each(data, function(index, role) {
-                uniqueCodes.add(role.code);
+                uniqueCodes.add(role);
             });
-
             // Lấy select element từ DOM
             let $selectElement = $("#RoleCodeSelect");
-
             // Xóa các option cũ trong select
             $selectElement.empty();
 
@@ -72,8 +55,8 @@ function loadRoleCodes() {
             $selectElement.append(defaultOption);
 
             // Thêm các option từ Set vào select
-            uniqueCodes.forEach(function(code) {
-                let option = $("<option>").val(code).text(code);
+            uniqueCodes.forEach(function(role) {
+                let option = $("<option>").val(role.code).text(role.name);
                 $selectElement.append(option);
             });
         },
@@ -82,3 +65,22 @@ function loadRoleCodes() {
         }
     });
 }
+
+/*
+function loadRoleName(data){
+    // Lấy select element từ DOM
+    let $selectRoleName = $("#RoleNameSelect");
+
+    // Xóa các option cũ trong select
+    $selectRoleName.empty();
+
+    // Thêm option mặc định
+    let defaultOption = $("<option>").val("").text("Chọn vai trò").prop("selected", true).prop("selected", true);
+    $selectRoleName.append(defaultOption);
+
+    // Thêm các option từ Set vào select
+    $.each(data, function(index, role) {
+        let option = $("<option>").val(role.code).text(role.name);
+        $selectRoleName.append(option);
+    });
+}*/
