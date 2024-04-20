@@ -141,7 +141,7 @@ function drawChart(dataFromApi) {
         data: {
             labels: dates,
             datasets: [{
-                label: 'Biểu đồ diện tích',
+                label: 'Biểu đồ so sánh bài viết',
                 data: areaCounts,
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',

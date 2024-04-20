@@ -31,11 +31,10 @@ public class CategoryAPI {
         return categoryService.addCategory(categoryDTO);
     }
     @PutMapping("/categories/{id}")
-    public  ResponseEntity<String> updateCategory(@PathVariable long id,
+    public  Long updateCategory(@PathVariable long id,
                                                   @RequestBody CategoryDTO categoryDTO){
      //   categoryDTO.setCreatedBy(loggedInUser);
-        categoryService.updateCategory(id,categoryDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
-
+//        categoryService.updateCategory(id,categoryDTO);
+        return categoryService.updateCategory(id, categoryDTO);
     }
 }
