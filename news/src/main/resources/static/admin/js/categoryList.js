@@ -10,7 +10,7 @@ $(document).ready(function () {
                 "<td><input type='checkbox' class='checkbox-del' data-id="+ category.id +" id='checkbox_" + category.id + "' value='" + category.id + "'></td>" +
                 "<td>" + category.name + "</td>" +
                 "<td>" + category.code + "</td>" +
-                "<td><a class=\"updateCategory\" href=\"#\" id=\"update\" title='Cập nhật' data-id="+ category.id +" data-name="+ category.name +" data-code="+category.code+" >\n" +
+                "<td><a class=\"updateCategory\" href=\"#\" id=\"update\" title='Cập nhật' data-id="+ category.id +" data-name='"+ category.name +"' data-code="+category.code+" >\n" +
                 "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
                 "    </a></td>" +
                 "</tr>";
@@ -59,8 +59,8 @@ $(document).ready(function () {
     $(document).on("click", ".updateCategory", function () {
         var id = $(this).data("id");
         var name = $(this).data("name");
+        console.log("Name", name)
         var code = $(this).data("code");
-        console.log(id+name+code);
         $("#category-id").val(id);
         $("#category-name").val(name);
         $("#category-code").val(code);
@@ -93,7 +93,7 @@ $(document).ready(function () {
             alert("Bạn hãy chọn thể loại muốn xóa");
         }
     });
-    $("#fromAddCategory").on("click",function () {
+    $("#btnAddCategory").on("click",function () {
         showFormCategory();
     });
 })

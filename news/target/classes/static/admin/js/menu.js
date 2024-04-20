@@ -67,3 +67,13 @@ function showCategoryList() {
         $("#main-content").html(data)
     })
 }
+
+$(document).on("click", "#ds-role", function () {
+    showRoleList()
+})
+
+function showRoleList() {
+    $.get("/roleList", function (data){
+        $("#main-content").html(data)
+    })
+}

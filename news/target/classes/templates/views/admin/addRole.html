@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm vai trò</title>
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
+    <!--    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+
+    <script th:src="@{/static/admin/js/menu.js}"></script>
+    <script th:src="@{/static/admin/js/addRole.js}"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Thêm vai trò</h2>
+    <form id="addRoleForm">
+        <div class="form-group">
+            <label for="nameRole">Tên vai trò</label>
+            <input type="text" class="form-control" id="nameRole" placeholder="Nhập tên vai trò" name="nameRole">
+        </div>
+        <div class="form-group">
+            <label for="codeRole">Mã vai trò</label>
+            <input type="text" class="form-control" id="codeRole" placeholder="Mã vai trò" name="codeRole">
+            <select id="RoleCodeSelect" class="form-select mt-4">
+                <!-- Dữ liệu từ API sẽ được thêm vào đây -->
+                <!--<option value="" selected disabled>Chọn vai trò</option>-->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="categorySelect">Thể loại</label>
+            <select id="categorySelect" class="form-select">
+                <!-- Dữ liệu từ API sẽ được thêm vào đây -->
+                <option value="" selected disabled>Chọn thể loại</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success" style="margin-top: 15px">Thêm</button>
+        <a class="cancel-addUser btn btn-danger" style="margin-top: 15px; color: #ffffff">Huỷ</a>
+    </form>
+</div>
+</body>
+</html>
