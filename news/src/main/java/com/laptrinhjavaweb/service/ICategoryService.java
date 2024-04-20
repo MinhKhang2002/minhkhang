@@ -9,6 +9,6 @@ public interface ICategoryService {
     Long addCategory(CategoryDTO categoryDTO);
      Long updateCategory(long id, CategoryDTO categoryDTO);
      CategoryEntity  getCategoryById(Long id) ;
-
+     void deleteCategory (long[] ids);
 }
 

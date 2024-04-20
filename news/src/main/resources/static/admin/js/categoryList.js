@@ -10,7 +10,7 @@ $(document).ready(function () {
                 "<td><input type='checkbox' class='checkbox-del' data-id="+ category.id +" id='checkbox_" + category.id + "' value='" + category.id + "'></td>" +
                 "<td>" + category.name + "</td>" +
                 "<td>" + category.code + "</td>" +
-                "<td><a class=\"updateCategory\" href=\"#\" id=\"update\" title='Cập nhật' data-id="+ category.id +" data-name="+category.name+" data-code="+category.code+" >\n" +
+                "<td><a class=\"updateCategory\" href=\"#\" id=\"update\" title='Cập nhật' data-id="+ category.id +" data-name="+ category.name +" data-code="+category.code+" >\n" +
                 "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
                 "    </a></td>" +
                 "</tr>";
@@ -54,14 +54,22 @@ $(document).ready(function () {
     // Khi nhấn submit trong form
     $("#formContainer").submit( function (event) {
         submitFrom(event)
-    })
 
+    })
+    $(document).on("click", ".updateCategory", function () {
+        var id = $(this).data("id");
+        var name = $(this).data("name");
+        var code = $(this).data("code");
+        console.log(id+name+code);
+        $("#category-id").val(id);
+        $("#category-name").val(name);
+        $("#category-code").val(code);
+
+        $("#formContainer").show();
+        $("#overlay").show();
+    });
     function submitFrom(event) {
         event.preventDefault(); // Ngăn chặn việc submit form
-        /*var name = $("#category-name").val()
-        var code = $("#category-code").val()
-
-        addCategory(name, code)*/
 
         var id = $("#category-id").val();
         var name = $("#category-name").val();
@@ -73,11 +81,26 @@ $(document).ready(function () {
             addCategory(name, code);
         }
     }
+
+    $("#deleteCategory").on("click", function () {
+      //  e.preventDefault();
+        var ids = $('tbody input[type=checkbox]:checked').map(function () {
+        return $(this).val() }).get();
+        var numbericIds = ids.map(Number);
+        if (numbericIds.length > 0) {
+            deleteCategory(numbericIds);
+        } else {
+            alert("Bạn hãy chọn thể loại muốn xóa");
+        }
+    });
+    $("#fromAddCategory").on("click",function () {
+        showFormCategory();
+    });
 })
 
-$(document).on("click", "#fromAddCategory", function () {
-    showFormCategory()
-})
+// $(document).on("click", "#fromAddCategory", function () {
+//     showFormCategory()
+// })
 
 $(document).on("click", "#overlay", function () {
     cancelForm()
@@ -131,14 +154,8 @@ function addCategory(name, code) {
 }
 
 function success() {
-
     // Hiển thị thông báo xoá thành công
     $(".alert-success").text("Thêm thành công!").show();
-
-    // Hide the alert after 3 seconds
-    setTimeout(function() {
-        $(".alert-success").hide();
-    }, 3000);
 }
 
 // update ở đây nè
@@ -152,96 +169,19 @@ function updateCategory(id, name, code) {
             code: code
         }),
         contentType: "application/json",
-        dataType: "json",
         success: function (response) {
-            cancelForm();
+            alert("Đã sửa thành công");
+            showCategoryList();
 
-            // Cập nhật lại bảng sau khi cập nhật thành công
-            showCategoryList()
-
-            // Hiển thị thông báo cập nhật thành công
-            success()
         },
         error: function (error) {
             // Hiển thị thông báo lỗi cập nhật
-            $(".alert-danger").text("Lỗi! Cập nhật không thành công.").show();
-
-            // Hide the alert after 3 seconds
-            setTimeout(function() {
-                $(".alert-danger").hide();
-            }, 3000);
+            alert(error)
         }
     });
 }
 
-$(document).on("click", ".updateCategory", function () {
-    var id = $(this).data("id");
-    var name = $(this).data("name");
-    var code = $(this).data("code");
 
-    $("#category-id").val(id);
-    $("#category-name").val(name);
-    $("#category-code").val(code);
-
-    $("#formContainer").show();
-    $("#overlay").show();
-});
-
-/*function updateCategory(id, categoryData){
-    $.ajax({
-        type: "PUT",
-        url: "http://localhost:8081/categories/" + id,
-        data:JSON.stringify( {
-            name: categoryData.name,
-            code: categoryData.code
-        }),
-        contentType: "application/json",
-        dataType: "json",
-        success: function(result) {
-            alert("Đã sửa danh mục có ID " + id);
-            showCategoryList()
-        },
-        error: function(error) {
-            $(".alert-success").text("Thêm thành công!").show();
-
-            // Hide the alert after 3 seconds
-            setTimeout(function() {
-                $(".alert-success").hide();
-            }, 3000);
-            showCategoryList()
-        }
-    });
-}
-$(document).on("click", "#update", function(e) {
-    e.preventDefault();
-    $("#formContainer-update").show()
-    var categoryId = $(this).data("id");
-    var name = $(this).data("name");
-    var code =$(this).data("code");
-    $("#category-id-update").val(categoryId);
-    $("#category-name-update").val(name);
-    $("#category-code-update").val(code);
-});
-
-$(document).on("click", ".cancel", function () {
-    $("#formContainer-update").hide()
- })
-$("#formContainer-update").submit( function (event) {
-    submitFromUpdate(event)
-})
-
-function submitFromUpdate(event) {
-    event.preventDefault(); // Ngăn chặn việc submit form
-    var name = $("#category-name-update").val()
-    var code = $("#category-code-update").val()
-    var categoryId = $("#category-id-update").val();
-
-    var categoryData = {
-        name: name,
-        code: code
-    }
-    updateCategory(categoryId, categoryData)
-}*/
 
 function showCategoryList() {
     $.get("/categoryList", function (data) {
@@ -249,4 +189,29 @@ function showCategoryList() {
     })
 }
 
+function deleteCategory(ids) {
+    if (ids.length > 0) {
+        console.log(ids);
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8081/categories",
+            contentType: "application/json",
+            data: JSON.stringify(ids),
+            success: function (response) {
+                alert(response);
+                showCategoryList();
+            },
+            error: function (xhr, status, errorThrown) {
+                if (errorThrown === 'timeout') {
+                    $(".alert-danger").text("Lỗi mạng: Không thể kết nối đến máy chủ").show();
+                } else {
+                    $(".alert-danger").text(xhr.responseText).show(); // Hiển thị nội dung lỗi từ phản hồi của máy chủ
+                }
+                alert(errorThrown); // In ra lỗi nếu có
 
+            }
+        });
+
+
+    }
+}

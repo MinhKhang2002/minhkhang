@@ -3,6 +3,7 @@ package com.laptrinhjavaweb.api;
 import com.laptrinhjavaweb.dto.CategoryDTO;
 import com.laptrinhjavaweb.service.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,21 @@ public class CategoryAPI {
     @PutMapping("/categories/{id}")
     public  Long updateCategory(@PathVariable long id,
                                                   @RequestBody CategoryDTO categoryDTO){
-     //   categoryDTO.setCreatedBy(loggedInUser);
-//        categoryService.updateCategory(id,categoryDTO);
         return categoryService.updateCategory(id, categoryDTO);
     }
+    @DeleteMapping("/categories")
+    public ResponseEntity<String>  deleteCategory(@RequestBody long[] ids){
+        try {
+            categoryService.deleteCategory(ids);
+            return ResponseEntity.ok("Xóa thể loại thành công");
+        } catch (DataIntegrityViolationException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Không thể xóa thể loại. Có ràng buộc khóa ngoại với các bản ghi khác.");
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Không thể xóa");
+        }
+
+    }
+
 }
