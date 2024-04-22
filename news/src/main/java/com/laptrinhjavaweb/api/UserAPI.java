@@ -1,9 +1,12 @@
 package com.laptrinhjavaweb.api;
 
 import com.laptrinhjavaweb.api.output.UserOutput;
+import com.laptrinhjavaweb.dto.CategoryDTO;
 import com.laptrinhjavaweb.dto.UserDTO;
 import com.laptrinhjavaweb.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,6 +28,7 @@ public class UserAPI {
     public ResponseEntity<?> getListUser() {
         return null;
     }
+
     @GetMapping("/users/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         // Gọi userService để lấy thông tin người dùng theo id
@@ -81,11 +85,11 @@ public class UserAPI {
 
     @GetMapping(value = "/userList")
     public UserOutput showAllUserPaging(@RequestParam(value = "page", required = false) Integer page,
-                                        @RequestParam(value = "limit", required = false) Integer limit){
+                                        @RequestParam(value = "limit", required = false) Integer limit) {
         UserOutput result = new UserOutput();
         if (page != null && limit != null) {
             result.setPage(page);
-			Pageable pageable = PageRequest.of(page - 1, limit);
+            Pageable pageable = PageRequest.of(page - 1, limit);
             result.setListResult(userService.findAll(pageable));
             result.setTotalPage((int) Math.ceil((double) (userService.totalItem()) / limit));
         } else {
@@ -93,4 +97,30 @@ public class UserAPI {
         }
         return result;
     }
+
+    @DeleteMapping("/userList")
+    public ResponseEntity<String> deleteUserInList(@RequestBody long[] id) {
+        try {
+            userService.deleteUser(id);
+            return ResponseEntity.ok("Xóa người dùng thành công");
+        } catch (
+                DataIntegrityViolationException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Không thể xóa người dùng. Có ràng buộc khóa ngoại với các bản ghi khác.");
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Không thể xóa");
+        }
+    }
+@PutMapping("/userListUpdate/{id}")
+public ResponseEntity<String> updateCategory(@RequestBody UserDTO userDTO
+                                             ,@PathVariable long id){
+        try {
+            userService.updateUser(id, userDTO, userDTO.getRoleId());
+            return ResponseEntity.ok("Sửa thông tin người dùng thành công");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Không thể sữa");
+        }
+}
 }

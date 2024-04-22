@@ -18,4 +18,6 @@ public interface IUserService {
     List<UserDTO> getAllUser();
     List<UserDTO> findAll(Pageable pageable);
     int totalItem();
+    void deleteUser(long[] id);
+    void updateUser(long id,UserDTO userDTO,long roleId) throws Exception;
 }

@@ -64,17 +64,14 @@ $(document).ready(function () {
         $("#category-id").val(id);
         $("#category-name").val(name);
         $("#category-code").val(code);
-
         $("#formContainer").show();
         $("#overlay").show();
     });
     function submitFrom(event) {
         event.preventDefault(); // Ngăn chặn việc submit form
-
         var id = $("#category-id").val();
         var name = $("#category-name").val();
         var code = $("#category-code").val();
-
         if (id) {
             updateCategory(id, name, code);
         } else {
@@ -131,21 +128,12 @@ function addCategory(name, code) {
         contentType: "application/json",
         dataType: "json",
         success: function (response) {
-
             cancelForm()
-
-            // Hiển thị lại danh sách thể loại
             showCategoryList()
-
-            //Thông báo thành công
             success()
         },
         error: function (error) {
-
-            // Hiển thị thông báo xoá thành công
             $(".alert-danger").text("Lỗi! Thêm không thành công.").show();
-
-            // Hide the alert after 3 seconds
             setTimeout(function() {
                 $(".alert-danger").hide();
             }, 3000);
@@ -157,9 +145,6 @@ function success() {
     // Hiển thị thông báo xoá thành công
     $(".alert-success").text("Thêm thành công!").show();
 }
-
-// update ở đây nè
-
 function updateCategory(id, name, code) {
     $.ajax({
         type: "PUT",

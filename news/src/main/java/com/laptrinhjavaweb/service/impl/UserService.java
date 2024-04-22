@@ -10,17 +10,18 @@ import com.laptrinhjavaweb.repository.RoleRepository;
 import com.laptrinhjavaweb.repository.UserRepository;
 import com.laptrinhjavaweb.repository.UserRoleRepository;
 import com.laptrinhjavaweb.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService implements IUserService {
@@ -205,6 +206,35 @@ public class UserService implements IUserService {
         return (int) userRepository.count();
     }
 
+    @Override
+    public void deleteUser(long[] ids) {
+        for (long id : ids) {
+            try {
+                userRepository.deleteById(id);
+            } catch (DataIntegrityViolationException e) {
+                throw new IllegalArgumentException("Không thể xóa người dùng với id: " + id );
+            } catch (Exception e) {
+                throw new RuntimeException("Đã xảy ra lỗi khi xóa người dùng với id: " + id, e);
+            }
+        }
+    }
+
+    @Override
+    public void updateUser(long id,UserDTO userDTO, long role_id) throws Exception {
+            UserEntity existUser = userRepository.findById(id)
+                    .orElseThrow(()->new UsernameNotFoundException("not found"));
+            if (existsByUsername(userDTO.getUserName())) {
+                throw new Exception("Username already exists");
+            }
+            if (existUser != null) {
+                existUser.setFullName(userDTO.getFullName());
+                existUser.setUserName(userDTO.getUserName());
+                existUser.setPassword(userDTO.getPassword());
+                userRepository.save(existUser);
+                addUserRole(id, role_id);
+            }
+    }
+}
     /*public List<UserDTO> getAllUserPaging(Pageable pageable) {
         List<UserDTO> result = new ArrayList<>();
         List<UserEntity> entities = userRepository.findAllAndPaging(pageable);
@@ -218,4 +248,3 @@ public class UserService implements IUserService {
     public int totalItem() {
         return (int) userRepository.count();
     }*/
-}

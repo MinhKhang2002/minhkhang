@@ -23,12 +23,55 @@
         .add:hover{
             cursor: pointer;
         }
+        #UpdateUserForm {
+            display: none;
+            /*width: 50%;*/
+            position: absolute;
+            /*top: 25%;*/
+            left: 50%;
+            /*transform: translate(-50%, -50%);*/
+            background: #2a62bc;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(158, 143, 143,50%); /* Màu nền mờ mờ */
+            z-index: 1;
+        }
+
     </style>
 </head>
 <body id="container">
 <div th:fragment="main-content" class="container-fluid magin-top">
-    <div class="card mb-4">
-        <div class="card-header">
+
+
+    <form id="UpdateUserForm">
+        <input type="hidden" id="user-id">
+        <div class="form-group">
+            <label >Full Name:</label>
+            <input type="text" class="form-control" id="fullName-update"  name="fullName">
+        </div>
+        <div class="form-group">
+            <label >User Name:</label>
+            <input type="text" class="form-control" id="userName-update" name="userName">
+        </div>
+        <div class="form-group">
+            <label >Password:</label>
+            <input type="password" class="form-control" id="pwd-update" placeholder="Enter password" name="pwd">
+        </div>
+        <div class="form-group">
+            <label >Confirm Password:</label>
+            <input type="password" class="form-control" id="pwdConfirm-update" placeholder="Confirm password" name="pwdConfirm">
+        </div>
+        <select id="RoleNameSelect-update" class="form-select-update"><option value="" selected disabled>Chọn vai trò</option></select>.
+        <button type="submit" id="submit_update" href="#" class="btn btn-success" style="margin-top: 15px">Sửa</button>
+        <a class="cancel-addUser btn btn-danger" id="cancel-update" style="margin-top: 15px; color: #ffffff">Huỷ</a>
+    </form>
+    <div class="card mb-4" id="div-a">
+        <div class="card-header">z
             <!--            <i class="fa fa-list-alt" aria-hidden="true"></i>-->
             <i class="fas fa-table me-1"></i>
             Danh sách người dùng
@@ -39,49 +82,51 @@
         <div class="alert alert-danger">
             <strong>Danger!</strong>
         </div>
+
+
+        <div class="overlay" id="overlay"></div>
         <div class="card-body">
             <div class="icon">
                 <a id="showFromAddUser" class="add">
                     <i class="fa-regular fa-square-plus showFromAddNews"></i>
                 </a>
-                <a id="deleteUser" class="delete" style="display: none">
+                <a id="deleteUser" class="add"  href="#">
                     <i class="fa-regular fa-trash-can"></i>
                 </a>
             </div>
-            <form id="formContainer" style="display: none">
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" placeholder="">
-                    <!--                    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="">-->
-                </div>
-                <div class="form-group">
-                    <label for="content">Content</label>
-                    <input type="text" class="form-control" id="content" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="shortDescription">shortDescription</label>
-                    <input type="text" class="form-control" id="shortDescription" placeholder="">
-                </div>
-                <select id="categorySelect" class="form-select">
-                    <!-- Dữ liệu từ API sẽ được thêm vào đây -->
-                    <option value="" selected disabled>Chọn thể loại</option>
-                </select>
+<!--            <form id="formContainer" style="display: none">-->
+<!--                <div class="form-group">-->
+<!--                    <label for="title">Title</label>-->
+<!--                    <input type="text" class="form-control" id="title" placeholder="">-->
+<!--                    &lt;!&ndash;                    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="">&ndash;&gt;-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="content">Content</label>-->
+<!--                    <input type="text" class="form-control" id="content" placeholder="">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="shortDescription">shortDescription</label>-->
+<!--                    <input type="text" class="form-control" id="shortDescription" placeholder="">-->
+<!--                </div>-->
+<!--                <select id="categorySelect" class="form-select">-->
+<!--                    &lt;!&ndash; Dữ liệu từ API sẽ được thêm vào đây &ndash;&gt;-->
+<!--                    <option value="" selected disabled>Chọn thể loại</option>-->
+<!--                </select>-->
+<!--                <div class="form-group">-->
+<!--                    &lt;!&ndash; Thẻ img để hiển thị ảnh đã chọn &ndash;&gt;-->
+<!--                    <img id="displayThumbnail" src="" alt="Selected Thumbnail">-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <!-- Thẻ img để hiển thị ảnh đã chọn -->
-                    <img id="displayThumbnail" src="" alt="Selected Thumbnail">
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="thumbnail">Thumbnail</label>-->
+<!--                    <input type="file" class="form-control" id="thumbnail">-->
+<!--                    &lt;!&ndash;                    <button id="uploadButton" type="button" style="display: none">Upload Ảnh</button>&ndash;&gt;-->
+<!--                </div>-->
+<!--                <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--                &lt;!&ndash;                <button type="submit" class="btn btn-primary">UPDATE NEWS</button>&ndash;&gt;-->
+<!--            </form>-->
 
-                <div class="form-group">
-                    <label for="thumbnail">Thumbnail</label>
-                    <input type="file" class="form-control" id="thumbnail">
-                    <!--                    <button id="uploadButton" type="button" style="display: none">Upload Ảnh</button>-->
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <!--                <button type="submit" class="btn btn-primary">UPDATE NEWS</button>-->
-            </form>
-
-            <div class="overlay" id="overlay"></div>
+<!--            <div class="overlay" id="overlay-2"></div>-->
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -89,7 +134,7 @@
                     <th>Họ và tên</th>
                     <th>Tên đăng nhập</th>
                     <th>Ngày đăng ký</th>
-                    <th style="display: none">Thao tác</th>
+                    <th>Thao tác</th>
                 </tr>
                 </thead>
                 <tbody>
