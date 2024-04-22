@@ -122,7 +122,7 @@ $(document).ready(function () {
         if (numbericIds.length > 0) {
             deleteUser(numbericIds);
         } else {
-            alert("Bạn hãy chọn thể loại muốn xóa");
+            alert("Bạn hãy chọn người dùng muốn xóa");
         }
     });
     $(document).on("click","#cancel-update" ,function () {

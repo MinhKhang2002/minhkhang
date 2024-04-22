@@ -1,33 +1,30 @@
 $(document).ready(function() {
     $("#addUserForm").submit(function(event) {
+        event.preventDefault(); // Ngăn chặn việc submit form
         submitForm(event)
     });
+    function submitForm(event) {
+        event.preventDefault(); // Ngăn chặn việc submit form
+        var userName = $("#userName").val();
+        var password = $("#pwd").val();
+        var confirmPassword = $("#pwdConfirm").val();
+        var fullName = $("#fullName").val();
+        var roleId = $("#RoleNameSelect").val();
+
+        // Kiểm tra mật khẩu
+        if (password !== confirmPassword) {
+            alert("Mật khẩu và mật khẩu xác nhận không khớp!");
+            return;
+        }
+        // Kiểm tra roleId
+        if (!roleId) {
+            alert("Vui lòng chọn vai trò!");
+            return;
+        }
+        // Thêm người dùng
+        addUser(userName, fullName, password, roleId);
+    }
 });
-function submitForm(event) {
-    event.preventDefault(); // Ngăn chặn việc submit form
-
-    var userName = $("#userName").val();
-    var password = $("#pwd").val();
-    var confirmPassword = $("#pwdConfirm").val();
-    var fullName = $("#fullName").val();
-    var roleId = $("#RoleNameSelect").val();
-
-    // Kiểm tra mật khẩu
-    if (password !== confirmPassword) {
-        alert("Mật khẩu và mật khẩu xác nhận không khớp!");
-        return;
-    }
-
-    // Kiểm tra roleId
-    if (!roleId) {
-        alert("Vui lòng chọn vai trò!");
-        return;
-    }
-
-    // Thêm người dùng
-    addUser(userName, fullName, password, roleId);
-}
-
 function addUser(userName, fullName, password, roleId) {
     $.ajax({
         type: "POST",
@@ -52,7 +49,6 @@ function addUser(userName, fullName, password, roleId) {
         }
     });
 }
-
 $(document).on("click", ".cancel-addUser", function () {
     loadListUser()
 })
