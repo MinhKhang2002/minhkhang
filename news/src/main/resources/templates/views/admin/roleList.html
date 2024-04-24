@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
-    <script th:src="@{/static/admin/js/categoryList.js}"></script>
+    <script th:src="@{/static/admin/js/roleList.js}"></script>
 
     <style>
         #formContainer {
@@ -36,12 +36,12 @@
     </style>
 </head>
 <body id="container">
-<div th:fragment="main-content" class="container-fluid magin-top" >
-    <div class="card mb-4" >
+<div th:fragment="main-content" class="container-fluid magin-top">
+    <div class="card mb-4">
         <div class="card-header">
             <!--            <i class="fa fa-list-alt" aria-hidden="true"></i>-->
             <i class="fas fa-table me-1"></i>
-            Danh sách thể loại
+            Danh sách vai trò
         </div>
         <div class="alert alert-success">
             <strong>Success!</strong>
@@ -51,17 +51,16 @@
         </div>
         <div class="card-body">
             <div class="icon">
-                <a id="btnAddCategory" class="add" href="#">
+                <a id="add" class="add">
                     <i class="fa-regular fa-square-plus showFromAddNews"></i>
                 </a>
-                <a id="deleteCategory" href="#"   class="add" title='Xóa'>
+                <a id="delete" style="display: none">
                     <i class="fa-regular fa-trash-can"></i>
                 </a>
             </div>
-
-<!--form thêm-->
-            <form id="formContainer" class="" style="display: none">
-                <input type="hidden" id="category-id"> <!-- Thêm input ẩn cho id -->
+            <!--form thêm-->
+            <!--<form id="formContainer" class="" style="display: none">
+                <input type="hidden" id="category-id"> &lt;!&ndash; Thêm input ẩn cho id &ndash;&gt;
                 <div class="form-outline">
                     <div class="row">
                         <div class="col-11">
@@ -79,38 +78,14 @@
                 </div>
                 <button type="submit" class="btn btn-primary mt-4">Submit</button>
             </form>
-            <div class="overlay" id="overlay"></div>
-<!--fom update-->
-            <form id="formContainer-update" class="" style="display: none">
-                <input type="hidden" id="category-id-update">
-                <div class="form-outline">
-                    <div class="row">
-                        <div class="col-11">
-                            <label for="category-name-update">Tên thể loại</label>
-                        </div>
-                        <div class="col-1 cancel">
-                            <i class="fa-solid fa-xmark"></i>
-                        </div>
-                    </div>
-                    <input type="text" class="form-control" id="category-name-update" >
-                </div>
-                <div class="form-outline">
-                    <label for="category-code-update">Mã thể loại</label>
-                    <input type="text" class="form-control" id="category-code-update" >
-                </div>
-                <button type="submit" class="btn btn-primary mt-4">Submit</button>
-            </form>
-<!--            <div class="overlay" id="overlay-update"></div>-->
-
-            <!--Lớp mờ-->
-
+            <div class="overlay" id="overlay"></div>-->
 
             <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th><input type="checkbox" id="checkAll"></th>
-                    <th>Tên thể loại</th>
-                    <th>Mã thể loại</th>
+                    <th>Tên vai trò</th>
+                    <th>Mã vai trò</th>
                     <th >Thao tác</th>
                 </tr>
                 </thead>

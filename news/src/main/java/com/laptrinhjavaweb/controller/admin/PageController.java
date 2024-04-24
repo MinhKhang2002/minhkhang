@@ -30,4 +30,14 @@ public class PageController {
     public String categoryList() {
         return "/views/admin/categoryList";
     }
+
+    @GetMapping("/roleList")
+    public String roleList() {
+        return "/views/admin/roleList";
+    }
+
+    @GetMapping("/addRole")
+    public String addRole() {
+        return "/views/admin/addRole";
+    }
 }

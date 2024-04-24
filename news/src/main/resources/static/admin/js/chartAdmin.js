@@ -1,9 +1,5 @@
 $(document).ready(function () {
 
-    /*document.addEventListener("DOMContentLoaded", function() {
-        var selectElement = document.getElementById("timePeriod");
-        selectElement.addEventListener("change", fetchDataAndDrawChart);
-    });*/
     var selectElement = document.getElementById("timePeriod");
     selectElement.addEventListener("change", fetchDataAndDrawChart);
 
@@ -11,7 +7,7 @@ $(document).ready(function () {
     fetchDataAndDrawChart();
 });
 
-function fetchDataAndDrawChart() {
+/*function fetchDataAndDrawChart() {
     const selectedPeriod = document.getElementById('timePeriod').value;
     let endDate = new Date();
     let startDate;
@@ -41,6 +37,107 @@ function fetchDataAndDrawChart() {
             fetchChartData(startDate, endDate);
             break;
     }
+}*/
+
+function fetchDataAndDrawChart() {
+    const selectedPeriod = document.getElementById('timePeriod').value;
+    let endDate = new Date();
+    let startDate;
+
+    const currentDate = new Date();
+    const oneDay = 24 * 60 * 60 * 1000; // milliseconds in a day
+
+    switch (selectedPeriod) {
+        /*case 'week':
+            startDate = new Date(currentDate.getTime() - (7 * oneDay));
+            endDate = currentDate;
+            fetchChartData(startDate, endDate);
+            fetchLast7DaysData();
+            break;
+        case 'month':
+            startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+            endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+            fetchChartData(startDate, endDate);
+            fetchLastMonthData();
+            break;
+        case 'quarter':
+            startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 3, 1);
+            endDate = currentDate;
+            fetchChartData(startDate, endDate);
+            fetchLastQuarterData();
+            break;
+        case 'last7Days':
+            fetchLast7DaysData();
+            break;
+        case 'lastMonth':
+            fetchLastMonthData();
+            break;
+        case 'lastQuarter':
+            fetchLastQuarterData();
+            break;
+        default:
+            startDate = new Date(currentDate.getTime() - (7 * oneDay));
+            endDate = currentDate;
+            fetchChartData(startDate, endDate);
+            break;*/
+        case 'week':
+            startDate = new Date(currentDate.getTime() - (7 * oneDay));
+            endDate = currentDate;
+            fetchLast7DaysData();  // Gọi hàm này cho biểu đồ so sánh
+            fetchChartData(startDate, endDate);  // Gọi hàm này cho biểu đồ thống kê
+            break;
+        case 'month':
+            startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+            endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+            fetchLastMonthData()
+            fetchChartData(startDate, endDate);
+            break;
+        case 'quarter':
+            startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 3, 1);
+            endDate = currentDate;
+            fetchLastQuarterData()
+            fetchChartData(startDate, endDate);
+            break;
+        default:
+            startDate = new Date(currentDate.getTime() - (7 * oneDay));
+            endDate = currentDate;
+            fetchLast7DaysData()
+            fetchChartData(startDate, endDate);
+            break;
+    }
+}
+
+function fetchLast7DaysData() {
+    fetch(`/new/countByLast7Days`)
+        .then(response => response.json())
+        .then(data => {
+            drawAreaChart(data);
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+}
+
+function fetchLastMonthData() {
+    fetch(`/new/countByLastMonth`)
+        .then(response => response.json())
+        .then(data => {
+            drawAreaChart(data);
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+}
+
+function fetchLastQuarterData() {
+    fetch(`/new/countByLastQuarter`)
+        .then(response => response.json())
+        .then(data => {
+            drawAreaChart(data);
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
 }
 
 function fetchChartData(startDate, endDate) {
@@ -50,17 +147,18 @@ function fetchChartData(startDate, endDate) {
     fetch(`/new/countByDateRange?startDate=${startDateStr}&endDate=${endDateStr}`)
         .then(response => response.json())
         .then(data => {
-            drawChart(data);
+            drawBarChart(data);
         })
         .catch(error => {
             console.error("Error fetching data:", error);
         });
 }
 
-/*let myBarChart = null; // Biến để lưu trữ biểu đồ
+let myBarChart = null; // Biến để lưu trữ biểu đồ cột
+let myAreaChart = null; // Biến để lưu trữ biểu đồ diện tích
 
-function drawChart(dataFromApi) {
-    // Tiêu diệt biểu đồ hiện tại nếu tồn tại
+function drawBarChart(dataFromApi) {
+    // Tiêu diệt biểu đồ cột hiện tại nếu tồn tại
     if (myBarChart) {
         myBarChart.destroy();
     }
@@ -69,9 +167,9 @@ function drawChart(dataFromApi) {
     const dates = dataFromApi.map(item => new Date(item.date).toLocaleDateString());
     const counts = dataFromApi.map(item => item.count);
 
-    // Vẽ biểu đồ
-    var ctx = document.getElementById('myBarChart').getContext('2d');
-    myBarChart = new Chart(ctx, {
+    // Vẽ biểu đồ cột
+    var ctxBar = document.getElementById('myBarChart').getContext('2d');
+    myBarChart = new Chart(ctxBar, {
         type: 'bar',
         data: {
             labels: dates,
@@ -91,12 +189,44 @@ function drawChart(dataFromApi) {
             }
         }
     });
-}*/
+}
 
-let myBarChart = null; // Biến để lưu trữ biểu đồ cột
-let myAreaChart = null; // Biến để lưu trữ biểu đồ diện tích
+function drawAreaChart(dataFromApi) {
+    // Tiêu diệt biểu đồ diện tích hiện tại nếu tồn tại
+    if (myAreaChart) {
+        myAreaChart.destroy();
+    }
 
-function drawChart(dataFromApi) {
+    // Xử lý dữ liệu để trích xuất ngày và số lượng
+    const dates = dataFromApi.map(item => new Date(item.date).toLocaleDateString());
+    const counts = dataFromApi.map(item => item.count);
+
+    // Vẽ biểu đồ diện tích
+    const areaCounts = counts.map(count => count * 1.5); // Ví dụ tăng giá trị lên 1.5 lần
+    var ctxArea = document.getElementById('myAreaChart').getContext('2d');
+    myAreaChart = new Chart(ctxArea, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Biểu đồ so sánh bài viết',
+                data: areaCounts,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+/*function drawChart(dataFromApi) {
     // Tiêu diệt biểu đồ hiện tại nếu tồn tại
     if (myBarChart) {
         myBarChart.destroy();
@@ -156,7 +286,7 @@ function drawChart(dataFromApi) {
             }
         }
     });
-}
+}*/
 
 
 /*function fetchDataAndDrawChart() {
