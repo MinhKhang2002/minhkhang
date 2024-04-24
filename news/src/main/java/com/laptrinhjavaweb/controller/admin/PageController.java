@@ -40,4 +40,9 @@ public class PageController {
     public String addRole() {
         return "/views/admin/addRole";
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "/views/admin/users/addUserForm";
+    }
 }

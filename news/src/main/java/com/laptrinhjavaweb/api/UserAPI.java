@@ -3,6 +3,7 @@ package com.laptrinhjavaweb.api;
 import com.laptrinhjavaweb.api.output.UserOutput;
 import com.laptrinhjavaweb.dto.CategoryDTO;
 import com.laptrinhjavaweb.dto.UserDTO;
+import com.laptrinhjavaweb.entity.UserEntity;
 import com.laptrinhjavaweb.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,7 +65,7 @@ public class UserAPI {
         return userService.getCategoriesByUserId(id);
     }
 
-    @PostMapping("/addUser")
+    /*@PostMapping("/addUser")
     public Long createUser(@RequestBody UserDTO model,
                            @RequestParam(name = "roleId") Long roleId,
                            HttpSession session) {
@@ -75,6 +76,31 @@ public class UserAPI {
         model.setCreatedBy(loggedInUser);
 
         return userService.addUser(model, loggedInUser, roleId);
+    }*/
+
+    @PostMapping("/addUser")
+    public ResponseEntity<?> createUser(@RequestBody UserDTO model,
+                                        @RequestParam(name = "roleId") Long roleId,
+                                        HttpSession session) {
+        try {
+            String loggedInUser = (String) session.getAttribute("loggedInUser");
+            model.setCreatedBy(loggedInUser);
+
+            Long userId = userService.addUser(model, loggedInUser, roleId);
+
+            if (userId != null) {
+                return new ResponseEntity<>(userId, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>("Người dùng đã tồn tại", HttpStatus.BAD_REQUEST);
+            }
+
+        } catch (IllegalArgumentException e) {
+            // Trả về thông báo lỗi cho client
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }  catch (Exception e) {
+            e.printStackTrace();  // Ghi log lỗi
+            return new ResponseEntity<>("Lỗi khi thêm người dùng", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/getAllUser")

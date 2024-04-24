@@ -88,7 +88,7 @@ $(document).ready(function () {
                 data: JSON.stringify(ids),
                 success: function (response) {
                     alert(response);
-                    fetchAndDisplayData(1, 5);
+                    loadListUser()
                 },
                 error: function (xhr, status, errorThrown) {
                     if (errorThrown === 'timeout') {
@@ -175,7 +175,7 @@ $(document).on("click", "#showFromAddUser", function () {
 })
 
 function showFormAddUser() {
-    $.get("/addUser", function (data) {
+    $.get("/test", function (data) {
         $("#main-content").html(data);
     })
 }

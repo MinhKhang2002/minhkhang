@@ -160,15 +160,27 @@ public class UserService implements IUserService {
         UserEntity userEntity = new UserEntity();
         // Kiểm tra tính duy nhất của username trước khi thêm
         if (existsByUsername(userDTO.getUserName())) {
-            throw new IllegalArgumentException("Username already exists");
+            return null;
         }
         userEntity = userConverter.toEntity(userDTO);
         userEntity.setStatus(1);
         userEntity.setCreatedBy(loggedInUser);
+        /*// Lưu (persist) người dùng mới vào cơ sở dữ liệu
+        UserEntity savedUser = userRepository.save(userEntity);
+
+        addUserRole(savedUser.getId(), roleId);*/
+
         // Lưu (persist) người dùng mới vào cơ sở dữ liệu
         UserEntity savedUser = userRepository.save(userEntity);
 
-        addUserRole(savedUser.getId(), roleId);
+        // Kiểm tra và gán vai trò cho người dùng
+        try {
+            addUserRole(savedUser.getId(), roleId);
+        } catch (Exception e) {
+            // Nếu có lỗi xảy ra, xóa người dùng vừa thêm và ném ra ngoại lệ
+            deleteUser(new long[]{savedUser.getId()});
+            throw new RuntimeException("Error assigning role to user", e);
+        }
 
         // Trả về ID của người dùng vừa được thêm
         return savedUser.getId();
