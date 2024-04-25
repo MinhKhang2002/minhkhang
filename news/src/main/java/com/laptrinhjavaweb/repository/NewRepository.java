@@ -33,11 +33,8 @@ public interface NewRepository extends JpaRepository<NewEntity, Long>{
 
     List<NewEntity> findByCreatedByAndStatus(String createdBy, int status, Pageable pageable);
 
-	@Query("SELECT n.createdDate, COUNT(n) FROM NewEntity n WHERE n.createdDate BETWEEN :startDate AND :endDate GROUP BY n.createdDate")
-	List<Object[]> countByDateRange(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
-
-	/*List<NewEntity> findByCategories(String categories, Pageable pageable);
-
-	int countByCategoriesAndStatus(String category, int status);
-	int countByCategories(String category);*/
+	/*@Query("SELECT n.createdDate, COUNT(n) FROM NewEntity n WHERE n.createdDate BETWEEN :startDate AND :endDate GROUP BY n.createdDate")
+	List<Object[]> countByDateRange(@Param("startDate") Date startDate, @Param("endDate") Date endDate);*/
+	@Query("SELECT n.createdDate, COUNT(n) FROM NewEntity n WHERE n.createdDate BETWEEN :startDate AND :endDate AND n.status = :status GROUP BY n.createdDate")
+	List<Object[]> countByDateRangeWithStatus(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("status") int status);
 }
