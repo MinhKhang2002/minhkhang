@@ -81,28 +81,30 @@ function fetchDataAndDrawChart() {
             fetchChartData(startDate, endDate);
             break;*/
         case 'week':
-            startDate = new Date(currentDate.getTime() - (7 * oneDay));
-            endDate = currentDate;
+            /*startDate = new Date(currentDate.getTime() - (7 * oneDay));*/
+            startDate = new Date(endDate.getTime() - (6  * oneDay));
+            // endDate = currentDate;
             fetchLast7DaysData();  // Gọi hàm này cho biểu đồ so sánh
-            fetchChartData(startDate, endDate);  // Gọi hàm này cho biểu đồ thống kê
+            fetchChartData(startDate);  // Gọi hàm này cho biểu đồ thống kê
             break;
         case 'month':
-            startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
-            endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+            startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1, 11, 0 ,0); // First day of the current month
+            console.log("Start Date: ", startDate)
+            // endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
             fetchLastMonthData()
-            fetchChartData(startDate, endDate);
+            fetchChartData(startDate);
             break;
         case 'quarter':
             startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 3, 1);
-            endDate = currentDate;
+            // endDate = currentDate;
             fetchLastQuarterData()
-            fetchChartData(startDate, endDate);
+            fetchChartData(startDate);
             break;
         default:
-            startDate = new Date(currentDate.getTime() - (7 * oneDay));
-            endDate = currentDate;
+            startDate = new Date(currentDate.getTime() - (6 * oneDay));
+            // endDate = currentDate;
             fetchLast7DaysData()
-            fetchChartData(startDate, endDate);
+            fetchChartData(startDate);
             break;
     }
 }
@@ -122,7 +124,9 @@ function fetchLastMonthData() {
     fetch(`/new/countByLastMonth`)
         .then(response => response.json())
         .then(data => {
-            drawAreaChart(data);
+            /*drawAreaChart(data);*/
+            const weeklyData = groupDataByWeek(data);
+            drawBarChart(weeklyData);
         })
         .catch(error => {
             console.error("Error fetching data:", error);
@@ -133,18 +137,47 @@ function fetchLastQuarterData() {
     fetch(`/new/countByLastQuarter`)
         .then(response => response.json())
         .then(data => {
-            drawAreaChart(data);
+            /*drawAreaChart(data);*/
+            const monthlyData = groupDataByMonth(data);
+            drawBarChart(monthlyData);
         })
         .catch(error => {
             console.error("Error fetching data:", error);
         });
 }
 
-function fetchChartData(startDate, endDate) {
-    const startDateStr = startDate.toISOString().split('T')[0];
-    const endDateStr = endDate.toISOString().split('T')[0];
+function groupDataByWeek(data) {
+    const weeklyData = {};
+    data.forEach(item => {
+        const date = new Date(item.date);
+        const weekNumber = getWeekNumber(date);
+        weeklyData[weekNumber] = (weeklyData[weekNumber] || 0) + item.count;
+    });
+    return Object.values(weeklyData);
+}
 
-    fetch(`/new/countByDateRange?startDate=${startDateStr}&endDate=${endDateStr}`)
+function groupDataByMonth(data) {
+    const monthlyData = {};
+    data.forEach(item => {
+        const date = new Date(item.date);
+        const month = date.getMonth();
+        monthlyData[month] = (monthlyData[month] || 0) + item.count;
+    });
+    return Object.values(monthlyData);
+}
+
+function getWeekNumber(date) {
+    const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+    const pastDays = (date - firstDayOfYear) / 86400000;
+    return Math.ceil((pastDays + firstDayOfYear.getDay() + 1) / 7);
+}
+
+function fetchChartData(startDate) {
+    const startDateStr = startDate.toISOString().split('T')[0];
+    // const endDateStr = endDate.toISOString().split('T')[0];
+// &endDate=${endDateStr}
+
+    fetch(`/new/countByDateRange?startDate=${startDateStr}`)
         .then(response => response.json())
         .then(data => {
             drawBarChart(data);
@@ -224,6 +257,13 @@ function drawAreaChart(dataFromApi) {
             }
         }
     });
+}
+
+// Hàm để lấy thứ của ngày
+function getDayOfWeek(dateStr) {
+    const date = new Date(dateStr);
+    const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+    return days[date.getDay()];
 }
 
 /*function drawChart(dataFromApi) {

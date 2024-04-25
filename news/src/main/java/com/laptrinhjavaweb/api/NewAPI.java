@@ -299,11 +299,24 @@ public class NewAPI {
 		return result;
 	}
 
-	@GetMapping("/new/countByDateRange")
+	/*@GetMapping("/new/countByDateRange")
 	public ResponseEntity<List<Map<String, Object>>> countNewPostsByDateRange(
 			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate) {
 
 		Date endDate = new Date(); // Lấy ngày và giờ hiện tại
+		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
+		return ResponseEntity.ok(counts);
+	}*/
+
+	@GetMapping("/new/countByDateRange")
+	public ResponseEntity<List<Map<String, Object>>> countNewPostsByDateRange(
+			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+			@RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+
+		if (endDate == null) {
+			endDate = new Date(); // Nếu không có endDate, sẽ lấy ngày hiện tại
+		}
+
 		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
 		return ResponseEntity.ok(counts);
 	}
@@ -311,17 +324,23 @@ public class NewAPI {
 	@GetMapping("/new/countByLast7Days")
 	public ResponseEntity<List<Map<String, Object>>> countNewPostsLast7Days() {
 		Calendar calendar = Calendar.getInstance();
-		Date endDate = calendar.getTime(); // Lấy ngày và giờ hiện tại
+
+		// Lấy ngày và giờ hiện tại
+		Date currentDate = calendar.getTime();
 
 		// Trừ 7 ngày từ ngày hiện tại
 		calendar.add(Calendar.DAY_OF_MONTH, - 7);
+		Date endDate = calendar.getTime();
+
+		// Trừ 7 ngày từ ngày hiện tại
+		calendar.add(Calendar.DAY_OF_MONTH, - 6);
 		Date startDate = calendar.getTime();
 
 		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
 		return ResponseEntity.ok(counts);
 	}
 
-	@GetMapping("/new/countByLastMonth")
+	/*@GetMapping("/new/countByLastMonth")
 	public ResponseEntity<List<Map<String, Object>>> countNewPostsLastMonth() {
 		Calendar calendar = Calendar.getInstance();
 		Date endDate = calendar.getTime(); // Lấy ngày và giờ hiện tại
@@ -332,7 +351,23 @@ public class NewAPI {
 
 		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
 		return ResponseEntity.ok(counts);
+	}*/
+	@GetMapping("/new/countByLastMonth")
+	public ResponseEntity<List<Map<String, Object>>> countNewPostsLastMonth() {
+		Calendar calendar = Calendar.getInstance();
+
+		// Đặt endDate là ngày cuối cùng của tháng trước
+		calendar.add(Calendar.MONTH, -1);
+		calendar.set(Calendar.DAY_OF_MONTH, 1); // Đặt ngày là 1 để lấy đầu tháng
+		Date startDate = calendar.getTime();
+
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH)); // Đặt ngày là ngày cuối cùng của tháng
+		Date endDate = calendar.getTime();
+
+		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
+		return ResponseEntity.ok(counts);
 	}
+
 
 	@GetMapping("/new/countByLastQuarter")
 	public ResponseEntity<List<Map<String, Object>>> countNewPostsLastQuarter() {
