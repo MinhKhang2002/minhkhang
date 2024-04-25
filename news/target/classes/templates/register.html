@@ -1,41 +1,114 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <title>Đăng Ký</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <title>Đăng nhập</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" th:href="@{/static/login/images/icons/favicon.ico}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/login/vendor/bootstrap/css/bootstrap.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/login/vendor/animate/animate.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/login/vendor/css-hamburgers/hamburgers.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/login/vendor/select2/select2.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/login/css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/login/css/main.css}">
+    <!--===============================================================================================-->
 </head>
-<body id="LoginForm">
-<div class="container">
-    <!-- <h1 class="form-heading">login Form</h1> -->
-    <div class="login-form">
-        <div class="main-div">
+<body>
 
-            <form action="/register" method="post" onsubmit="return validateForm()"  th:object="${userDTO}">
-                <div class="form-group ">
-                    <input type="text" class="form-control " id="fullname" name="fullName"
-                           placeholder="Họ và tên" required>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img th:src="@{/static/login/images/img-01.png}" alt="IMG">
+            </div>
+
+            <form action="/register" method="post" onsubmit="return validateForm()"  th:object="${userDTO}" class="login100-form validate-form">
+					<span class="login100-form-title">
+						Đăng ký ngay
+					</span>
+
+                <div class="wrap-input100 validate-input" data-validate = "Valid username is required: abc123">
+                    <input class="input100" type="text" id="fullname" name="fullName" placeholder="Họ và tên">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
                 </div>
-                <div class="form-group ">
-                    <input type="text" class="form-control " id="username" name="userName"
-                           placeholder="Tên đăng nhập" required>
+
+                <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                    <input class="input100" type="text"  id="username" name="userName" placeholder="Tên đăng nhập">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+						</span>
                 </div>
-                <div class="form-group ">
-                    <input type="password" class="form-control " id="password" name="password"
-                           placeholder="Mật khẩu" required>
-                    <button type="button"class="btn-show-password btn btn-primary" id="togglePassword">Show Password</button>
+
+                <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                    <input class="input100" type="password" id="password" name="password" placeholder="Mật khẩu">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
                 </div>
-                <input type="hidden" name="roleId" value="2">
-                <button type="submit" class="btn-dangky btn btn-primary" >Đăng Ký</button>
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input class="input100" type="password" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                </div>
+                <div th:if="${error}" class="alert alert-danger">
+                    <p th:text="${error}"></p>
+                </div>
+                <div th:if="${param.error}" class="alert alert-danger">
+                    <p th:text="${param.error}"></p>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <input type="hidden" name="roleId" value="2">
+                    <button type="submit" class="btn-dangky login100-form-btn" >Đăng Ký</button>
+                </div>
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="/login">
+                        Đăng nhập tài khoản
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
             </form>
-
-
         </div>
     </div>
 </div>
+
+
+
+
+<!--===============================================================================================-->
+<script th:src="@{/static/login/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/static/login/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/static/login/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/static/login/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/static/login/vendor/tilt/tilt.jquery.min.js}"></script>
+<script >
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<!--===============================================================================================-->
+
+
+</body>
+</html>
 <script>
     // Hàm kiểm tra xem một chuỗi có chứa ký tự đặc biệt hay không
     function containsSpecialCharacters(str) {
@@ -53,7 +126,7 @@
         var fullName = document.getElementById("fullname").value;
         var userName = document.getElementById("username").value;
         var password = document.getElementById("password").value;
-
+        var confirmPassword = document.getElementById("confirmPassword").value;
         if (fullName.trim() === '' || userName.trim() === '' || password.trim() === '') {
             alert("Vui lòng điền đầy đủ thông tin.");
             return false;
@@ -68,127 +141,14 @@
             alert("Mật khẩu phải có ít nhất 6 ký tự.");
             return false;
         }
+        if (password !== confirmPassword) {
+            alert("Mật khẩu và nhập lại mật khẩu không khớp.");
+            return false;
+        }
 
         return true; // Form hợp lệ
     }
-    document.getElementById("togglePassword").addEventListener("click", function() {
-        var passwordField = document.getElementById("password");
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-            this.textContent = "Hide";
-        } else {
-            passwordField.type = "password";
-            this.textContent = "Show";
-        }
-    });
 </script>
-<style>
-    body#LoginForm {
-        background-image:
-                url("https://www.shutterstock.com/shutterstock/photos/2277328299/display_1500/stock-photo-newspaper-magazine-collage-background-texture-torn-clippings-scrap-paper-black-and-white-2277328299.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        padding: 10px;
-    }
 
-    .form-heading {
-        color: #208cc6;
-        font-size: 23px;
-    }
-    .btn-show-password{
-        margin-top: 10px;
-    }
-    .panel h2 {
-        color: #ffffff;
-        font-size: 18px;
-        margin: 0 0 8px 0;
-    }
-    .form-white{
-        background-color: aliceblue;
-    }
-    .btn-dangky{
-        margin-top: 20px;
-        color: #208cc6;
-    }
-    .btn-dangnhap{
-        margin-top: 20px;
-        color: #208cc6;
-    }
-    .panel p {
-        color: #fffdfd;
-        font-size: 14px;
-        margin-bottom: 30px;
-        line-height: 24px;
-    }
-
-    .login-form .form-control {
-        background: #ffffff none repeat scroll 0 0;
-        border: 1px solid #d4d4d4;
-        border-radius: 4px;
-        font-size: 14px;
-        height: 50px;
-        line-height: 50px;
-    }
-
-    .main-div {
-        background: #ffffff none repeat scroll 0 0;
-        border-radius: 2px;
-        margin: 10px auto 30px;
-        max-width: 38%;
-        padding: 50px 70px 70px 71px;
-    }
-
-    .login-form .form-group {
-        margin-bottom: 10px;
-    }
-
-    .login-form {
-        text-align: center;
-    }
-
-    .forgot a {
-        color: #777777;
-        font-size: 14px;
-        text-decoration: underline;
-    }
-
-    .login-form  .btn.btn-primary {
-        background: #f0ad4e none repeat scroll 0 0;
-        border-color: #f0ad4e;
-        color: #ffffff;
-        font-size: 14px;
-        width: 100%;
-        height: 50px;
-        line-height: 50px;
-        padding: 0;
-    }
-
-    .forgot {
-        text-align: left;
-        margin-bottom: 30px;
-    }
-
-    .botto-text {
-        color: #ffffff;
-        font-size: 14px;
-        margin: auto;
-    }
-
-    .login-form .btn.btn-primary.reset {
-        background: #ff9900 none repeat scroll 0 0;
-    }
-
-    .back {
-        text-align: left;
-        margin-top: 10px;
-    }
-
-    .back a {
-        color: #444444;
-        font-size: 13px;
-        text-decoration: none;
-    }
-</style>
 </body>
 </html>

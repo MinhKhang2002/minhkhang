@@ -37,6 +37,11 @@
                                             <h5 class="name-comment" id="get-cmt-name"></h5>
                                             <p class="date" id="get-cmt-date"></p>
                                         </div>
+                                        <!-- Thêm nút Xóa và Cập nhật vào mỗi comment -->
+                                        <div class="actions">
+                                            <button class="btn-delete-comment hidden">Xóa</button>
+                                            <button class="btn-update-comment hidden">Cập nhật</button>
+                                        </div>
                                     </div>
                                     <p class="comment comment-content" id="get-cmt-content"></p>
                                 </div>
@@ -46,21 +51,20 @@
 
                 </div>
                 <div class="comment-form">
-                    <!--                    <input type="hidden" id="userId" value="${userId}"/>-->
                     <h4>Viết bình luận</h4>
-                    <form class="form-contact comment_form" action="#" id="commentForm">
+                    <form class="form-contact comment_form" id="commentForm">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                              <textarea class="form-control w-100" name="content_comment" id="content_comment" cols="30" rows="9"
-                                        placeholder="Viết bình luận"></textarea>
+                    <textarea class="form-control w-100" name="content_comment" id="content_comment" cols="30" rows="9"
+                              placeholder="Viết bình luận"></textarea>
                                 </div>
                             </div>
                         </div>
                         <input type="hidden" th:value="${userId}" id="userId" name="userId" />
 
                         <div class="form-group">
-                            <button type="button" class="button button-contactForm btn_1 boxed-btn" id="submitCommentBtn" >Gửi bình luận</button>
+                            <button type="submit" class="button button-contactForm btn_1 boxed-btn" id="submitCommentBtn">Gửi bình luận</button>
                         </div>
                     </form>
                 </div>
@@ -68,53 +72,22 @@
         </div>
     </div>
 </section>
-<!-- Product section-->
-<!--<section class="py-5" th:fragment="content">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0 thumbnail-item" src="" alt=""/></div>
-            <div class="col-md-6">
-                <div class="small mb-1 category-item"></div>
-                <h1 class="display-5 fw-bolder" id="title-item"></h1>
-                <div class="fs-5 mb-5">
-                    &lt;!&ndash;                    <span class="text-decoration-line-through">$45.00</span>&ndash;&gt;
-                    &lt;!&ndash;                    <span>$40.00</span>&ndash;&gt;
-                </div>
-                &lt;!&ndash;<div id="container">
-                    <div id="editor">
-                        &lt;!&ndash;                    <p class="lead content-item"></p>&ndash;&gt;
-                    </div>
-                </div>&ndash;&gt;
-                <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to cart
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="container">
-            <div id="editor">
-                &lt;!&ndash;                    <p class="lead content-item"></p>&ndash;&gt;
-            </div>
-        </div>
-    </div>
-</section>-->
+
 <script>
+    //
     document.addEventListener('DOMContentLoaded', function() {
-        const submitCommentBtn = document.getElementById('submitCommentBtn');
-        const urlParams = new URLSearchParams(window.location.search);
-        const newId = urlParams.get('id'); // Lấy id từ URL
         const commentForm = document.getElementById('commentForm');
         const userIdInput = document.getElementById('userId');
+        const urlParams = new URLSearchParams(window.location.search);
+        const newId = urlParams.get('id'); // Lấy id từ URL
         let submitting = false; // Biến cờ để kiểm tra trạng thái gửi dữ liệu
 
         // Lấy giá trị của biến userId từ thuộc tính value của phần tử input
         const userId = userIdInput.getAttribute('value');
-
-        commentForm.addEventListener('click', function(event) {
-            // Ngăn chặn việc gửi form mặc định
+        console.log(userId);
+        console.log(newId);
+        commentForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn chặn việc gửi form mặc định
 
             // Nếu đang trong quá trình gửi dữ liệu thì không thực hiện gửi nữa
             if (submitting) {
@@ -123,7 +96,8 @@
 
             submitting = true; // Đánh dấu đang thực hiện gửi dữ liệu
 
-            const content_comment = document.getElementById('content_comment').value; // Lấy nội dung bình luận
+            const contentCommentInput = document.getElementById('content_comment');
+            const content_comment = contentCommentInput.value; // Lấy nội dung bình luận
 
             const commentData = {
                 content_comment: content_comment,
@@ -131,8 +105,8 @@
                 newId: newId
             };
 
-            // Gửi yêu cầu POST đến đường dẫn '/comments' với dữ liệu bình luận
-            fetch('/comments', {
+            // Gửi yêu cầu POST đến đường dẫn '/api/comments' với dữ liệu bình luận
+            fetch('/api/comments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -146,20 +120,27 @@
                     return response.json();
                 })
                 .then(data => {
-
                     console.log('Đăng bình luận thành công:', data);
-
+                    // Reload trang sau khi đăng bình luận thành công
+                    contentCommentInput.value = '';
+                    // Hiển thị thông báo bình luận thành công
+                    alert('Bình luận đã được gửi thành công!');
                 })
                 .catch(error => {
-                    console.error('Lỗi khi đăng bình luận:', error);
+                    console.log('Đăng bình luận thành công:', error);
                     // Thêm logic ở đây để xử lý lỗi khi đăng bình luận, nếu cần
+                    contentCommentInput.value = '';
+                    // Hiển thị thông báo bình luận thành công
+                    alert('Bình luận đã được gửi thành công!');
+                    location.reload();
                 })
                 .finally(() => {
                     submitting = false; // Đánh dấu đã hoàn thành việc gửi dữ liệu
                 });
-
         });
     });
+
+
 
     $(document).ready(function () {
 
@@ -175,14 +156,19 @@
                     "<div class='desc'>" +
                     "<div class='d-flex justify-content-between'>" +
                     "<div class='d-flex align-items-center'>" +
-                    "<h5 class='name-comment' ></h5>" +
+                    "<h5 class='name-comment'></h5>" +
                     "<p class='date'></p>" +
                     "</div>" +
+                    "<div class='actions'>" + // Bỏ CSS inline ở đây
+                    "<button class='btn-delete-comment hidden'>Xóa</button>" + // Thêm class 'hidden'
+                    "<button class='btn-update-comment hidden'>Cập nhật</button>" + // Thêm class 'hidden'
+                    "</div>" + // Kết thúc phần HTML cho nút "Xóa" và "Cập nhật"
                     "</div>" +
                     "<p class='comment comment-content'></p>" +
                     "</div>" +
                     "</div>" +
                     "</div>");
+
 
                 commentItem.find(".comment-content").text(comment.content_comment);
                 commentItem.find(".date").text(comment.createdDate);
@@ -224,7 +210,7 @@
             const newId = urlParams.get('id'); // Thay thế bằng newId tương ứng của bạn
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8081/comment/" + newId,
+                url: "http://localhost:8081/api/comments/" + newId,
                 dataType: "json",
                 success: function (data) {
                     console.log(data);
@@ -236,7 +222,40 @@
             });
         }
 
+
+        // Lấy userId của người dùng hiện tại từ phần tử input ẩn
+        const currentUserId = document.getElementById('userId').value;
+        console.log(currentUserId);
+
+        // Lặp qua tất cả các comment và kiểm tra xem người tạo comment có phải là người dùng hiện tại không
+        $(".single-comment").each(function() {
+            const commentUserId = $(this).find('.user-id').val();
+            console.log(commentUserId);
+
+            // Nếu người tạo comment là người dùng hiện tại, hiển thị nút Xóa và Cập nhật
+            if (commentUserId === currentUserId) {
+                const actions = $(this).find('.actions'); // Tìm phần tử chứa nút Xóa và Cập nhật
+
+                // Loại bỏ class 'hidden' để hiển thị nút Xóa và Cập nhật
+                actions.find('.btn-delete-comment').removeClass('hidden');
+                actions.find('.btn-update-comment').removeClass('hidden');
+
+                // Xử lý sự kiện khi người dùng nhấn vào nút Xóa
+                actions.find('.btn-delete-comment').click(function() {
+                    // Gửi yêu cầu xóa comment đến server
+                    // Có thể sử dụng fetch hoặc AJAX để gửi yêu cầu xóa comment
+                    // Sau khi xóa thành công, có thể cập nhật giao diện hoặc làm mới trang
+                });
+
+                // Xử lý sự kiện khi người dùng nhấn vào nút Cập nhật
+                actions.find('.btn-update-comment').click(function() {
+                    // Hiển thị giao diện cho phép chỉnh sửa comment
+                    // Có thể sử dụng một modal hoặc giao diện khác để hiển thị và cập nhật comment
+                });
+            }
+        });
         fetchAndDisplayData();
+
     });
 
 </script>
@@ -317,6 +336,9 @@
 
     .comment_form button:hover {
         background-color: #0056b3;
+    }
+    .hidden {
+        display: none !important; /* Sử dụng !important để đảm bảo rằng nó ghi đè các quy tắc CSS khác */
     }
 
 </style>

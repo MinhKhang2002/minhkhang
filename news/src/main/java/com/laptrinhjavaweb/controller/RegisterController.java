@@ -26,11 +26,18 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String registerUser(@RequestParam String userName, @RequestParam String password, @RequestParam String fullName, RedirectAttributes redirectAttributes) {
+        // Kiểm tra xem username đã tồn tại trong cơ sở dữ liệu hay chưa
+        if (userService.existsByUsername1(userName)) {
+            // Nếu username đã tồn tại, hiển thị thông báo lỗi và chuyển hướng lại form đăng ký
+            redirectAttributes.addAttribute("error", "Username already exists");
+            return "redirect:/register";
+        }
+
+        // Nếu username chưa tồn tại, tiến hành lưu thông tin người dùng vào cơ sở dữ liệu
         UserDTO userDTO = new UserDTO();
         userDTO.setUserName(userName);
         userDTO.setPassword(password);
         userDTO.setFullName(fullName);
-        // Thực hiện lưu thông tin người dùng
         userService.saveUser(userDTO);
         logger.info("User registered successfully: " + userName);
         // Chuyển hướng đến trang của người dùng sau khi đăng ký thành công
