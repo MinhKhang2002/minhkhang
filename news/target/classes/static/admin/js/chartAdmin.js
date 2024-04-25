@@ -124,9 +124,7 @@ function fetchLastMonthData() {
     fetch(`/new/countByLastMonth`)
         .then(response => response.json())
         .then(data => {
-            /*drawAreaChart(data);*/
-            const weeklyData = groupDataByWeek(data);
-            drawBarChart(weeklyData);
+            drawAreaChart(data);
         })
         .catch(error => {
             console.error("Error fetching data:", error);
@@ -137,9 +135,7 @@ function fetchLastQuarterData() {
     fetch(`/new/countByLastQuarter`)
         .then(response => response.json())
         .then(data => {
-            /*drawAreaChart(data);*/
-            const monthlyData = groupDataByMonth(data);
-            drawBarChart(monthlyData);
+            drawAreaChart(data);
         })
         .catch(error => {
             console.error("Error fetching data:", error);
@@ -224,7 +220,7 @@ function drawBarChart(dataFromApi) {
     });
 }
 
-function drawAreaChart(dataFromApi) {
+/*function drawAreaChart(dataFromApi) {
     // Tiêu diệt biểu đồ diện tích hiện tại nếu tồn tại
     if (myAreaChart) {
         myAreaChart.destroy();
@@ -257,7 +253,41 @@ function drawAreaChart(dataFromApi) {
             }
         }
     });
+}*/
+function drawAreaChart(dataFromApi) {
+    // Tiêu diệt biểu đồ diện tích hiện tại nếu tồn tại
+    if (myAreaChart) {
+        myAreaChart.destroy();
+    }
+
+    // Xử lý dữ liệu để trích xuất ngày và số lượng
+    const dates = dataFromApi.map(item => new Date(item.date).toLocaleDateString());
+    const counts = dataFromApi.map(item => item.count);
+
+    // Vẽ biểu đồ diện tích
+    var ctxArea = document.getElementById('myAreaChart').getContext('2d');
+    myAreaChart = new Chart(ctxArea, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Biểu đồ so sánh bài viết',
+                data: counts,  // Sử dụng giá trị count gốc
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 }
+
 
 // Hàm để lấy thứ của ngày
 function getDayOfWeek(dateStr) {

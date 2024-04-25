@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
 
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script th:src="@{/static/admin/js/menu.js}"></script>
-<!--    <script th:src="@{/static/admin/js/addUser.js}"></script>-->
+    <script th:src="@{/static/admin/js/addRole.js}"></script>
 
     <style>
         body {
@@ -39,9 +39,10 @@
             margin-bottom: 0
         }
 
-        .cancel-addUser,
+        #cancel,
         input,
         textarea,
+        select,
         button {
             padding: 8px 15px;
             border-radius: 5px !important;
@@ -89,23 +90,41 @@
             <!--<h3>Request a Demo</h3>
             <p class="blue-text">Just answer a few questions<br> so that we can personalize the right experience for you.</p>-->
             <div class="card">
-                <h5 class="text-center mb-4">Thêm người dùng</h5>
-                <form id="addUserForm" class="form-card" onsubmit="event.preventDefault()">
+                <h5 class="text-center mb-4">Thêm vai trò</h5>
+                <form id="addRoleForm" class="form-card" onsubmit="event.preventDefault()">
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Họ và tên<span class="text-danger"> *</span></label> <input type="text" id="fullName" name="fullName" placeholder="Nhập họ và tên" onblur="validate(1)"> </div>
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Tên đăng nhập<span class="text-danger"> *</span></label> <input type="text" id="userName" name="userName" placeholder="Nhập tên đăng nhập" onblur="validate(2)"> </div>
+                        <div class="form-group col-12 flex-column d-flex">
+                            <label class="form-control-label px-3">Tên vai trò
+                                <span class="text-danger"> *</span></label>
+                            <input type="text" id="nameRole" name="nameRole" placeholder="Nhập tên vai trò" onblur="validate(1)">
+                        </div>
+                        <!--<div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Tên đăng nhập
+                                <span class="text-danger"> *</span>
+                            </label>
+                            <input type="text" id="userName" name="userName" placeholder="Nhập tên đăng nhập" onblur="validate(2)"> </div>-->
                     </div>
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Mật khẩu<span class="text-danger"> *</span></label> <input type="password" id="pwd" name="pwd" placeholder="Mật khẩu" onblur="validate(3)"> </div>
-                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Nhập lại mật khẩu<span class="text-danger"> *</span></label> <input type="password" id="pwdConfirm" name="pwdConfirm" placeholder="Nhập lại mật khẩu" onblur="validate(4)"> </div>
+                        <!--<div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Mã vai trò
+                                <span class="text-danger"> *</span>
+                            </label>
+                            <input type="text" id="codeRole" name="codeRole" placeholder="Mã vai trò" onblur="validate(3)">
+                        </div>-->
+                        <div class="form-group col-sm-6 flex-column d-flex">
+                            <label class="form-control-label px-3">Chọn vai trò
+                                <span class="text-danger"> *</span>
+                            </label>
+                            <select id="RoleCodeSelect" class="form-select" onblur="validate(4)"></select>
+                        </div>
                     </div>
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 flex-column d-flex">
-                            <label class="form-control-label px-3">Vai trò
+                            <label class="form-control-label px-3">Thể loại
                                 <span class="text-danger"> *</span>
                             </label>
-<!--                            <input type="text" id="job" name="job" placeholder="" onblur="validate(5)">-->
-                            <select id="RoleNameSelect" class="form-select">
+                            <!--                            <input type="text" id="job" name="job" placeholder="" onblur="validate(5)">-->
+                            <select id="categorySelect" class="form-select" onblur="validate(5)">
                                 <!-- Dữ liệu từ API sẽ được thêm vào đây -->
                                 <option value="" selected disabled>Chọn thể loại</option>
                             </select>
@@ -113,10 +132,10 @@
                     </div>
                     <div class="row justify-content-end">
                         <div class="form-group col-sm-2">
-                            <span class="cancel-addUser btn-block btn-danger">Huỷ</span>
+                            <span id="cancel" class="btn-block btn-danger">Huỷ</span>
                         </div>
-                        <div class="form-group col-sm-6">
-                            <button type="submit" id="add-submit" class="btn-block btn-primary">Thêm người dùng</button>
+                        <div class="form-group col-sm-4">
+                            <button type="submit" id="add-submit" class="btn-block btn-primary">Thêm vai trò</button>
                         </div>
 
                     </div>
@@ -128,17 +147,17 @@
 
 <script>
     function validate(val) {
-        v1 = document.getElementById("fullName");
-        v2 = document.getElementById("userName");
-        v3 = document.getElementById("pwd");
-        v4 = document.getElementById("pwdConfirm");
-        // v5 = document.getElementById("job");
+        v1 = document.getElementById("nameRole");
+        // v2 = document.getElementById("userName");
+        // v3 = document.getElementById("codeRole");
+        v4 = document.getElementById("RoleCodeSelect");
+        v5 = document.getElementById("categorySelect");
 
         flag1 = true;
-        flag2 = true;
-        flag3 = true;
+        // flag2 = true;
+        // flag3 = true;
         flag4 = true;
-        // flag5 = true;
+        flag5 = true;
 
         if(val>=1 || val==0) {
             if(v1.value == "") {
@@ -150,8 +169,7 @@
                 flag1 = true;
             }
         }
-
-        if(val>=2 || val==0) {
+        /*if(val>=2 || val==0) {
             if(v2.value == "") {
                 v2.style.borderColor = "red";
                 flag2 = false;
@@ -160,17 +178,18 @@
                 v2.style.borderColor = "green";
                 flag2 = true;
             }
-        }
-        if(val>=3 || val==0) {
+        }*/
+        /*if(val>=3 || val==0) {
             if(v3.value == "") {
                 v3.style.borderColor = "red";
                 flag3 = false;
             }
             else {
                 v3.style.borderColor = "green";
+                v4.style.borderColor = "green";
                 flag3 = true;
             }
-        }
+        }*/
         if(val>=4 || val==0) {
             if(v4.value == "") {
                 v4.style.borderColor = "red";
@@ -181,48 +200,21 @@
                 flag4 = true;
             }
         }
-        // if(val>=5 || val==0) {
-        //     if(v5.value == "") {
-        //         v5.style.borderColor = "red";
-        //         flag5 = false;
-        //     }
-        //     else {
-        //         v5.style.borderColor = "green";
-        //         flag5 = true;
-        //     }
-        // }
+        if(val>=5 || val==0) {
+            if(v5.value == "") {
+                v5.style.borderColor = "red";
+                flag5 = false;
+            }
+            else {
+                v5.style.borderColor = "green";
+                flag5 = true;
+            }
+        }
 
-        flag = flag1 && flag2 && flag3 && flag4;
+        flag = flag1 && flag4 && flag5;
 
         return flag;
     }
-
-    // Hàm để lấy danh sách role và thẻ select
-    function loadRolesSelect() {
-        var roleSelect = $("#RoleNameSelect");
-        roleSelect.empty();
-
-        // Thêm tùy chọn mặc định
-        roleSelect.append($("<option>", { value: '', text: 'Chọn vai trò' }));
-
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8081/allRole",
-            dataType: "json",
-            success: function (roles) {
-                // Thêm tất cả các vai trò vào thẻ select
-                $.each(roles, function (index, role) {
-                    var option = $("<option>", { value: role.id, text: role.name });
-                    roleSelect.append(option);
-                });
-            },
-            error: function (error) {
-                console.error("Lỗi khi lấy dữ liệu role:", error);
-            }
-        });
-    }
-
-    loadRolesSelect()
 </script>
 </body>
 </html>

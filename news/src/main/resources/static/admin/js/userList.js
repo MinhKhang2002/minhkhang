@@ -175,7 +175,7 @@ $(document).on("click", "#showFromAddUser", function () {
 })
 
 function showFormAddUser() {
-    $.get("/test", function (data) {
+    $.get("/fromAddUser", function (data) {
         $("#main-content").html(data);
     })
 }

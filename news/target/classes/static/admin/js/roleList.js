@@ -57,7 +57,7 @@ $(document).on("click", "#add", function () {
 })
 
 function showAddRole() {
-    $.get("/addRole", function (data){
+    $.get("/formAddRole", function (data){
         $("#main-content").html(data)
     })
 }

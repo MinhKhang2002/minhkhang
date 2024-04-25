@@ -29,7 +29,7 @@ public class RegisterController {
         // Kiểm tra xem username đã tồn tại trong cơ sở dữ liệu hay chưa
         if (userService.existsByUsername1(userName)) {
             // Nếu username đã tồn tại, hiển thị thông báo lỗi và chuyển hướng lại form đăng ký
-            redirectAttributes.addAttribute("error", "Username already exists");
+            redirectAttributes.addAttribute("error", "Tài khoản đã tồn tại!");
             return "redirect:/register";
         }
 

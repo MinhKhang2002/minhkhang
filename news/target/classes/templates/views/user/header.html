@@ -29,8 +29,12 @@
             </form>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">User</a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25"
+                             alt="Black and White Portrait of a Man" loading="lazy" />
+                    </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
                         <li><a class="dropdown-item" th:href="@{/login}">Đăng nhập</a></li>
 <!--                        <li><hr class="dropdown-divider" /></li>-->
                         <li><a class="dropdown-item" th:if="${fullname}" th:text="${fullname}" href="#"></a></li>

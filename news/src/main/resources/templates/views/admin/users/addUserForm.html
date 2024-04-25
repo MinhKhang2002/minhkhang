@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Thêm người dùng</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
 
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script th:src="@{/static/admin/js/menu.js}"></script>
-    <script th:src="@{/static/admin/js/addUser.js}"></script>
+<!--    <script th:src="@{/static/admin/js/addUser.js}"></script>-->
 
     <style>
         body {
@@ -39,6 +39,7 @@
             margin-bottom: 0
         }
 
+        .cancel-addUser,
         input,
         textarea,
         button {
@@ -112,7 +113,7 @@
                     </div>
                     <div class="row justify-content-end">
                         <div class="form-group col-sm-2">
-                            <button class="cancel-addUser btn-block btn-danger">Huỷ</button>
+                            <span class="cancel-addUser btn-block btn-danger">Huỷ</span>
                         </div>
                         <div class="form-group col-sm-6">
                             <button type="submit" id="add-submit" class="btn-block btn-primary">Thêm người dùng</button>

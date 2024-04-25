@@ -41,8 +41,13 @@ public class PageController {
         return "/views/admin/addRole";
     }
 
-    @GetMapping("/test")
+    @GetMapping("/fromAddUser")
     public String test() {
         return "/views/admin/users/addUserForm";
+    }
+
+    @GetMapping("/formAddRole")
+    public String formAddRole() {
+        return "/views/admin/role/addRoleForm";
     }
 }
