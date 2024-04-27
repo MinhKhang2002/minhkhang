@@ -1,31 +1,11 @@
 $(document).ready(function () {
 
-    function updateTable(newsList) {
-        $("table tbody").empty(); // Xóa nội dung của tbody trước khi thêm hàng mới
-
-        // Sử dụng Thymeleaf để tạo dòng HTML cho mỗi tin tức
-        $.each(newsList, function (index, news) {
-            // Tạo dòng HTML
-            var row = "<tr>" +
-                "<td><input type='checkbox' class='checkbox-del' data-id="+ news.id +" id='checkbox_" + news.id + "' value='" + news.id + "'></td>" +
-                "<td>" + news.title + "</td>" +
-                "<td class='truncated-content'>" + extractFirstParagraph(news.content) + "</td>" +  // Sử dụng hàm này để lấy thẻ <p> đầu tiên
-                "<td>" + news.shortDescription + "</td>" +
-                "<td><a class=\"updateNews\" href=\"#\" title='Cập nhật' data-id=" + news.id + ">\n" +
-                "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
-                "    </a></td>" +
-                "</tr>";
-            $("table").append(row);
-        });
-    }
-
-// Hàm để lấy nội dung của thẻ <p> đầu tiên
-    function extractFirstParagraph(content) {
-        var temp = document.createElement("div");
-        temp.innerHTML = content;
-        var firstParagraph = temp.querySelector("p");
-        return firstParagraph ? firstParagraph.innerText : content;
-    }
+    /*$(document).on("click", "#showFromAddNews", function () {
+        showFormAddNew()
+    });*/
+    $("#showFromAddNews").click(function () {
+        showFormAddNew()
+    });
 
     // Hàm để thực hiện yêu cầu AJAX và cập nhật bảng khi thành công
     function fetchAndDisplayData(pageNumber, limit) {
@@ -51,7 +31,7 @@ $(document).ready(function () {
                 console.error("Lỗi khi lấy dữ liệu từ API:", error);
             }
         });
-    }
+    };
 
     function updatePagination(totalPages) {
         window.pagObj = $('#pagination').twbsPagination({
@@ -61,39 +41,109 @@ $(document).ready(function () {
                 fetchAndDisplayData(page, 5); // Gọi hàm để lấy và hiển thị dữ liệu cho trang mới
             }
         });
-    }
+    };
 
     fetchAndDisplayData(1, 5);
+
+    // Xử lý sự kiện click vào nút xoá bài viết
+    $(document).on("click", "#deleteNews", function (e) {
+        e.preventDefault();
+
+        var ids = $('tbody input[type=checkbox]:checked').map(function () {
+            return $(this).val();
+        }).get();
+
+        // Chuyển đổi các chuỗi số thành số nguyên
+        var numericIds = ids.map(Number);
+
+        if(numericIds.length === 0) {
+            $(".alert-danger").text("Vui lòng chọn bài viết cần xoá!").show()
+
+            setTimeout(function () {
+                $(".alert-danger").hide()
+            }, 3000)
+        } else {
+            deleteNew(numericIds);
+        }
+    });
 })
 
+
+function updateTable(newsList) {
+    $("table tbody").empty(); // Xóa nội dung của tbody trước khi thêm hàng mới
+
+    // Sử dụng Thymeleaf để tạo dòng HTML cho mỗi tin tức
+    $.each(newsList, function (index, news) {
+        // Tạo dòng HTML
+        var row = "<tr>" +
+            "<td><input type='checkbox' class='checkbox-del' data-id="+ news.id +" id='checkbox_" + news.id + "' value='" + news.id + "'></td>" +
+            "<td>" + news.title + "</td>" +
+            "<td class='truncated-content'>" + extractFirstParagraph(news.content) + "</td>" +  // Sử dụng hàm này để lấy thẻ <p> đầu tiên
+            "<td>" + news.shortDescription + "</td>" +
+            "<td><a class=\"updateNews\" href=\"#\" title='Cập nhật' data-id=" + news.id + ">\n" +
+            "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
+            "    </a></td>" +
+            "</tr>";
+        $("table").append(row);
+    });
+}
+
+// Hàm để lấy nội dung của thẻ <p> đầu tiên
+function extractFirstParagraph(content) {
+    var temp = document.createElement("div");
+    temp.innerHTML = content;
+    var firstParagraph = temp.querySelector("p");
+    return firstParagraph ? firstParagraph.innerText : content;
+}
+
+function btnAddText() {
+    $("#btn-submit").text("Thêm")
+}
+
+function btnUpdateText() {
+    $("#btn-submit").text("Sửa")
+}
+
 // Xử lý sự kiện click vào nút hiển thị form
-$(document).on("click", "#showFromAddNews", function () {
+function showFormAddNew() {
+    btnAddText()
     var formContainer = $("#formContainer");
+    // Làm mới (reset) form
+    formContainer[0].reset();
+    // Làm mới lại trình soạn thảo CKEditor
+    var editor = window.editor;
+    if (editor) {
+        // Đặt nội dung của trình soạn thảo về rỗng
+        editor.setData('');
+    } else {
+        console.error('Trình soạn thảo CKEditor chưa được khởi tạo.');
+    }
     var categorySelect = $("#categorySelect");
     $("#displayThumbnail").hide();
     formContainer.toggle();
     $("#overlay").toggle();
 
-    // Làm mới (reset) form
-    formContainer[0].reset();
-
-    categorySelect.append($("<option>", { value: '', text: 'Chọn thể loại' }));
-
     // Load thể loại vào thẻ select
     loadCategoriesSelect();
-});
+}
 
 // Xử lý sự kiện click vào nút cập nhật form
 $(document).on("click", ".updateNews", function () {
+    $("#btn-submit").text("Sửa")
     $("#formContainer").toggle();
     $("#overlay").toggle();
 });
 
 // Xử lý sự kiện click vào overlay
-$("#overlay").click(function () {
+$("#overlay, .cancel").click(function () {
+    cancelForm()
+});
+
+// Đóng form
+function cancelForm() {
     $("#formContainer").hide();
     $("#overlay").hide();
-});
+}
 
 // Khi click vào checkALL
 document.getElementById('checkAll').addEventListener('change', function () {
@@ -108,16 +158,18 @@ document.getElementById('checkAll').addEventListener('change', function () {
 });
 
 // ===========================================================================
-
 // Load lại trang khi thêm, sửa, xoá
 function loadIndexContent() {
+    // Hiển thị loading
+    showLoading()
     // Sử dụng jQuery để tải nội dung từ index.html
     $.get("/ds-bai-viet", function (data) {
         // Thay đổi nội dung của thẻ <main>
         $("#main-content").html(data);
 
-        // Hiển thị thông báo xoá thành công
-        $(".alert-success").text("Thành công!").show();
+        hideLoading()
+
+        $(".alert-success").text("Thành công").show();
 
         // Hide the alert after 3 seconds
         setTimeout(function() {
@@ -146,10 +198,10 @@ $(document).on("click", ".updateNews", function () {
             $("#title").val(data.title);
             // $("#content").val(data.content);
             $("#shortDescription").val(data.shortDescription);
-            // displaySelectedThumbnail(data.thumbnail)
-            data.images.forEach(image => {
-                displaySelectedThumbnail(image.thumbnail);
-            });
+            displaySelectedThumbnail(data.thumbnail)
+            // data.images.forEach(image => {
+            //     displaySelectedThumbnail(image.thumbnail);
+            // });
 
             // Set data-id cho form để sử dụng trong quá trình submit
             $("#formContainer").data("id", idToUpdate);
@@ -175,20 +227,6 @@ $(document).on("click", ".updateNews", function () {
     });
 });
 
-// Xử lý sự kiện click vào nút xoá bài viết
-$(document).on("click", "#deleteNews", function (e) {
-    e.preventDefault();
-
-    var ids = $('tbody input[type=checkbox]:checked').map(function () {
-        return $(this).val();
-    }).get();
-
-    // Chuyển đổi các chuỗi số thành số nguyên
-    var numericIds = ids.map(Number);
-
-    deleteNew(numericIds);
-});
-
 // Hàm gửi request xoá bài viết
 function deleteNew(ids) {
     // Gửi yêu cầu xoá thông qua AJAX với danh sách các ID
@@ -210,12 +248,17 @@ function deleteNew(ids) {
 
             // Hiển thị thông báo lỗi xoá
             $(".alert-danger").text("Lỗi khi xoá dữ liệu!").show();
+
+            // Hide the alert after 3 seconds
+            setTimeout(function() {
+                $(".alert-danger").hide();
+            }, 3000);
         }
     });
 }
 
 // Hàm để lấy danh sách thể loại và cập nhật thẻ select
-function loadCategoriesSelect(selectedCategoryCode) {
+/*function loadCategoriesSelect(selectedCategoryCode) {
     var categorySelect = $("#categorySelect");
     categorySelect.empty();
 
@@ -257,6 +300,49 @@ function loadCategoriesSelect(selectedCategoryCode) {
             console.error("Lỗi khi lấy dữ liệu thể loại:", error);
         }
     });
+}*/
+
+// Hàm để lấy danh sách thể loại và cập nhật thẻ select
+function loadCategoriesSelect(selectedCategoryCode) {
+    $.ajax({
+        url: "http://localhost:8081/categories",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            // Lấy select element từ DOM
+            let $selectCategory = $("#categorySelect");
+
+            // Xóa các option cũ trong select
+            $selectCategory.empty();
+
+            // Thêm option mặc định
+            let defaultOption = $("<option>").val("").text("Chọn thể loại").prop("selected", true).prop("selected", true);
+            $selectCategory.append(defaultOption);
+
+            // Kiểm tra xem selectedCategoryCode có tồn tại hay không
+            if (selectedCategoryCode) {
+                // Tìm thể loại tương ứng với selectedCategoryCode
+                var selectedCategory = data.find(function(category) {
+                    return category.code === selectedCategoryCode;
+                });
+
+                // Nếu tìm thấy thể loại, thêm vào thẻ select
+                if (selectedCategory) {
+                    var option = $("<option>", { value: selectedCategory.code, text: selectedCategory.name });
+                    $selectCategory.append(option);
+                }
+            }
+
+            // Thêm các option từ Set vào select
+            $.each(data, function(index, category) {
+                let option = $("<option>").val(category.code).text(category.name);
+                $selectCategory.append(option);
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("Error loading role codes:", textStatus, errorThrown);
+        }
+    });
 }
 
 // Hàm hiển thị ảnh đã chọn ngay trên form
@@ -293,11 +379,6 @@ $("#formContainer").submit(function (e) {
     // Gọi hàm submitForm để thực hiện thêm mới hoặc cập nhật
     submitForm(idToUpdate, newData);
 });
-
-// Đảm bảo rằng CKEditor đã được tải trước khi thực hiện bất kỳ thao tác nào
-/*document.addEventListener("DOMContentLoaded", function() {
-    CKEDITOR.replace('editor');
-});*/
 
 // Hàm chung để submit form
 function submitForm(idToUpdate, newData) {
@@ -383,35 +464,6 @@ $("#thumbnail").on("change", function (e) {
     }
     $("#thumbnail").click();
 });
-/*$("#thumbnail").on("change", function (e) {
-    const file = e.target.files[0];
-
-    if (file) {
-        // Lấy URL của ảnh cũ từ trường input hidden thumbnailUrl
-        const oldImageUrl = $("#thumbnailUrl").val();
-
-        // Kiểm tra xem có URL của ảnh cũ hay không
-        if (oldImageUrl) {
-            // Lấy public ID của ảnh cũ từ URL của nó
-            const publicId = getPublicIdFromImageUrl(oldImageUrl);
-
-            // Gọi hàm deleteFromCloudinary để xóa ảnh cũ từ Cloudinary
-            deleteFromCloudinary(publicId)
-                .then(() => {
-                    // Sau khi xóa ảnh cũ thành công, tiếp tục tải lên ảnh mới
-                    uploadToCloudinary(file);
-                })
-                .catch((error) => {
-                    console.error("Error deleting old image from Cloudinary:", error);
-                });
-        } else {
-            // Nếu không có URL của ảnh cũ, tiếp tục tải lên ảnh mới
-            uploadToCloudinary(file);
-        }
-    }
-    // Gọi click để người dùng có thể chọn lại cùng một tệp ảnh sau khi đã xóa ảnh cũ
-    $("#thumbnail").click();
-});*/
 
 // Thêm image vào Cloudinary
 function uploadToCloudinary(file) {
@@ -447,33 +499,6 @@ function uploadToCloudinary(file) {
         })
         .catch((error) => {
             console.error("Error uploading to Cloudinary:", error);
-            return null;
-        });
-}
-
-function deleteFromCloudinary(imagePublicId) {
-    const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dd1grolgr/image/destroy`;
-
-    const requestBody = {
-        public_id: imagePublicId,
-        api_key: "165223227289875",
-        api_secret: "KuEgKknBTrJ7-FdsAHGJYa_Jx4c",
-    };
-
-    return fetch(cloudinaryUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log("Cloudinary delete response:", data);
-            return data;
-        })
-        .catch((error) => {
-            console.error("Error deleting from Cloudinary:", error);
             return null;
         });
 }

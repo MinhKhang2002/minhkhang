@@ -139,7 +139,7 @@ $(document).ready(function () {
         var PasswordConfirm = $("#pwdConfirm-update").val();
         var roleId = $("#RoleNameSelect-update").val();
         console.log(id+fullName+userName+Password,roleId);
-        if (Password==PasswordConfirm&&roleId!=null){
+        if (Password === PasswordConfirm && roleId != null){
             updateUser(id,fullName,userName,Password,roleId);
         }else {
             alert("kiểm tra mật khẩu nhập lại và chọn vai trò ");
@@ -177,6 +177,18 @@ $(document).on("click", "#showFromAddUser", function () {
 function showFormAddUser() {
     $.get("/fromAddUser", function (data) {
         $("#main-content").html(data);
+    })
+}
+
+function loadListUser() {
+    $.get("/listUser", function (data) {
+        $("#main-content").html(data);
+
+        $(".alert-success").text("Thành công").show()
+
+        setTimeout(function () {
+            $(".alert-success").hide()
+        }, 3000)
     })
 }
 

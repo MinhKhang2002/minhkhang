@@ -243,26 +243,15 @@ public class NewAPI {
 		return result;
 	}
 
-	/*@GetMapping(value = "/new/approve")
-	public NewOutput showNewByStatus(@RequestParam(value = "page", required = false) Integer page,
-									 @RequestParam(value = "limit", required = false) Integer limit) {
-		NewOutput result = new NewOutput();
-		int status = 0; // Đặt giá trị status là 0
-
-		if (page != null && limit != null) {
-			result.setPage(page);
-			Pageable pageable = PageRequest.of(page - 1, limit);
-			result.setListResult(newService.findAll(pageable, status)); // Truyền tham số status vào phương thức findAll
-			result.setTotalPage((int) Math.ceil((double) (newService.totalItem(status)) / limit));
-		} else {
-			result.setListResult(newService.findAll());
-		}
-		return result;
-	}*/
-
 	@PutMapping(value = "/new/{id}/approve")
 	public ResponseEntity<?> approveNew(@PathVariable("id") Long id) {
 		newService.updateStatus(id, 1); // 1 là trạng thái đã duyệt
+		return ResponseEntity.ok().build();
+	}
+
+	@PutMapping(value = "/new/{id}/notApprove")
+	public ResponseEntity<?> notApproveNew(@PathVariable("id") Long id) {
+		newService.updateStatus(id, 2); // 2 là trạng thái không được duệt
 		return ResponseEntity.ok().build();
 	}
 
@@ -273,19 +262,19 @@ public class NewAPI {
 	}
 
 	@GetMapping(value = "/newPaging/categoryCode")
-	public NewOutput PagingCategory(@RequestParam(value = "category", required = false, defaultValue = "") String Category,
+	public NewOutput PagingCategory(@RequestParam(value = "categoryCode", required = false, defaultValue = "") String categoryCode,
 												@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
 												@RequestParam(value = "limit", required = false, defaultValue = "5") Integer limit) {
 		NewOutput result = new NewOutput();
 		int status = 1; // Đặt giá trị status là 0
 		Pageable pageable;
 
-		if (Category != null && !Category.isEmpty()) {
+		if (categoryCode != null && !categoryCode.isEmpty()) {
 			result.setPage(page);
 //			pageable = PageRequest.of(page - 1, limit);
 			pageable = PageRequest.of(page - 1, limit, Sort.by("modifiedDate").descending());
-			int totalItem = newService.totalItemByCategoryAndStatus(Category, status);
-			result.setListResult(newService.findByCategoryAndStatus(Category, status, pageable));
+			int totalItem = newService.totalItemByCategoryAndStatus(categoryCode, status);
+			result.setListResult(newService.findByCategoryAndStatus(categoryCode, status, pageable));
 			/*result.setTotalPage((int) Math.ceil((double) (newService.totalItem(status)) / limit));*/
 			result.setTotalPage((int) Math.ceil((double) totalItem / limit));
 		} else {
@@ -298,15 +287,6 @@ public class NewAPI {
 		}
 		return result;
 	}
-
-	/*@GetMapping("/new/countByDateRange")
-	public ResponseEntity<List<Map<String, Object>>> countNewPostsByDateRange(
-			@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate) {
-
-		Date endDate = new Date(); // Lấy ngày và giờ hiện tại
-		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
-		return ResponseEntity.ok(counts);
-	}*/
 
 	@GetMapping("/new/countByDateRange")
 	public ResponseEntity<List<Map<String, Object>>> countNewPostsByDateRange(
@@ -340,21 +320,9 @@ public class NewAPI {
 		return ResponseEntity.ok(counts);
 	}
 
-	/*@GetMapping("/new/countByLastMonth")
-	public ResponseEntity<List<Map<String, Object>>> countNewPostsLastMonth() {
-		Calendar calendar = Calendar.getInstance();
-		Date endDate = calendar.getTime(); // Lấy ngày và giờ hiện tại
-
-		// Trừ 1 tháng từ ngày hiện tại
-		calendar.add(Calendar.MONTH, -1);
-		Date startDate = calendar.getTime();
-
-		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
-		return ResponseEntity.ok(counts);
-	}*/
 	@GetMapping("/new/countByLastMonth")
 	public ResponseEntity<List<Map<String, Object>>> countNewPostsLastMonth() {
-		Calendar calendar = Calendar.getInstance();
+		/*Calendar calendar = Calendar.getInstance();
 
 		// Đặt endDate là ngày cuối cùng của tháng trước
 		calendar.add(Calendar.MONTH, -1);
@@ -365,12 +333,37 @@ public class NewAPI {
 		Date endDate = calendar.getTime();
 
 		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
+		return ResponseEntity.ok(counts);*/
+		Calendar calendar = Calendar.getInstance();
+
+		// Đặt endDate là ngày cuối cùng của tháng trước
+		calendar.add(Calendar.MONTH, -1);
+//		calendar.set(Calendar.DAY_OF_MONTH, 1); // Đặt ngày là 1 để lấy đầu tháng
+		Date endDate = calendar.getTime();
+
+//		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH)); // Đặt ngày là ngày cuối cùng của tháng
+		calendar.add(Calendar.MONTH, -1);
+		Date startDate = calendar.getTime();
+
+		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
 		return ResponseEntity.ok(counts);
 	}
 
 
 	@GetMapping("/new/countByLastQuarter")
 	public ResponseEntity<List<Map<String, Object>>> countNewPostsLastQuarter() {
+		Calendar calendar = Calendar.getInstance();
+
+		// Di chuyển ngày hiện tại 3 tháng trước để có được thời điểm cuối cùng của quý hiện tại
+		calendar.add(Calendar.MONTH, -3);
+		Date endDate = calendar.getTime();
+
+		// Di chuyển thêm 9 tháng (3 quý) để đến thời điểm cuối cùng của quý trước đó
+		calendar.add(Calendar.MONTH, -3);
+		Date startDate = calendar.getTime();
+
+		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
+		return ResponseEntity.ok(counts);
 		/*Calendar calendar = Calendar.getInstance();
 		Date endDate = calendar.getTime(); // Lấy ngày và giờ hiện tại
 
@@ -380,14 +373,5 @@ public class NewAPI {
 
 		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
 		return ResponseEntity.ok(counts);*/
-		Calendar calendar = Calendar.getInstance();
-		Date endDate = calendar.getTime(); // Lấy ngày và giờ hiện tại
-
-		// Trừ 3 tháng từ ngày hiện tại
-		calendar.add(Calendar.MONTH, -3);
-		Date startDate = calendar.getTime();
-
-		List<Map<String, Object>> counts = newService.getNewPostCountsByDateRange(startDate, endDate);
-		return ResponseEntity.ok(counts);
 	}
 }

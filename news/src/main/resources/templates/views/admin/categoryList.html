@@ -43,10 +43,10 @@
             <i class="fas fa-table me-1"></i>
             Danh sách thể loại
         </div>
-        <div class="alert alert-success">
+        <div class="alert alert-success hidden">
             <strong>Success!</strong>
         </div>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger hidden">
             <strong>Danger!</strong>
         </div>
         <div class="card-body">
@@ -77,7 +77,7 @@
                     <label for="category-code">Mã thể loại</label>
                     <input type="text" class="form-control" id="category-code" placeholder="VD: the-thao">
                 </div>
-                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                <button type="submit" id="btn-submit" class="btn btn-primary mt-4"></button>
             </form>
             <div class="overlay" id="overlay"></div>
 <!--fom update-->

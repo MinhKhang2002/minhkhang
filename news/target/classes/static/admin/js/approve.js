@@ -36,9 +36,9 @@ $(document).ready(function () {
             var row = "<tr>" +
                 "<td><input type='checkbox' class='checkbox-del' data-id="+ item.id +" id='checkbox_" + item.id + "' value='" + item.id + "'></td>" +
                 "<td>" + item.title + "</td>" +
-                "<td>" + item.content + "</td>" +
+                "<td>" + extractFirstParagraph(item.content) + "</td>" +
                 "<td>" + item.shortDescription + "</td>" +
-                "<td><a class=\"updateNews\" href=\"#\" title='Chi tiết' data-id=" + item.id + ">\n" +
+                "<td style='display: none'><a class=\"updateNews\" href=\"#\" title='Chi tiết' data-id=" + item.id + ">\n" +
                 "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
                 // "       <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n" +
                 "    </a></td>" +
@@ -49,6 +49,16 @@ $(document).ready(function () {
             // Thêm hàng mới vào tbody của bảng
             $("table tbody").append(row);
         });
+    }
+
+
+
+// Hàm để lấy nội dung của thẻ <p> đầu tiên
+    function extractFirstParagraph(content) {
+        var temp = document.createElement("div");
+        temp.innerHTML = content;
+        var firstParagraph = temp.querySelector("p");
+        return firstParagraph ? firstParagraph.innerText : content;
     }
 
     // Gọi hàm fetchAndDisplayData để lấy và hiển thị dữ liệu khi trang được tải

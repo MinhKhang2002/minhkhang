@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:insert="~{/views/admin/head :: head}"></head>
+<head th:replace="~{/views/admin/head :: head}"></head>
 
 <body class="sb-nav-fixed">
-<nav th:insert="~{/views/admin/header :: header}"></nav>
+<nav th:replace="~{/views/admin/header :: header}"></nav>
 <div id="layoutSidenav">
     <div th:insert="~{/views/admin/menu :: menu}"></div>
     <div id="layoutSidenav_content">
+        <!--Loading-->
+        <div id="loadingIndicator" style="display: none;">
+            <img th:src="@{/static/assets/loading/Loading.png}" alt="Loading...">
+        </div>
+
+        <div class="overlay" id="overlay"></div>
         <main id="main-content" th:fragment="main-content">
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Thống kê và thông báo</h1>

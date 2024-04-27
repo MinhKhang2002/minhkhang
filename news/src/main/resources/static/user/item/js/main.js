@@ -34,7 +34,7 @@ $(document).ready(function () {
     function showItemNews(data) {
         $("#title-item").text(data.title);
         // $(".thumbnail-item").attr("src", data.images[0].thumbnail);
-        $(".thumbnail-item").attr("src", data.thumbnail);
+        // $(".thumbnail-item").attr("src", data.thumbnail);
 
         // Hiển thị nội dung vào trong CKEditor
         if (window.editor) {

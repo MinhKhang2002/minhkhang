@@ -40,3 +40,16 @@
 .d-0{
     display: none;
 }
+
+#loadingIndicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Đảm bảo biểu tượng loading hiển thị trên tất cả các phần khác */
+}
+
+#loadingIndicator img {
+    width: 100px; /* Độ rộng của biểu tượng loading */
+    height: 100px; /* Độ cao của biểu tượng loading */
+}

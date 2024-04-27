@@ -57,6 +57,7 @@ $(document).ready(function () {
 
     })
     $(document).on("click", ".updateCategory", function () {
+        btnUpdateText()
         var id = $(this).data("id");
         var name = $(this).data("name");
         console.log("Name", name)
@@ -87,10 +88,17 @@ $(document).ready(function () {
         if (numbericIds.length > 0) {
             deleteCategory(numbericIds);
         } else {
-            alert("Bạn hãy chọn thể loại muốn xóa");
+            $(".alert-danger").text("Vui lòng chọn bài viết cần xoá!").show()
+
+            setTimeout(function () {
+                $(".alert-danger").hide()
+            }, 3000)
         }
     });
+
+    // Click vào thêm thể loại mới
     $("#btnAddCategory").on("click",function () {
+        btnAddText()
         showFormCategory();
     });
 })
@@ -130,7 +138,7 @@ function addCategory(name, code) {
         success: function (response) {
             cancelForm()
             showCategoryList()
-            success()
+            // success()
         },
         error: function (error) {
             $(".alert-danger").text("Lỗi! Thêm không thành công.").show();
@@ -143,8 +151,14 @@ function addCategory(name, code) {
 
 function success() {
     // Hiển thị thông báo xoá thành công
-    $(".alert-success").text("Thêm thành công!").show();
+    $(".alert-success").text("Thành công!").show();
+
+    // Hide the alert after 3 seconds
+    setTimeout(function() {
+        $(".alert-success").hide();
+    }, 3000);
 }
+
 function updateCategory(id, name, code) {
     $.ajax({
         type: "PUT",
@@ -171,6 +185,8 @@ function updateCategory(id, name, code) {
 function showCategoryList() {
     $.get("/categoryList", function (data) {
         $("#main-content").html(data)
+
+        success()
     })
 }
 

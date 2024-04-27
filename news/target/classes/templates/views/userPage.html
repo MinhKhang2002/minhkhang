@@ -3,6 +3,10 @@
 <head th:insert="~{/views/user/head :: head}"></head>
 <body>
     <div th:insert="~{/views/user/header :: header}"></div>
+    <select id="categorySelectHome" class="form-select">
+        <!-- Dữ liệu từ API sẽ được thêm vào đây -->
+        <option value="" selected disabled>Chọn thể loại</option>
+    </select>
     <section th:insert="~{/views/user/content :: section}"></section>
     <div th:insert="~{/views/user/footer :: footer}"></div>
 </body>

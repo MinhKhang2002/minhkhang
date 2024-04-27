@@ -1,11 +1,11 @@
 
 // Sử dụng sự kiện click cho thẻ a
 $(document).on("click", "#approveLink", function () {
-    loadApproveContent();
+    loadPageApproveContent();
 })
 
 // Hàm để tải nội dung trang "Duyệt tin tức"
-function loadApproveContent() {
+function loadPageApproveContent() {
     $.get("/teststatus", function(data) {
         // Thay đổi nội dung của thẻ <main>
         $("#main-content").html(data);
@@ -13,20 +13,20 @@ function loadApproveContent() {
 }
 
 $(document).on("click", "#ds-user", function () {
-    loadListUser()
+    loadPageListUser()
 })
 
-function loadListUser() {
+function loadPageListUser() {
     $.get("/listUser", function (data) {
         $("#main-content").html(data);
     })
 }
 
 $(document).on("click", "#listNew", function () {
-    loadListNew()
+    loadPageListNew()
 })
 
-function loadListNew() {
+function loadPageListNew() {
     $.get("/ds-bai-viet", function (data) {
         // Thay đổi nội dung của thẻ <main>
         $("#main-content").html(data);
@@ -48,10 +48,10 @@ function retrieveCategories() {
 retrieveCategories();
 
 $(document).on("click", "#phong-vien", function () {
-    loadContent()
+    loadPageContent()
 })
 
-function loadContent() {
+function loadPageContent() {
     $.get("/phong-vien", function(data) {
         // Thay đổi nội dung của thẻ <main>
         $("#main-content").html(data);
@@ -59,20 +59,20 @@ function loadContent() {
 }
 
 $(document).on("click", "#ds-category", function () {
-    showCategoryList()
+    showPageCategoryList()
 })
 
-function showCategoryList() {
+function showPageCategoryList() {
     $.get("/categoryList", function (data) {
         $("#main-content").html(data)
     })
 }
 
 $(document).on("click", "#ds-role", function () {
-    showRoleList()
+    showPageRoleList()
 })
 
-function showRoleList() {
+function showPageRoleList() {
     $.get("/roleList", function (data){
         $("#main-content").html(data)
     })
