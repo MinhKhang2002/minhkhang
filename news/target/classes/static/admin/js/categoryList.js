@@ -37,18 +37,6 @@ $(document).ready(function () {
         });
     }
 
-    /*function updatePagination(totalPages) {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPages, // Số trang tổng cộng
-            visiblePages: 10, // Số trang hiển thị
-            onPageClick: function (event, page) {
-                fetchAndDisplayData(page, 5); // Gọi hàm để lấy và hiển thị dữ liệu cho trang mới
-            }
-        });
-    }
-
-    fetchAndDisplayData(1, 5);*/
-
     fetchAndDisplayData();
 
     // Khi nhấn submit trong form
@@ -57,7 +45,7 @@ $(document).ready(function () {
 
     })
     $(document).on("click", ".updateCategory", function () {
-        btnUpdateText()
+        $("#btn-submit").text("Sửa")
         var id = $(this).data("id");
         var name = $(this).data("name");
         console.log("Name", name)
@@ -68,6 +56,7 @@ $(document).ready(function () {
         $("#formContainer").show();
         $("#overlay").show();
     });
+
     function submitFrom(event) {
         event.preventDefault(); // Ngăn chặn việc submit form
         var id = $("#category-id").val();
@@ -97,9 +86,10 @@ $(document).ready(function () {
     });
 
     // Click vào thêm thể loại mới
-    $("#btnAddCategory").on("click",function () {
-        btnAddText()
-        showFormCategory();
+    $(document).on("click","#btnAddCategory",function () {
+        $("#btn-submit").text("Thêm")
+        $("#formContainer").toggle()
+        $("#overlay").toggle()
     });
 })
 

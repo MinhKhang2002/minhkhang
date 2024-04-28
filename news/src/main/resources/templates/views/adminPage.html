@@ -56,6 +56,9 @@
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
+                        <!--List  bài viết không duyệt-->
+<!--                        <div id="notApprovedPostsList" class="not-approved-posts-list"></div>-->
+
                     </div>
                 </div>
                 <div class="row">
@@ -92,6 +95,37 @@
         <footer th:insert="~{/views/admin/footer :: footer}"></footer>
     </div>
 </div>
+<!--<script>
 
+
+    function loadNotApprovedPosts() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8081/detailNotApprove",
+            success: function (data) {
+                // Xử lý dữ liệu trả về
+                var listResult = data.listResult;
+                if (listResult.length > 0) {
+                    var html = "<ul>";
+                    listResult.forEach(function (post) {
+                        html += "<li>" + post.title + "</li>";
+                    });
+                    html += "</ul>";
+                    // Hiển thị danh sách bài viết trong một cửa sổ hoặc tooltip
+                    // Ở đây tôi giả sử sử dụng tooltip của Bootstrap
+                    $('.card.bg-danger').tooltip({
+                        title: html,
+                        html: true,
+                        trigger: 'manual',
+                        placement: 'bottom'
+                    }).tooltip('show');
+                }
+            },
+            error: function (error) {
+                console.error("Lỗi:", error);
+            }
+        });
+    }
+</script>-->
 </body>
 </html>

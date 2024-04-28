@@ -1,3 +1,15 @@
 .pagination {
     display: block;
 }
+
+.logo-image {
+    width: 140px;
+    border-radius: 5px;
+}
+/*
+!* CSS cho thẻ <a> khi được chọn *!
+#categoriesNav nav a.selected {
+    background-color: #333;
+    color: #fff !important;
+    border-radius: 5px;
+}*/

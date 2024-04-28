@@ -14,6 +14,12 @@
     <script th:src="@{/static/template/paging/jquery.twbsPagination.js}"></script>
     <script th:src="@{/static/admin/js/approve.js}"></script>
     <script th:src="@{/static/admin/js/aggregate.js}"></script>
+    <style>
+        .notApprove {
+            font-size: 20px;
+            margin: 5px;
+        }
+    </style>
 </head>
 <body id="container">
     <div th:fragment="main-content" class="container-fluid px-4 magin-top">
@@ -30,14 +36,14 @@
                 <strong>Danger!</strong>
             </div>
             <div class="card-body">
-                <!--<div class="icon">
-                    <a id="showFromAddNews">
+                <div class="icon">
+                    <!--<a id="showFromAddNews">
                         <i class="fa-regular fa-square-plus showFromAddNews"></i>
-                    </a>
-                    <a id="deleteNews">
+                    </a>-->
+                    <a id="notApprove" class="notApprove" href="#">
                         <i class="fa-regular fa-trash-can"></i>
                     </a>
-                </div>-->
+                </div>
 
                 <div class="overlay" id="overlay"></div>
                 <table class="table table-bordered">

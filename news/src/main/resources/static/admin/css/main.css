@@ -53,3 +53,19 @@
     width: 100px; /* Độ rộng của biểu tượng loading */
     height: 100px; /* Độ cao của biểu tượng loading */
 }
+
+.not-approved-posts-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.logo-image {
+    width: 140px;
+    border-radius: 5px;
+}

@@ -246,7 +246,7 @@ sup {
 
 a {
   color: var(--bs-link-color);
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:hover {
   color: var(--bs-link-hover-color);
@@ -10823,4 +10823,10 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+
+.click-category {
+  background-color: #333;
+  color: #fff !important;
+  border-radius: 5px;
 }

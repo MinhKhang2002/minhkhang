@@ -38,7 +38,7 @@ $(document).ready(function () {
                 "<td>" + item.title + "</td>" +
                 "<td>" + extractFirstParagraph(item.content) + "</td>" +
                 "<td>" + item.shortDescription + "</td>" +
-                "<td style='display: none'><a class=\"updateNews\" href=\"#\" title='Chi tiết' data-id=" + item.id + ">\n" +
+                "<td style='display: none'><a class=\"detailApprove\" href=\"#\" title='Chi tiết' data-id=" + item.id + ">\n" +
                 "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
                 // "       <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n" +
                 "    </a></td>" +
@@ -100,6 +100,17 @@ function loadIndexContent() {
     });
 }
 
+function error(text) {
+
+    // Hiển thị thông báo xoá thành công
+    $(".alert-danger").text(text).show();
+
+    // Hide the alert after 3 seconds
+    setTimeout(function() {
+        $(".alert-danger").hide();
+    }, 3000);
+}
+
 $(document).on("click", "#Duyet", function (e) {
     e.preventDefault();
 
@@ -109,3 +120,35 @@ $(document).on("click", "#Duyet", function (e) {
     // var numericIds = id.map(Number);
     updateStatus(id)
 })
+
+// Thêm hàm xử lý sự kiện cho checkbox, sử dụng delegated event
+$(document).on("change", ".checkbox-del", function () {
+    if ($(this).prop("checked")) {
+        var id = $(this).val();
+    }
+});
+
+$("#notApprove").click(function () {
+    // Lấy ID của checkbox đầu tiên được chọn
+    var id = $(".checkbox-del:checked").first().val();
+    if (id) {
+        notApprove(id);
+    } else {
+        error("Vui lòng chọn tối thiếu 1 bài viết!")
+    }
+})
+
+function notApprove(id) {
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:8081/new/" + id + "/notApprove",
+        success: function (result) {
+            // alert("Duyệt thành công")
+            loadIndexContent()
+            console.log("Đã từ trối duyệt bài viết có ID:", id);
+        },
+        error: function (error) {
+            console.error("Lỗi:", error);
+        }
+    });
+}

@@ -63,6 +63,13 @@ $(document).ready(function () {
         }
     });
 
+// Xử lý sự kiện click vào nút cập nhật form
+    $(document).on("click", ".updateNews", function () {
+        $("#btn-submit").text("Sửa")
+        $("#formContainer").toggle();
+        $("#overlay").toggle();
+    });
+
 // Xử lý sự kiện submit form
     $("#formContainer").submit(function (e) {
         e.preventDefault();
@@ -88,8 +95,14 @@ $(document).ready(function () {
         // Gọi hàm submitForm để thực hiện thêm mới hoặc cập nhật
         submitForm(idToUpdate, newData);
     });
-});
 
+
+    $("#notApprovedPostsCard").mouseenter(function() {
+        loadNotApprovedPosts();
+    }).mouseleave(function() {
+        $("#notApprovedPostsList").hide();
+    });
+});
 
 function updateTable(newsList) {
     $("table tbody").empty(); // Xóa nội dung của tbody trước khi thêm hàng mới
@@ -148,13 +161,6 @@ function showFormAddNew() {
     // Load thể loại vào thẻ select
     loadCategoriesSelect();
 }
-
-// Xử lý sự kiện click vào nút cập nhật form
-$(document).on("click", ".updateNews", function () {
-    $("#btn-submit").text("Sửa")
-    $("#formContainer").toggle();
-    $("#overlay").toggle();
-});
 
 // Xử lý sự kiện click vào overlay
 $("#overlay, .cancel").click(function () {
