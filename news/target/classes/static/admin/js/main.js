@@ -1,8 +1,4 @@
 $(document).ready(function () {
-
-    /*$(document).on("click", "#showFromAddNews", function () {
-        showFormAddNew()
-    });*/
     $("#showFromAddNews").click(function () {
         showFormAddNew()
     });
@@ -66,7 +62,33 @@ $(document).ready(function () {
             deleteNew(numericIds);
         }
     });
-})
+
+// Xử lý sự kiện submit form
+    $("#formContainer").submit(function (e) {
+        e.preventDefault();
+
+        var idToUpdate = $(this).data("id");
+        var title = $("#title").val();
+        console.log("Title: ", title)
+        var content = $("#content").val();
+        var shortDescription = $("#shortDescription").val();
+        var categoryCode = $("#categorySelect").val();
+        var thumbnail = $("#thumbnailUrl").val();
+        console.log("Type of Thumbnail URL:", typeof $("#thumbnailUrl").val());
+        console.log("Type of Thumbnail:", thumbnail);
+
+        var newData = {
+            title: title,
+            content: content,
+            shortDescription: shortDescription,
+            categoryCode: categoryCode,
+            thumbnail: thumbnail
+        };
+
+        // Gọi hàm submitForm để thực hiện thêm mới hoặc cập nhật
+        submitForm(idToUpdate, newData);
+    });
+});
 
 
 function updateTable(newsList) {
@@ -354,32 +376,6 @@ function displaySelectedThumbnail(imageUrl) {
     $("#displayThumbnail").attr("src", imageUrl);
 }
 
-// Xử lý sự kiện submit form
-$("#formContainer").submit(function (e) {
-    e.preventDefault();
-
-    var idToUpdate = $(this).data("id");
-    var title = $("#title").val();
-    console.log("Title: ", title)
-    var content = $("#content").val();
-    var shortDescription = $("#shortDescription").val();
-    var categoryCode = $("#categorySelect").val();
-    var thumbnail = $("#thumbnailUrl").val();
-    console.log("Type of Thumbnail URL:", typeof $("#thumbnailUrl").val());
-    console.log("Type of Thumbnail:", thumbnail);
-
-    var newData = {
-        title: title,
-        content: content,
-        shortDescription: shortDescription,
-        categoryCode: categoryCode,
-        thumbnail: thumbnail
-    };
-
-    // Gọi hàm submitForm để thực hiện thêm mới hoặc cập nhật
-    submitForm(idToUpdate, newData);
-});
-
 // Hàm chung để submit form
 function submitForm(idToUpdate, newData) {
     var form = $("#formContainer");
@@ -529,6 +525,85 @@ document.querySelector('.textarea').addEventListener('input', function(event) {
         this.rows = 1;
     }
 })
+
+/*// Thêm image vào Cloudinary và chèn URL vào CKEditor
+function uploadAndInsertImageToEditor(file) {
+    const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dd1grolgr/image/upload";
+    const uploadPreset = "auto-tag";
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+
+    return fetch(cloudinaryUrl, {
+        method: "POST",
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Cloudinary response:", data);
+
+            // Lấy URL của ảnh từ Cloudinary
+            const imageUrl = data.secure_url;
+
+            // Tạo một phần tử hình ảnh trong CKEditor với URL từ Cloudinary
+            const imageElement = window.editor.document.createElement("img");
+            imageElement.setAttribute("src", imageUrl);
+
+            // Chèn phần tử hình ảnh vào CKEditor
+            window.editor.model.insertContent(imageElement);
+
+            // Trả về URL của ảnh đã tải lên
+            return imageUrl;
+        })
+        .catch(error => {
+            console.error("Error uploading image to Cloudinary:", error);
+            return null;
+        });
+}*/
+
+// Thêm image vào Cloudinary và chèn URL vào CKEditor
+function uploadAndInsertImageToEditor(file) {
+    const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dd1grolgr/image/upload";
+    const uploadPreset = "auto-tag";
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+
+    return fetch(cloudinaryUrl, {
+        method: "POST",
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Cloudinary response:", data);
+
+            // Lấy URL của ảnh từ Cloudinary
+            const imageUrl = data.secure_url;
+
+            // Trả về URL của ảnh đã tải lên
+            return imageUrl;
+        })
+        .catch(error => {
+            console.error("Error uploading image to Cloudinary:", error);
+            return null;
+        });
+}
+
+// Lắng nghe sự kiện 'fileUploadRequest' khi có yêu cầu tải lên ảnh
+document.addEventListener('fileUploadRequest', function (event) {
+    var fileLoader = event.detail.loader;
+
+    // Gọi hàm uploadAndInsertImageToEditor với file ảnh
+    uploadAndInsertImageToEditor(fileLoader.file)
+        .then(imageUrl => {
+            // Xử lý sau khi ảnh được tải lên và chèn vào CKEditor
+        })
+        .catch(error => {
+            console.error("Lỗi khi tải lên ảnh và chèn vào CKEditor:", error);
+        });
+});
 
 CKEDITOR.ClassicEditor
     .create(document.getElementById("editor"), {
@@ -684,30 +759,32 @@ CKEDITOR.ClassicEditor
         // Đoạn mã trong then được thực thi khi CKEditor đã được tạo thành công
         window.editor = editor;
 
-        // Đăng ký sự kiện dragstart trên nội dung của CKEditor
-        editor.editing.view.document.on('dragstart', function (eventInfo) {
-            var target = event.data.getTarget();
-            // Kiểm tra xem đối tượng được kéo có phải là ảnh không
-            if (target.is("img")) {
-                var file = target.$.src;
-                // Gọi hàm uploadToCloudinary với file ảnh
-                uploadToCloudinary(file)
-                    .then(cloudinaryUrl => {
-                        // Nếu tải lên thành công, chèn URL của ảnh vào nội dung CKEditor
-                        if (cloudinaryUrl) {
-                            var imageElement = window.editor.document.createElement("img");
-                            imageElement.setAttribute("src", cloudinaryUrl);
-                            window.editor.insertElement(imageElement);
-                            console.log("Uploaded image URL:", cloudinaryUrl);
-                        } else {
-                            console.error("Failed to upload image to Cloudinary.");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error uploading image to Cloudinary:", error);
-                    });
+        class MyUploadAdapter {
+            constructor(loader) {
+                this.loader = loader;
             }
-        });
+
+            upload() {
+                return this.loader.file.then(file => {
+                    return new Promise((resolve, reject) => {
+                        uploadAndInsertImageToEditor(file)
+                            .then(imageUrl => {
+                                resolve({
+                                    default: imageUrl
+                                });
+                            })
+                            .catch(error => {
+                                reject(error);
+                            });
+                    });
+                });
+            }
+        }
+
+        // Lắng nghe sự kiện 'fileUploadRequest' khi editor đã sẵn sàng
+        editor.plugins.get('FileRepository').createUploadAdapter = function (loader) {
+            return new MyUploadAdapter(loader);
+        };
     })
     .catch(error => {
         console.error('Đã xảy ra lỗi khi tạo CKEditor:', error);

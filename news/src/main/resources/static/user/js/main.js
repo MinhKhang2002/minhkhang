@@ -90,7 +90,7 @@ $(document).ready(function () {
         if (!window.pagObj || window.pagObj.totalPages !== totalPages) {
             // Nếu chưa có phân trang hoặc totalPages thay đổi, tạo mới phân trang
             if (window.pagObj) {
-                $('#pagination').twbsPagination('destroy');
+                // $('#pagination').twbsPagination('destroy');
             }
             window.pagObj = $('#pagination').twbsPagination({
                 totalPages: totalPages,
