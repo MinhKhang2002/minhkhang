@@ -3,40 +3,52 @@ $(document).ready(function () {
     loadCategoriesSelectHome()
     // changeCategory()
 });
-function updatePagination(totalPages) {
-    /*// Đảm bảo totalPages không nhỏ hơn 1
-    totalPages = Math.max(totalPages, 1);*/
+// Phân trang
+var currentPage = 1;
+function updatePagination(totalPage) {
+    // Xóa các nút phân trang hiện có
+    $('#pagination').empty();
 
-    // Hide or show pagination based on totalPages
-    if (totalPages <= 1) {
-        $('#pagination').hide();
-    } else {
-        $('#pagination').show();
-    }
-
-    window.pagObj = $('#pagination').twbsPagination({
-        totalPages: totalPages,
-        visiblePages: 10,
-        onPageClick: function (event, page) {
-            FilterNewByCategory(page, 8);
+    // Tạo nút "Trang trước"
+    var prevButton = $('<button>').text('Trang trước').addClass("border-page1").on('click', function() {
+        // Kiểm tra nếu đang ở trang đầu tiên
+        if (currentPage === 1) {
+            return;
         }
+        currentPage--;
+        FilterNewByCategory(currentPage, 8);
     });
 
-    /*// Luôn gọi phương thức updateOptions để cập nhật thông tin phân trang
-    if (window.pagObj) {
-        window.pagObj.updateOptions({
-            totalPages: totalPages,
+    // Thêm nút "Trang trước" và "Trang sau" vào phân trang
+    $('#pagination').append(prevButton);
+
+    // Tạo các nút phân trang từ trang 1 đến trang cuối cùng
+    for (var i = 1; i <= totalPage; i++) {
+        var pageButton = $('<button>').text(i).on('click', function() {
+            currentPage = parseInt($(this).text());
+            // Xóa lớp active từ tất cả các nút
+            $("#pagination button").removeClass('active-pagination');
+            // Thêm lớp active cho nút được click
+            $(this).addClass('active-pagination');
+            FilterNewByCategory(currentPage, 8);
         });
-    } else {
-        // Nếu window.pagObj chưa được khởi tạo, tạo mới phân trang
-        $('#pagination').twbsPagination({
-            totalPages: totalPages,
-            visiblePages: 10,
-            onPageClick: function (event, page) {
-                FilterNewByCategory(page, 8);
-            }
-        });
-    }*/
+        // Thêm lớp active cho nút trang hiện tại
+        if (i === currentPage) {
+            pageButton.addClass('active-pagination');
+        }
+        $('#pagination').append(pageButton);
+    }
+
+    // Tạo nút "Trang sau"
+    var nextButton = $('<button>').text('Trang sau').addClass("border-page2").on('click', function() {
+        // Kiểm tra nếu đang ở trang cuối cùng
+        if (currentPage === totalPage) {
+            return;
+        }
+        currentPage++;
+        FilterNewByCategory(currentPage, 8);
+    });
+    $('#pagination').append(nextButton);
 }
 
 function updateTable(newsList) {
@@ -98,9 +110,8 @@ function FilterNewByCategory(pageNumber, limit) {
         },
         dataType: "json",
         success: function (data) {
-            // console.log(data)
+            // Cập nhật giao diện phân trang với số trang mới
             updatePagination(data.totalPage);
-            console.log("totalPage: ", data.totalPage);
             updateTable(data.listResult);
         },
         error: function (error) {

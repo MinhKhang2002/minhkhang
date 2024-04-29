@@ -49,6 +49,43 @@
                 </div>
             </div>-->
         </div>
-        <ul class="pagination" id="pagination"></ul>
+<!--        <ul class="pagination" id="pagination"></ul>-->
+        <div id="pagination" class="pagination justify-content-center mb-4"></div>
     </div>
+
+    <style>
+        .pagination {
+            text-align: center;
+        }
+
+        .pagination button {
+            /*margin: 5px;*/
+            padding: 5px 15px;
+            font-size: 17px;
+            cursor: pointer;
+            border: 1px solid #dee2e6;
+            /*border-radius: 5px;*/
+            /*padding: 5px 10px;
+            margin-left: -1px;
+            line-height: 1.25;
+            color: #007bff;
+            background-color: #fff;
+            border: 1px solid #dee2e6;*/
+        }
+
+        .border-page1 {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .border-page2 {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .active-pagination {
+            background-color: #007bff; /* Màu nền khi được chọn */
+            color: #fff; /* Màu chữ khi được chọn */
+        }
+    </style>
 </section>
