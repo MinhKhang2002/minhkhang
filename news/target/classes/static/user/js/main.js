@@ -71,7 +71,7 @@ function updateTable(newsList) {
             "</div>" +
             "</div>" +
             "<div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>" +
-            "<div class='text-center'><a class='btn btn-outline-dark mt-auto btn-viewsmore' href='/item?id="+news.id+"'>View options</a></div>" +
+            "<div class='text-center'><a class='btn btn-outline-dark mt-auto btn-viewsmore' href='/item?id="+news.id+"'>Xem chi tiết</a></div>" +
             "</div>" +
             "</div>" +
             "</div>");

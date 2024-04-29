@@ -88,8 +88,22 @@
         const userId = userIdInput.getAttribute('value');
         console.log(userId);
         console.log(newId);
+
         commentForm.addEventListener('submit', function(event) {
             event.preventDefault(); // Ngăn chặn việc gửi form mặc định
+
+            // Kiểm tra xem userId có giá trị hay không
+            if (!userId || userId.trim() === '') {
+                // Nếu userId không có giá trị, hiển thị thông báo và ngăn chặn việc đăng bình luận
+                alert('Bạn cần đăng nhập để đăng bình luận!');
+                const confirmation = confirm('Bạn có muốn đăng nhập ngay bây giờ?');
+
+                // Nếu người dùng chọn "OK" (đồng ý), chuyển hướng tới trang đăng nhập
+                if (confirmation) {
+                    window.location.href = '/login'; // Thay đổi '/login' bằng đường dẫn tới trang đăng nhập của bạn
+                }
+                return;
+            }
 
             // Nếu đang trong quá trình gửi dữ liệu thì không thực hiện gửi nữa
             if (submitting) {
@@ -159,7 +173,6 @@
                     "<div class='d-flex justify-content-between'>" +
                     "<div class='d-flex align-items-center'>" +
                     "<h5 class='name-comment'></h5>" +
-                    "<p class='date'></p>" +
                     "</div>" +
                     "<div class='actions'>" + // Bỏ CSS inline ở đây
                     "<button class='btn-delete-comment hidden'>Xóa</button>" + // Thêm class 'hidden'
@@ -167,6 +180,7 @@
                     "</div>" + // Kết thúc phần HTML cho nút "Xóa" và "Cập nhật"
                     "</div>" +
                     "<p class='comment comment-content'></p>" +
+                    "<p class='date'></p>" +
                     "</div>" +
                     "</div>" +
                     "</div>");
@@ -281,8 +295,10 @@
         font-size: 18px;
         font-weight: bold;
         margin-bottom: 5px;
+        margin-top: 15px;
     }
     .comment-list .user .desc .comment-content {
+        margin-top: 15px;
         font-size: 22px;
         line-height: 1.6;
     }
@@ -298,7 +314,6 @@
     .comment-list .user .desc .date {
         font-size: 14px;
         color: #888;
-        margin-left: 30px;
         white-space: nowrap; /* Ngăn chặn việc ngắt dòng */
         overflow: hidden; /* Ẩn phần vượt quá chiều rộng */
         text-overflow: ellipsis;
