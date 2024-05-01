@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+    // loadRolesSelect()
 });
 /*$("#addUserForm").submit(function(event) {
     event.preventDefault(); // Ngăn chặn việc submit form
@@ -46,8 +46,8 @@ function addUser(userName, fullName, password, roleId) {
         },*/
         dataType: "json",
         success: function (response) {
-            console.log("Thêm người dùng thành công:", response);
-            alert("Thêm người dùng thành công!");
+            /*console.log("Thêm người dùng thành công:", response);
+            alert("Thêm người dùng thành công!");*/
             loadListUser();
             /*if (response.id) {
                 alert("Thêm người dùng thành công!");

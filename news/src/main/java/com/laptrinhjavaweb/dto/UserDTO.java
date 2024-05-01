@@ -1,11 +1,17 @@
 package com.laptrinhjavaweb.dto;
 
+import com.laptrinhjavaweb.entity.RoleEntity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserDTO extends AbstractDTO<UserDTO> {
-    private int roleId;
+    private long roleId;
     private String userName;
     private String password;
     private String fullName;
     private Integer status;
+    private List<RoleDTO> roles = new ArrayList<>();
 
     public String getUserName() {
         return userName;
@@ -39,12 +45,20 @@ public class UserDTO extends AbstractDTO<UserDTO> {
         this.status = status;
     }
 
-    public int getRoleId() {
+    public long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(long roleId) {
         this.roleId = roleId;
+    }
+
+    public List<RoleDTO> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleDTO> roles) {
+        this.roles = roles;
     }
 }
 

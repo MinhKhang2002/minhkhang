@@ -1,6 +1,8 @@
 package com.laptrinhjavaweb.api;
 
 import com.laptrinhjavaweb.dto.CategoryDTO;
+import com.laptrinhjavaweb.entity.RoleEntity;
+import com.laptrinhjavaweb.repository.RoleRepository;
 import com.laptrinhjavaweb.service.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -16,6 +18,7 @@ import java.util.List;
 public class CategoryAPI {
     @Autowired
     private CategoryService categoryService;
+
     @GetMapping("/categories")
     public ResponseEntity<List<CategoryDTO>> getAllCategories() {
         List<CategoryDTO> categories = categoryService.getAllCategories();

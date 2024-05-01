@@ -37,4 +37,7 @@ public interface NewRepository extends JpaRepository<NewEntity, Long>{
 	List<Object[]> countByDateRange(@Param("startDate") Date startDate, @Param("endDate") Date endDate);*/
 	@Query("SELECT n.createdDate, COUNT(n) FROM NewEntity n WHERE n.createdDate BETWEEN :startDate AND :endDate AND n.status = :status GROUP BY n.createdDate")
 	List<Object[]> countByDateRangeWithStatus(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("status") int status);
+
+	// Xoá bài viết có category_id liên quan khi xoá thể loại
+	List<NewEntity> findByCategoryId(long categoryId);
 }

@@ -1,9 +1,13 @@
 package com.laptrinhjavaweb.converter;
 
 import com.laptrinhjavaweb.dto.CategoryDTO;
+import com.laptrinhjavaweb.dto.RoleDTO;
 import com.laptrinhjavaweb.dto.UserDTO;
 import com.laptrinhjavaweb.entity.CategoryEntity;
+import com.laptrinhjavaweb.entity.RoleEntity;
 import com.laptrinhjavaweb.entity.UserEntity;
+import com.laptrinhjavaweb.service.impl.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,6 +15,9 @@ import java.util.List;
 
 @Component
 public class UserConverter {
+
+    @Autowired
+    private RoleConverter roleConverter;
 
     public UserEntity toEntity(UserDTO userDTO) {
         UserEntity userEntity = new UserEntity();
@@ -32,10 +39,23 @@ public class UserConverter {
         userDTO.setFullName(userEntity.getFullName());
         userDTO.setPassword(userEntity.getPassword());
         userDTO.setStatus(userEntity.getStatus());
+
+        // Lấy roleId từ vai trò đầu tiên trong danh sách vai trò của người dùng
+        if (!userEntity.getRoles().isEmpty()) {
+            RoleEntity firstRole = userEntity.getRoles().get(0);
+            userDTO.setRoleId(firstRole.getId());
+        }
+
+        // Chuyển đổi danh sách roles từ RoleEntity sang RoleDTO
+        List<RoleDTO> roleDTOs = new ArrayList<>();
+        for (RoleEntity roleEntity : userEntity.getRoles()) {
+            roleDTOs.add(roleConverter.toDTO(roleEntity));
+        }
+        userDTO.setRoles(roleDTOs);
         userDTO.setCreatedBy(userEntity.getCreatedBy());
         userDTO.setCreatedDate(userEntity.getCreatedDate());
         userDTO.setModifiedBy(userEntity.getModifiedBy());
-        userDTO.setCreatedDate(userEntity.getCreatedDate());
+        userDTO.setModifiedDate(userEntity.getModifiedDate());
         return userDTO;
     }
 

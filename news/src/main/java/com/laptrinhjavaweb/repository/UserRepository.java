@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Long findRoleIdByUserId(@Param("userId") Long userId);
 
     boolean existsByUserName(String username);
+
+    UserEntity findOneById(long id);
 }

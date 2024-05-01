@@ -1,9 +1,15 @@
 package com.laptrinhjavaweb.api;
 
 import com.laptrinhjavaweb.api.output.UserOutput;
+import com.laptrinhjavaweb.converter.RoleConverter;
+import com.laptrinhjavaweb.converter.UserConverter;
 import com.laptrinhjavaweb.dto.CategoryDTO;
+import com.laptrinhjavaweb.dto.RoleDTO;
 import com.laptrinhjavaweb.dto.UserDTO;
 import com.laptrinhjavaweb.entity.UserEntity;
+import com.laptrinhjavaweb.entity.UserRoleEntity;
+import com.laptrinhjavaweb.repository.UserRepository;
+import com.laptrinhjavaweb.repository.UserRoleRepository;
 import com.laptrinhjavaweb.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -24,6 +31,18 @@ public class UserAPI {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+
+    @Autowired
+    private UserConverter userConverter;
+
+    @Autowired
+    private RoleConverter roleConverter;
 
     @GetMapping("/users")
     public ResponseEntity<?> getListUser() {
@@ -43,6 +62,13 @@ public class UserAPI {
 
         // Trả về thông tin người dùng nếu tìm thấy
         return ResponseEntity.ok(user);
+    }
+
+    // Lấy chi tiết user và chi tiết role thông qua userId
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<UserDTO> getUserDetails(@PathVariable Long userId) {
+        UserDTO userDetails = userService.getUserById(userId);
+        return ResponseEntity.ok(userDetails);
     }
 
     @PostMapping("/users")
@@ -138,15 +164,18 @@ public class UserAPI {
                     .body("Không thể xóa");
         }
     }
-@PutMapping("/userListUpdate/{id}")
-public ResponseEntity<String> updateCategory(@RequestBody UserDTO userDTO
-                                             ,@PathVariable long id){
+
+    // Cập nhật user thông qua userId
+    @PutMapping("/userListUpdate/{id}")
+    public ResponseEntity<String> updateCategory(@RequestBody UserDTO userDTO, @PathVariable long id) {
         try {
+            // Gọi phương thức updateUser để cập nhật người dùng
             userService.updateUser(id, userDTO, userDTO.getRoleId());
-            return ResponseEntity.ok("Sửa thông tin người dùng thành công");
-        }catch (Exception e){
+            return ResponseEntity.ok("Cập nhật thông tin người dùng thành công");
+        } catch (Exception e) {
+            // Trả về thông báo lỗi cụ thể nếu cập nhật không thành công
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Không thể sữa");
+                    .body("Không thể cập nhật thông tin người dùng: " + e.getMessage());
         }
-}
+    }
 }

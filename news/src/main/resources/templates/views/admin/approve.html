@@ -19,9 +19,37 @@
             font-size: 20px;
             margin: 5px;
         }
+
+        #displayThumbnail {
+            display: none;
+            /*Thay đổi giá trị tối đa theo ý muốn của bạn*/
+            max-width: 300px;
+            /*Thay đổi giá trị tối đa theo ý muốn của bạn*/
+            max-height: 200px;
+            /*Duy trì tỉ lệ khung hình*/
+            width: auto;
+            /*Duy trì tỉ lệ khung hình*/
+            height: auto;
+            margin-top: 20px;
+            border-radius: 3px;
+        }
+        .cancel {
+            font-size: 20px;
+            display: block;
+            width: 100%;
+        }
+
+        .cancel:hover {
+            cursor: pointer;
+        }
+
+        .cancel-icon {
+            float: right;
+            padding: 7px 12px;
+        }
     </style>
 </head>
-<body id="container">
+<body>
     <div th:fragment="main-content" class="container-fluid px-4 magin-top">
         <div class="card mb-4">
             <div class="card-header">
@@ -44,16 +72,73 @@
                         <i class="fa-regular fa-trash-can"></i>
                     </a>
                 </div>
+                <form id="formContainer" style="display: none">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-11">
+                                <label for="title">Tiêu đề</label>
+                            </div>
+                            <div class="col-sm-1">
+                                <a class="cancel">
+                                    <i class="fa-solid fa-xmark cancel-icon"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <textarea class="form-control auto-height textarea" id="title" rows="1" placeholder=""></textarea>
+                        <!--                    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="">-->
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Nội dung</label>
+                        <div id="container">
+                            <div id="editor">
+                            </div>
+                        </div>
+                        <!--<div class="centered">
+                            <div id="editor">
+
+                            </div>
+                        </div>-->
+                        <!--                    <input type="text" class="form-control" id="content" placeholder="">-->
+                        <textarea class="form-control auto-height textarea" id="content" rows="3" style="display:none;" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="shortDescription">Mô tả</label>
+                        <!--                    <input type="text" class="form-control" id="shortDescription" placeholder="">-->
+                        <textarea class="form-control auto-height textarea" id="shortDescription" rows="1" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="categorySelect">Thể loại</label>
+                        <select id="categorySelect" class="form-select">
+                            <!-- Dữ liệu từ API sẽ được thêm vào đây -->
+                            <option value="" selected disabled>Chọn thể loại</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Thẻ img để hiển thị ảnh đã chọn -->
+                        <img id="displayThumbnail" class="displayThumbnail" src="" alt="Selected Thumbnail">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="thumbnail">Hình ảnh</label>
+                        <input type="file" class="form-control" id="thumbnail">
+                        <!--                    <button id="uploadButton" type="button" style="display: none">Upload Ảnh</button>-->
+                    </div>
+                    <button type="submit" id="btn-submit" class="btn btn-primary">Duyệt</button>
+                    <button id="btn-notApprove" class="btn btn-danger">Từ chối</button>
+                    <!--                    <button type="submit" id="update-New" class="btn btn-primary">Sửa bài viết</button>-->
+                </form>
 
                 <div class="overlay" id="overlay"></div>
+
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th><input type="checkbox" id="checkAll"></th>
-                        <th>Title</th>
-                        <th>Content</th>
-                        <th>ShortDescription</th>
-                        <th style="display: none">Chi tiết</th>
+                        <th>Tiêu đề</th>
+                        <th>Nội dung</th>
+                        <th style="display: none">Mô tả</th>
+                        <th>Chi tiết</th>
                         <th>Duyệt</th>
                     </tr>
                     </thead>

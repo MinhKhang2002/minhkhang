@@ -21,37 +21,6 @@ $(document).ready(function () {
             $("table").append(row);
         });
     }
-    $(document).on("click",".updateUser",function () {
-        var idUpdate = $(this).data("id");
-         var fullName = $(this).data("name");
-        var userName = $(this).data("user");
-        $("#user-id").val(idUpdate);
-        $("#userName-update").val(userName);
-        $("#fullName-update").val(fullName);
-        $("#UpdateUserForm").show();
-        $("#div-a").hide();
-    });
-    function updateUser(id,name,user_name,password,roleId) {
-        // console.log(user_name);
-        $.ajax({
-            type: "PUT",
-            url: "http://localhost:8081/userListUpdate/" + id,
-            data: JSON.stringify({
-                fullName: name,
-                userName:user_name,
-                password: password,
-                roleId: roleId
-            }),
-            contentType: "application/json",
-            success: function (response) {
-                alert(response);
-                fetchAndDisplayData(1, 5);
-            },
-            error: function (error) {
-                alert("không thể sửa");
-            }
-        });
-    }
     // Hàm để thực hiện yêu cầu AJAX và cập nhật bảng khi thành công
     function fetchAndDisplayData(pageNumber, limit) {
         $.ajax({
@@ -125,28 +94,88 @@ $(document).ready(function () {
             alert("Bạn hãy chọn người dùng muốn xóa");
         }
     });
+
     $(document).on("click","#cancel-update" ,function () {
         $("#UpdateUserForm").hide();
         $("#div-a").show();
     });
+    $(document).on("click", "#updateUser", function () {
+        var idUser = $(this).data("id");
+        console.log("id :", idUser)
+        $("#formContainer").toggle()
+        $("#overlay").toggle()
+        var roleId = $("#RoleNameSelect").val();
+        console.log("roleId: ", roleId);
+        detailUser(idUser)
+    });
+});
 
-    $("#UpdateUserForm").submit( "click",function (e) {
-        e.preventDefault();
-        var id =  $("#user-id").val();
-        var fullName = $("#fullName-update").val();
-        var userName = $("#userName-update").val();
-        var Password = $("#pwd-update").val();
-        var PasswordConfirm = $("#pwdConfirm-update").val();
-        var roleId = $("#RoleNameSelect-update").val();
-        console.log(id+fullName+userName+Password,roleId);
-        if (Password === PasswordConfirm && roleId != null){
-            updateUser(id,fullName,userName,Password,roleId);
-        }else {
-            alert("kiểm tra mật khẩu nhập lại và chọn vai trò ");
+$("#formContainer").submit(function (e) {
+    e.preventDefault();
+    var idUser = $(this).data("id");
+    var fullName = $("#fullName").val();
+    var userName = $("#userName").val();
+    var roleId = $("#RoleNameSelect").val();
+    console.log("roleId: ", roleId);
+    console.log("ID: ", idUser)
+
+    var userData = {
+        id: idUser,
+        fullName: fullName,
+        userName: userName
+    }
+    if (roleId != null){
+        updateUser(userData,roleId);
+    }else {
+        console.log("Vui lòng trọn vai trò")
+    }
+})
+
+function updateUser(userData,roleId) {
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:8081/userListUpdate/" + userData.id,
+        data: JSON.stringify({
+            fullName: userData.fullName,
+            userName: userData.userName,
+            roleId: roleId
+        }),
+        contentType: "application/json",
+        success: function (response) {
+            loadListUser()
+        },
+        error: function (error) {
+            console.log("Lỗi Update User")
         }
-    })
-function loadRolesSelect() {
-    var roleSelect = $("#RoleNameSelect-update");
+    });
+}
+
+function detailUser(userId) {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8081/user/" + userId,
+        dataType: "json",
+        success: function (data) {
+            $("#fullName").val(data.fullName);
+            $("#userName").val(data.userName);
+            $("#formContainer").data("id", userId);
+
+            // Lưu danh sách vai trò vào biến roles
+            var roleName = data.roles[0].name;
+            console.log("roleName: ", roleName);
+
+            // Load vai trò vào thẻ select
+            loadRolesSelectDetail(roleName);
+        },
+        error: function (error) {
+            console.error("Lỗi khi lấy dữ liệu bài viết:", error);
+        }
+    });
+}
+
+function loadRolesSelectDetail(roleName) {
+    console.log("Role Name ", roleName)
+    var roleSelect = $("#RoleNameSelect");
     roleSelect.empty();
     roleSelect.append($("<option>", { value: '', text: 'Chọn vai trò' }));
     $.ajax({
@@ -154,9 +183,12 @@ function loadRolesSelect() {
         url: "http://localhost:8081/allRole",
         dataType: "json",
         success: function (roles) {
-            // Thêm tất cả các vai trò vào thẻ select
             $.each(roles, function (index, role) {
                 var option = $("<option>", { value: role.id, text: role.name });
+                // Kiểm tra xem tên vai trò có trùng với roleName không
+                if (role.name === roleName) {
+                    option.prop("selected", true); // Đặt option này là option được chọn
+                }
                 roleSelect.append(option);
             });
         },
@@ -165,13 +197,14 @@ function loadRolesSelect() {
         }
     });
 }
-loadRolesSelect()
-
-
-})
 
 $(document).on("click", "#showFromAddUser", function () {
     showFormAddUser()
+})
+
+$("#overlay, .cancel").click(function () {
+    $("#formContainer").hide()
+    $("#overlay").hide()
 })
 
 function showFormAddUser() {
@@ -181,8 +214,11 @@ function showFormAddUser() {
 }
 
 function loadListUser() {
+    showLoading()
     $.get("/listUser", function (data) {
         $("#main-content").html(data);
+
+        hideLoading()
 
         $(".alert-success").text("Thành công").show()
 

@@ -114,7 +114,7 @@ function updateTable(newsList) {
             "<td><input type='checkbox' class='checkbox-del' data-id="+ news.id +" id='checkbox_" + news.id + "' value='" + news.id + "'></td>" +
             "<td>" + news.title + "</td>" +
             "<td class='truncated-content'>" + extractFirstParagraph(news.content) + "</td>" +  // Sử dụng hàm này để lấy thẻ <p> đầu tiên
-            "<td>" + news.shortDescription + "</td>" +
+            "<td style='display: none'>" + news.shortDescription + "</td>" +
             "<td><a class=\"updateNews\" href=\"#\" title='Cập nhật' data-id=" + news.id + ">\n" +
             "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
             "    </a></td>" +

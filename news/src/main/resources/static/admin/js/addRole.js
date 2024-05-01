@@ -62,7 +62,6 @@ function addRole(nameRole, roleCode, category) {
         contentType: "application/json",
         dataType: "json",
         success: function (response) {
-            alert("Thêm vai trò thành công")
             showRoleList()
         },
         error: function (error) {
@@ -137,9 +136,14 @@ function loadRoleCodes() {
 function loadRoleName(data){
     let roleMap = {};
 
+    // Lọc các role có mã khác 'USER'
+    var filteredRoles = data.filter(function(role) {
+        return role.code !== 'USER';
+    });
+
     // Lặp qua dữ liệu từ API và thêm các role vào roleMap
-    $.each(data, function(index, role) {
-        if (role.code === 'ADMIN' || role.code === 'USER' || role.code === 'phong-vien') {
+    $.each(filteredRoles, function(index, role) {
+        if (role.code === 'ADMIN' || role.code === 'phong-vien') {
             roleMap[role.code] = role.name;
         } else if (role.code.startsWith('ADMIN_MANAGE')) {
             roleMap['ADMIN_MANAGE'] = 'Quản lý thể loại';
@@ -165,5 +169,27 @@ function loadRoleName(data){
 }
 
 $(document).on("click", "#cancel", function () {
-    showRoleList()
+    showLoading()
+    $.get("/roleList", function (data){
+        $("#main-content").html(data)
+
+        hideLoading()
+    })
 })
+
+
+
+function showRoleList() {
+    showLoading()
+    $.get("/roleList", function (data){
+        $("#main-content").html(data)
+
+        hideLoading()
+
+        $(".alert-success").text("Thành công").show()
+
+        setTimeout(function () {
+            $(".alert-success").hide()
+        }, 3000)
+    })
+}

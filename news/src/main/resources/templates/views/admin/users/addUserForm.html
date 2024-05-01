@@ -210,8 +210,14 @@
             url: "http://localhost:8081/allRole",
             dataType: "json",
             success: function (roles) {
-                // Thêm tất cả các vai trò vào thẻ select
-                $.each(roles, function (index, role) {
+                // Lọc các role có mã khác 'USER'
+                var filteredRoles = roles.filter(function(role) {
+                    return role.code !== 'USER';
+                });
+
+                console.log("Filter: ", filteredRoles)
+                // Thêm các role đã lọc vào dropdown
+                $.each(filteredRoles, function (index, role) {
                     var option = $("<option>", { value: role.id, text: role.name });
                     roleSelect.append(option);
                 });

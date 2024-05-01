@@ -27,7 +27,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
 
-                console.log("Data: ", data)
+                console.table(data)
                 // updatePagination(data.totalPage);
                 updateTable(data);
             },
@@ -44,6 +44,7 @@ $(document).ready(function () {
         submitFrom(event)
 
     })
+
     $(document).on("click", ".updateCategory", function () {
         $("#btn-submit").text("Sửa")
         var id = $(this).data("id");
@@ -69,8 +70,8 @@ $(document).ready(function () {
         }
     }
 
-    $("#deleteCategory").on("click", function () {
-      //  e.preventDefault();
+    /*$("#deleteCategory").on("click", function (e) {
+        e.preventDefault();
         var ids = $('tbody input[type=checkbox]:checked').map(function () {
         return $(this).val() }).get();
         var numbericIds = ids.map(Number);
@@ -83,15 +84,42 @@ $(document).ready(function () {
                 $(".alert-danger").hide()
             }, 3000)
         }
+    });*/
+    // Khai báo biến cờ
+    var isDeleteCategoryAjaxCalled = false;
+    $("#deleteCategory").on("click", function (e) {
+        e.preventDefault();
+        var ids = $('tbody input[type=checkbox]:checked').map(function () {
+            return $(this).val()
+        }).get();
+        var numbericIds = ids.map(Number);
+        if (numbericIds.length > 0) {
+            if (!isDeleteCategoryAjaxCalled) {
+                deleteCategory(numbericIds);
+                isDeleteCategoryAjaxCalled = true;
+            } else {
+                console.log("Hàm deleteCategoryAjax đã được gọi trước đó.");
+            }
+        } else {
+            $(".alert-danger").text("Vui lòng chọn bài viết cần xoá!").show()
+
+            setTimeout(function () {
+                $(".alert-danger").hide()
+            }, 3000)
+        }
     });
 
     // Click vào thêm thể loại mới
-    $(document).on("click","#btnAddCategory",function () {
-        $("#btn-submit").text("Thêm")
-        $("#formContainer").toggle()
-        $("#overlay").toggle()
-    });
+    $("#btnAddCategory").on("click", function () {
+        showFormAddCategory()
+    })
 })
+
+function showFormAddCategory() {
+    $("#btn-submit").text("Thêm")
+    $("#formContainer").toggle()
+    $("#overlay").toggle()
+}
 
 // $(document).on("click", "#fromAddCategory", function () {
 //     showFormCategory()
@@ -159,13 +187,12 @@ function updateCategory(id, name, code) {
         }),
         contentType: "application/json",
         success: function (response) {
-            alert("Đã sửa thành công");
             showCategoryList();
 
         },
         error: function (error) {
             // Hiển thị thông báo lỗi cập nhật
-            alert(error)
+            alert("Lỗi")
         }
     });
 }
@@ -189,7 +216,6 @@ function deleteCategory(ids) {
             contentType: "application/json",
             data: JSON.stringify(ids),
             success: function (response) {
-                alert(response);
                 showCategoryList();
             },
             error: function (xhr, status, errorThrown) {

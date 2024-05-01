@@ -1,8 +1,12 @@
 package com.laptrinhjavaweb.service.impl;
 
 import com.laptrinhjavaweb.controller.LoginController;
+import com.laptrinhjavaweb.converter.RoleConverter;
 import com.laptrinhjavaweb.converter.UserConverter;
+import com.laptrinhjavaweb.dto.NewDTO;
+import com.laptrinhjavaweb.dto.RoleDTO;
 import com.laptrinhjavaweb.dto.UserDTO;
+import com.laptrinhjavaweb.entity.NewEntity;
 import com.laptrinhjavaweb.entity.RoleEntity;
 import com.laptrinhjavaweb.entity.UserEntity;
 import com.laptrinhjavaweb.entity.UserRoleEntity;
@@ -38,6 +42,9 @@ public class UserService implements IUserService {
     private RoleRepository roleRepository;
     @Autowired
     private UserRoleRepository userRoleRepository;
+
+    @Autowired
+    private RoleConverter roleConverter;
 
     public UserDTO getUserDTOByUsername(String userName) {
         UserEntity userEntity = userRepository.findByUserName(userName);
@@ -235,16 +242,55 @@ public class UserService implements IUserService {
     public void updateUser(long id,UserDTO userDTO, long role_id) throws Exception {
             UserEntity existUser = userRepository.findById(id)
                     .orElseThrow(()->new UsernameNotFoundException("not found"));
-            if (existsByUsername(userDTO.getUserName())) {
-                throw new Exception("Username already exists");
-            }
-            if (existUser != null) {
-                existUser.setFullName(userDTO.getFullName());
-                existUser.setUserName(userDTO.getUserName());
-                existUser.setPassword(userDTO.getPassword());
-                userRepository.save(existUser);
-                addUserRole(id, role_id);
-            }
+        // Kiểm tra sự tồn tại của tên người dùng mới
+        if (existsByUsername(userDTO.getUserName()) && !userDTO.getUserName().equals(existUser.getUserName())) {
+            throw new Exception("Username already exists");
+        }
+
+        // Cập nhật thông tin người dùng
+        existUser.setFullName(userDTO.getFullName());
+        existUser.setUserName(userDTO.getUserName());
+        userRepository.save(existUser);
+
+        // Xóa tất cả các vai trò hiện tại của người dùng
+//        deleteUserRoles(id);
+
+        // Cập nhật vai trò của người dùng
+        addUserRole(id, role_id);
+    }
+
+    private void deleteUserRoles(long userId) {
+        // Xóa tất cả các vai trò của người dùng với userId đã cho
+        // Cài đặt phương thức này dựa trên cách bạn đã triển khai xóa vai trò trong hệ thống của mình
+        // Ví dụ:
+        userRoleRepository.deleteByUserId(userId);
+    }
+
+    @Override
+    public UserDTO getUserById(long userId) {
+        // Lấy thông tin user từ repository
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+
+        // Lấy danh sách vai trò của user từ userEntity
+        List<RoleEntity> roles = userEntity.getRoles();
+        if (roles.isEmpty()) {
+            throw new RuntimeException("Roles not found for user with id: " + userId);
+        }
+
+        // Chuyển đổi thông tin user sang DTO
+        UserDTO userDTO = userConverter.toDTO(userEntity);
+
+        // Tạo danh sách chứa các RoleDTO
+        List<RoleDTO> roleDTOs = new ArrayList<>();
+        for (RoleEntity role : roles) {
+            roleDTOs.add(roleConverter.toDTO(role));
+        }
+
+        // Đặt danh sách vai trò vào DTO của user
+        userDTO.setRoles(roleDTOs);
+
+        return userDTO;
     }
 }
     /*public List<UserDTO> getAllUserPaging(Pageable pageable) {

@@ -10,7 +10,7 @@ $(document).ready(function () {
                 "<td><input type='checkbox' class='checkbox-del' data-id="+ role.id +" id='checkbox_" + role.id + "' value='" + role.id + "'></td>" +
                 "<td>" + role.name + "</td>" +
                 "<td>" + role.code + "</td>" +
-                "<td><a class=\"updateRole\" href=\"#\" id=\"update\" title='Cập nhật' data-id="+ role.id +" data-name="+role.name+" data-code="+role.code+" >\n" +
+                "<td style='display: none'><a class=\"updateRole\" href=\"#\" id=\"update\" title='Cập nhật' data-id="+ role.id +" data-name="+role.name+" data-code="+role.code+" >\n" +
                 "       <i class=\"fa-regular fa-pen-to-square\"></i>\n" +
                 "    </a></td>" +
                 "</tr>";

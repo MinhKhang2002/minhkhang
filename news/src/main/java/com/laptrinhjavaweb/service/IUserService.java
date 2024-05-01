@@ -20,4 +20,5 @@ public interface IUserService {
     int totalItem();
     void deleteUser(long[] id);
     void updateUser(long id,UserDTO userDTO,long roleId) throws Exception;
+    UserDTO getUserById(long userId);
 }
