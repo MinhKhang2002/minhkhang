@@ -21,11 +21,11 @@
                      alt="Black and White Portrait of a Man" loading="lazy" />
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
+<!--                <li><a class="dropdown-item" href="#">Hồ sơ</a></li>-->
                 <li><a class="dropdown-item" th:href="@{/login}">Đăng nhập</a></li>
                 <li><a class="dropdown-item" th:if="${fullname}" href="#" th:text="${fullname}"></a></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" th:if="${fullname}" th:href="@{/logout}">Logout</a></li>
+                <li><a class="dropdown-item" th:if="${fullname}" th:href="@{/logout}">Đăng xuất</a></li>
             </ul>
         </li>
     </ul>

@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements IUserService {
@@ -45,6 +47,9 @@ public class UserService implements IUserService {
 
     @Autowired
     private RoleConverter roleConverter;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public UserDTO getUserDTOByUsername(String userName) {
         UserEntity userEntity = userRepository.findByUserName(userName);
@@ -122,7 +127,8 @@ public class UserService implements IUserService {
     }
 
     public String getUserRoleCode(Long id) {
-        String query = "SELECT r.code FROM RoleEntity r JOIN UserEntity u ON r.id = u.id WHERE u.id = :id";
+//        String query = "SELECT r.code FROM RoleEntity r JOIN UserEntity u ON r.id = u.id WHERE u.id = :id";
+        String query = "SELECT r.code FROM RoleEntity r JOIN UserRoleEntity ur ON r.id = ur.roleId JOIN UserEntity u ON ur.userId = u.id WHERE u.id = :id";
         List<String> roleCodes = entityManager.createQuery(query, String.class)
                 .setParameter("id", id)
                 .getResultList();
@@ -256,10 +262,61 @@ public class UserService implements IUserService {
 //        deleteUserRoles(id);
 
         // Cập nhật vai trò của người dùng
-        addUserRole(id, role_id);
+//        addUserRole(id, role_id);
+        updateUserRole(id, role_id);
     }
 
-    private void deleteUserRoles(long userId) {
+    /*public void updateUserRole(Long userId, Long roleId){
+        List<UserRoleEntity> userRoleEntityList = userRoleRepository.findByUserId(userId);
+
+        if (userRoleEntityList.isEmpty()) {
+            // Nếu không tìm thấy bản ghi, bạn có thể tạo một bản ghi mới và lưu
+            UserRoleEntity newUserRoleEntity = new UserRoleEntity();
+            newUserRoleEntity.setUserId(userId);
+            newUserRoleEntity.setRoleId(roleId);
+            userRoleRepository.save(newUserRoleEntity);
+        } else {
+            // Nếu tìm thấy bản ghi, cập nhật roleId của các bản ghi hiện có
+            for (UserRoleEntity userRoleEntity : userRoleEntityList) {
+                if (!userRoleEntity.getRoleId().equals(roleId)) {
+                    userRoleEntity.setRoleId(roleId);
+                    userRoleRepository.save(userRoleEntity);
+                }
+            }
+        }
+    }*/
+    public void updateUserRole(Long userId, Long roleId) {
+        List<UserRoleEntity> userRoleEntityList = userRoleRepository.findByUserId(userId);
+
+        if (userRoleEntityList.isEmpty()) {
+            /*// Nếu không tìm thấy bản ghi, kiểm tra vai trò mới trước khi thêm vào
+            RoleEntity roleEntity = roleRepository.findById(roleId)
+                    .orElseThrow(() -> new RuntimeException("Role not found with id: " + roleId));
+
+            UserRoleEntity newUserRoleEntity = new UserRoleEntity();
+            newUserRoleEntity.setUserId(userId);
+            newUserRoleEntity.setRoleId(roleId);
+            userRoleRepository.save(newUserRoleEntity);*/
+
+            addUserRole(userId, roleId);
+        } else {
+            /*// Nếu tìm thấy bản ghi, cập nhật roleId của các bản ghi hiện có
+            for (UserRoleEntity userRoleEntity : userRoleEntityList) {
+                userRoleEntity.setRoleId(roleId);
+            }
+            userRoleRepository.saveAll(userRoleEntityList); // Cập nhật tất cả các bản ghi trong một lần*/
+
+            String sql = "UPDATE user_role SET role_id = ? WHERE user_id = ?";
+            jdbcTemplate.update(sql, roleId, userId);
+        }
+    }
+    /*public void updateUserRole(Long userId, Long roleId) {
+        String sql = "UPDATE user_role SET role_id = ? WHERE user_id = ?";
+        jdbcTemplate.update(sql, roleId, userId);
+    }*/
+
+
+    public void deleteUserRoles(long userId) {
         // Xóa tất cả các vai trò của người dùng với userId đã cho
         // Cài đặt phương thức này dựa trên cách bạn đã triển khai xóa vai trò trong hệ thống của mình
         // Ví dụ:

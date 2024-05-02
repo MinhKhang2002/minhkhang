@@ -5,7 +5,6 @@ $(document).ready(function () {
 
         // Sử dụng Thymeleaf để tạo dòng HTML cho mỗi tin tức
         $.each(usersList, function (index, users) {
-            $("table").append(row);
             // Convert ngày sang yyyy/MM/dd
             var createdDate = moment(users.createdDate).format('YYYY-MM-DD');
             // Tạo dòng HTML
@@ -21,6 +20,11 @@ $(document).ready(function () {
             $("table").append(row);
         });
     }
+
+    $(document).on("click", "#updateUser", function () {
+        showFormUpdateUser()
+    });
+
     // Hàm để thực hiện yêu cầu AJAX và cập nhật bảng khi thành công
     function fetchAndDisplayData(pageNumber, limit) {
         $.ajax({
@@ -56,7 +60,6 @@ $(document).ready(function () {
                 contentType: "application/json",
                 data: JSON.stringify(ids),
                 success: function (response) {
-                    alert(response);
                     loadListUser()
                 },
                 error: function (xhr, status, errorThrown) {
@@ -65,7 +68,6 @@ $(document).ready(function () {
                     } else {
                         $(".alert-danger").text(xhr.responseText).show(); // Hiển thị nội dung lỗi từ phản hồi của máy chủ
                     }
-                    alert(errorThrown); // In ra lỗi nếu có
 
                 }
             });
@@ -91,26 +93,49 @@ $(document).ready(function () {
         if (numbericIds.length > 0) {
             deleteUser(numbericIds);
         } else {
-            alert("Bạn hãy chọn người dùng muốn xóa");
+            $(".alert-danger").text("Vui loòng chọn người dùng cần xoá!").show();
         }
     });
 
-    $(document).on("click","#cancel-update" ,function () {
+    /*$(document).on("click","#cancel-update" ,function () {
         $("#UpdateUserForm").hide();
         $("#div-a").show();
-    });
-    $(document).on("click", "#updateUser", function () {
-        var idUser = $(this).data("id");
-        console.log("id :", idUser)
-        $("#formContainer").toggle()
-        $("#overlay").toggle()
-        var roleId = $("#RoleNameSelect").val();
-        console.log("roleId: ", roleId);
-        detailUser(idUser)
+    });*/
+});
+
+$(document).on("click", "#updateUser", function () {
+    var userId = $(this).data("id");
+    // detailUser(idUser);
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8081/user/" + userId,
+        dataType: "json",
+        success: function (data) {
+            $("#fullName").val(data.fullName);
+            $("#userName").val(data.userName);
+            $("#formDetailUserContainer").data("id", userId);
+
+            // Lưu danh sách vai trò vào biến roles
+            var roleName = data.roles[0].name;
+            console.log("roleName: ", roleName);
+
+            // Load vai trò vào thẻ select
+            loadRolesSelectDetail(roleName);
+        },
+        error: function (error) {
+            console.error("Lỗi khi lấy dữ liệu bài viết:", error);
+        }
     });
 });
 
-$("#formContainer").submit(function (e) {
+var FormUser = $("#formDetailUserContainer");
+
+function showFormUpdateUser() {
+    FormUser.toggle()
+    $("#overlay").toggle()
+}
+
+FormUser.submit(function (e) {
     e.preventDefault();
     var idUser = $(this).data("id");
     var fullName = $("#fullName").val();
@@ -134,15 +159,14 @@ $("#formContainer").submit(function (e) {
 function updateUser(userData,roleId) {
     $.ajax({
         type: "PUT",
-        url: "http://localhost:8081/userListUpdate/" + userData.id,
+        url: "http://localhost:8081/user/" + userData.id + "/role/" + roleId,
         data: JSON.stringify({
             fullName: userData.fullName,
-            userName: userData.userName,
-            roleId: roleId
+            userName: userData.userName
         }),
         contentType: "application/json",
         success: function (response) {
-            loadListUser()
+            loadListUserUpdate()
         },
         error: function (error) {
             console.log("Lỗi Update User")
@@ -150,7 +174,7 @@ function updateUser(userData,roleId) {
     });
 }
 
-function detailUser(userId) {
+/*function detailUser(userId) {
     $.ajax({
         type: "GET",
         url: "http://localhost:8081/user/" + userId,
@@ -158,7 +182,7 @@ function detailUser(userId) {
         success: function (data) {
             $("#fullName").val(data.fullName);
             $("#userName").val(data.userName);
-            $("#formContainer").data("id", userId);
+            $("#formDetailUserContainer").data("id", userId);
 
             // Lưu danh sách vai trò vào biến roles
             var roleName = data.roles[0].name;
@@ -171,7 +195,7 @@ function detailUser(userId) {
             console.error("Lỗi khi lấy dữ liệu bài viết:", error);
         }
     });
-}
+}*/
 
 function loadRolesSelectDetail(roleName) {
     console.log("Role Name ", roleName)
@@ -203,7 +227,7 @@ $(document).on("click", "#showFromAddUser", function () {
 })
 
 $("#overlay, .cancel").click(function () {
-    $("#formContainer").hide()
+    $("#formDetailUserContainer").hide()
     $("#overlay").hide()
 })
 
@@ -229,3 +253,22 @@ function loadListUser() {
 }
 
 
+
+function loadListUserUpdate() {
+    showLoading()
+    $.get("/listUser", function (data) {
+        $("#main-content").html(data);
+
+        hideLoading()
+
+        $(".alert-success").text("Thành công").show()
+
+        setTimeout(function () {
+            $(".alert-success").hide()
+        }, 3000)
+
+        $(document).on("click", "#updateUser", function () {
+            showFormUpdateUser()
+        });
+    })
+}

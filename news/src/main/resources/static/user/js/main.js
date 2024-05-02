@@ -78,7 +78,7 @@ function updateTable(newsList) {
 
         // Cập nhật thông tin cho sản phẩm mới
         // Kiểm tra nếu thumbnail là chuỗi rỗng
-        if (news.thumbnail === "") {
+        if (news.thumbnail === null || news.thumbnail === "") {
             // Gán một giá trị mặc định cho thumbnail
             productItem.find(".thumbnail-item").attr("src", "https://dummyimage.com/250x150/dee2e6/6c757d.jpg");
         } else {

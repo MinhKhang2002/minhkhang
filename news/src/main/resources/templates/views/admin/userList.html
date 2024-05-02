@@ -16,12 +16,16 @@
     <script th:src="@{/static/template/paging/jquery.twbsPagination.js}"></script>
     <script th:src="@{/static/admin/js/userList.js}"></script>
     <style>
-        #formContainer {
+        #formDetailUserContainer {
             width: 60%;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            z-index: 2;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
         }
         .add{
             font-size: 20px;
@@ -84,7 +88,7 @@
                 </a>
             </div>
 
-            <form id="formContainer" class="" style="display: none">
+            <form id="formDetailUserContainer" class="" style="display: none">
                 <input type="hidden" id="user-id"> <!-- Thêm input ẩn cho id -->
                 <div class="form-outline">
                     <div class="row">

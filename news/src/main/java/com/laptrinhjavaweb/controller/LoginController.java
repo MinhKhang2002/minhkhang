@@ -93,6 +93,11 @@ public class LoginController {
             // Lấy categories của user và lưu vào session
             String categories = userService.getCategoriesByUserId(user.getId());
             String roleCode = userService.getUserRoleCode(user.getId());
+            System.out.println("CategoryCode: " + roleCode);
+            logger.info("Lấy được danh mục cho người dùng " + user.getId() + ": " + categories);
+
+            session.setAttribute("categoryCode", roleCode);
+            model.addAttribute("categoryCode", roleCode);
 
             // Lưu trữ chỉ khi categories không null
             if (categories != null) {

@@ -166,11 +166,11 @@ public class UserAPI {
     }
 
     // Cập nhật user thông qua userId
-    @PutMapping("/userListUpdate/{id}")
-    public ResponseEntity<String> updateCategory(@RequestBody UserDTO userDTO, @PathVariable long id) {
+    @PutMapping("/user/{userId}/role/{roleId}")
+    public ResponseEntity<String> updateCategory(@RequestBody UserDTO userDTO, @PathVariable long userId, @PathVariable long roleId) {
         try {
             // Gọi phương thức updateUser để cập nhật người dùng
-            userService.updateUser(id, userDTO, userDTO.getRoleId());
+            userService.updateUser(userId, userDTO, roleId);
             return ResponseEntity.ok("Cập nhật thông tin người dùng thành công");
         } catch (Exception e) {
             // Trả về thông báo lỗi cụ thể nếu cập nhật không thành công

@@ -74,11 +74,16 @@ public class NewService implements INewService{
 		return newConverter.toDTO(newEntity);
 	}
 
-	@Override
+	/*@Override
 	public void delete(long[] ids) {
 		for(long item: ids) {
 			newRepository.deleteById(item);
 		}
+	}*/
+	@Override
+	public void delete(long[] ids) {
+		List<Long> idList = Arrays.stream(ids).boxed().collect(Collectors.toList());
+		newRepository.deleteAllById(idList);
 	}
 
 	@Override

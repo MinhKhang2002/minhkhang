@@ -42,7 +42,28 @@ $(document).ready(function () {
     fetchAndDisplayData(1, 5);
 
     // Xử lý sự kiện click vào nút xoá bài viết
-    $(document).on("click", "#deleteNews", function (e) {
+    /*$(document).on("click", "#deleteNews", function (e) {
+        e.preventDefault();
+
+        var ids = $('tbody input[type=checkbox]:checked').map(function () {
+            return $(this).val();
+        }).get();
+
+        // Chuyển đổi các chuỗi số thành số nguyên
+        var numericIds = ids.map(Number);
+
+        if(numericIds.length === 0) {
+            $(".alert-danger").text("Vui lòng chọn bài viết cần xoá!").show()
+
+            setTimeout(function () {
+                $(".alert-danger").hide()
+            }, 3000)
+        } else {
+            deleteNew(numericIds);
+        }
+    });*/
+    // Gán sự kiện click trực tiếp cho nút xoá bài viết
+    $("#deleteNews").click(function (e) {
         e.preventDefault();
 
         var ids = $('tbody input[type=checkbox]:checked').map(function () {
@@ -62,6 +83,7 @@ $(document).ready(function () {
             deleteNew(numericIds);
         }
     });
+
 
 // Xử lý sự kiện click vào nút cập nhật form
     $(document).on("click", ".updateNews", function () {
@@ -234,7 +256,7 @@ $(document).on("click", ".updateNews", function () {
             // Set data-id cho form để sử dụng trong quá trình submit
             $("#formContainer").data("id", idToUpdate);
             // gán categoryCode vào selectedCategoryCode
-            selectedCategoryCode = data.categoryCode;
+            var selectedCategoryCode = data.categoryCode;
 
             // Hiển thị form
             $("#formContainer").show();
@@ -347,7 +369,7 @@ function loadCategoriesSelect(selectedCategoryCode) {
             let defaultOption = $("<option>").val("").text("Chọn thể loại").prop("selected", true).prop("selected", true);
             $selectCategory.append(defaultOption);
 
-            // Kiểm tra xem selectedCategoryCode có tồn tại hay không
+            /*// Kiểm tra xem selectedCategoryCode có tồn tại hay không
             if (selectedCategoryCode) {
                 // Tìm thể loại tương ứng với selectedCategoryCode
                 var selectedCategory = data.find(function(category) {
@@ -364,6 +386,14 @@ function loadCategoriesSelect(selectedCategoryCode) {
             // Thêm các option từ Set vào select
             $.each(data, function(index, category) {
                 let option = $("<option>").val(category.code).text(category.name);
+                $selectCategory.append(option);
+            });*/
+            $.each(data, function (index, category) {
+                var option = $("<option>", { value: category.code, text: category.name });
+                // Kiểm tra xem tên vai trò có trùng với roleName không
+                if (category.code === selectedCategoryCode) {
+                    option.prop("selected", true); // Đặt option này là option được chọn
+                }
                 $selectCategory.append(option);
             });
         },
