@@ -70,9 +70,12 @@ $(document).ready(function () {
         $("#overlay").toggle();
 
         var idToUpdate = $(this).data("id");
-        var urlThumbnail = $("#thumbnailUrl").val();
-        var editor = $("#editor");
-        console.log("Url từ input ẩn:", urlThumbnail)
+        // Thêm vào input ẩn new id
+        $("#new-id-hide").val(idToUpdate);
+        console.log("id: ", idToUpdate)
+        // var urlThumbnail = $("#thumbnailUrl").val();
+        // var editor = $("#editor");
+        // console.log("Url từ input ẩn:", urlThumbnail)
 
         // Lấy dữ liệu từ API hoặc nguồn dữ liệu khác dựa trên idToUpdate
         // Sau đó, điền dữ liệu vào các trường input của form
@@ -113,12 +116,22 @@ $(document).ready(function () {
 })
 
 // Xử lý sự kiện submit form
-$("#formContainer").submit(function (e) {
+/*$("#formContainer").submit(function (e) {
     e.preventDefault();
     var idToUpdate = $(this).data("id");
     // Gọi hàm submitForm để thực hiện thêm mới hoặc cập nhật
     updateStatus(idToUpdate);
-});
+});*/
+
+$(document).on("click", ".Approve-news", function (e) {
+    e.preventDefault()
+
+    // Lấy giá trị id từ thuộc tính data-id
+    var id = $("#new-id-hide").val();
+    // Chuyển đổi các chuỗi số thành số nguyên
+    // var numericIds = id.map(Number);
+    updateStatus(id)
+})
 
 // Hàm hiển thị ảnh đã chọn ngay trên form
 function displaySelectedThumbnail(imageUrl) {
